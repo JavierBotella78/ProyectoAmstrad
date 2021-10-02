@@ -1,37 +1,46 @@
+.include "entityInfo.s"
 
 .globl manEntityDestroy
 .globl manEntityForAll
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysPhysicsUpdateOne
+;; Requisitos:
+;;    ix -> Posicion inicial de memoria de la entidad
+;; Return:
+;;    -
+;; Descripcion:
+;;    Modifica las entidades que son movibles segun su vx y vy
 sysPhysicsUpdateOne:
 
-    pop hl
-    inc hl
-    ld b, (hl) ;; x
+    ld a, indType(ix)      ;; tipo de la entidad
+    ld b, #ETypeMovable
+    and b
 
-    inc hl 
-    inc hl  
-    ld a, (hl) ;; vx negativo
+    jr z, salirSysPhysicsUpdateOne ;; si invalido, salir
 
-    dec hl
-    dec hl
-    dec hl
+    ld a, indX(ix)
+    ld b, indVx(ix)
+    add a, b
+    ld indX(ix), a
 
-    add a, b ;; vx + x
-    cp b
+    ld a, indY(ix)
+    ld b, indVy(ix)
+    add a, b
+    ld indY(ix), a
 
-    jr nc, llamadaDestroy
-
-    inc hl
-    ld (hl), a
-    dec hl
-    jr finSysPhysicsUpdateOne
-
-llamadaDestroy:
-    call manEntityDestroy
-    
-finSysPhysicsUpdateOne:
+salirSysPhysicsUpdateOne:
     ret
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysPhysicsUpdate
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;    Inversion de control para la modificacion de posicion de todas las entidades.
 sysPhysicsUpdate::
 
     ld hl, #sysPhysicsUpdateOne

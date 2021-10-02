@@ -1,3 +1,4 @@
+.include "entityInfo.s"
 
 .globl cpct_memset_asm
 .globl cpct_memcpy_asm
@@ -8,13 +9,8 @@ posicionActual:
 freeSpace:
 .ds 2
 
-eTypeInvalid=0x00
-eTypeStar=0x01
-eTypeDead=0x80
-eTypeDefault=0x7f
-
 mEntities:
-   .ds 350 ;;0->type, 1->x, 2->y, 3->vx , 4->color, 5-6->prevPos
+   .ds EntityArrayBytesSize 
    .db #0
 
 mNextFreeEntity:
@@ -23,10 +19,17 @@ mNextFreeEntity:
 funcionInversion:
    .ds 2
 
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; manEntityInit
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;    Crea el array de entidades.
 manEntityInit::
 
-   ld bc, #350 ;; size
+   ld bc, #EntityArrayBytesSize ;; size
 
    ld a, #0 ;; value
 
@@ -37,18 +40,26 @@ manEntityInit::
    ld hl, #mEntities
    ld (mNextFreeEntity), hl
 
-   ld hl, #350
+   ld hl, #EntityArrayBytesSize
    ld (#freeSpace), hl
 
    ret
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; manEntityCreate
+;; Requisitos:
+;;    -
+;; Return:
+;;    hl -> Devuelve el puntero al principio de la entidad creada
+;; Descripcion:
+;;    Mueve el puntero de siguiente entidad libre y devuelve el principio de la primera entidad libre
 manEntityCreate::
    ld bc, (mNextFreeEntity) 
 
-   ld a, #eTypeDefault
+   ld a, #ETypeDefault
    ld (bc), a
 
-   ld hl, #0x0007
+   ld hl, #EntitySize
    add hl, bc
    ld (mNextFreeEntity), hl 
    ld l, c
@@ -56,85 +67,55 @@ manEntityCreate::
 
    push hl
 
-   ld bc, #0xfff9
+   ld bc, #-EntitySize
    ld hl, (#freeSpace)
    add hl, bc
    ld (#freeSpace), hl
 
-   ld bc, #0xfff9
+   ld bc, #-EntitySize
 
    pop hl
 
 
    ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; manEntityDestroy
+;; Requisitos:
+;;    ix -> puntero al inicio de la entidad
+;; Return:
+;;    -
+;; Descripcion:
+;;    Destruye una entidad del array.
 manEntityDestroy::
 
-   push hl
+;; TODO
 
-   ld bc, #7
-   ld hl, (#freeSpace)
-   add hl, bc
-   ld (#freeSpace), hl
-
-   pop hl
-
-   ld bc, #5
-   add hl, bc  ;;prevPos1
-
-   ld e, (hl)
-   inc hl      ;;prevPos2
-   ld d, (hl)
-
-   dec hl  ;;prevPos1
-   dec hl  ;;color
-   dec hl  ;;vx
-   dec hl  ;;y
-   dec hl  ;;x
-   dec hl  ;;tipo
-
-   push hl
-
-   ld h, d
-   ld l, e
-   ld (hl), #0
-
-   pop hl
-
-   ld bc, #0xfff9
-   ld (posicionActual), hl
-   ld d, h
-   ld e, l
-   ld hl, (#mNextFreeEntity)
-
-   add hl, bc
-
-   ld (mNextFreeEntity), hl
-
-   ld bc, #7
-
-   call cpct_memcpy_asm
-
-   ld bc, #7;; size
-
-   ld a, #0 ;; value
-
-   ld de, (#mNextFreeEntity) ;; puntero al array, primer valor
-
-   call cpct_memset_asm
-
-   ld hl, (#posicionActual)
+;; Aumentar el freeSpace
+;; Borrar de memoria la entidad, tipo a 0
+;; bajar el puntero de mNextFreeEntity
 
    ret
 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; manEntityForAll
+;; Requisitos:
+;;    hl -> funcion a la que llamara para todas las entidades
+;; Return:
+;;    -
+;; Descripcion:
+;;    Recorre todas las entidades y ejecuta la funcion que se le pasa por parametro
 manEntityForAll::
 
    ld (funcionInversion), hl
-   ld hl, #mEntities
+   ld ix, #mEntities
 
 bucleForAll:
 
-   ld a, (hl)      ;; tipo de la entidad
+   ld a, indType(ix)      ;; tipo de la entidad
    or a
 
    jr z, salir ;; si invalido, salir
@@ -142,20 +123,28 @@ bucleForAll:
    ld bc, #salidaSalto
    push bc
 
-   push hl
    ld hl, (#funcionInversion)
    
    jp (hl) ;;hl=direccion de la funcion a la que hay que llamar
    salidaSalto:
 
-   ld bc, #7
-   add hl, bc
+   ld bc, #EntitySize
+   add ix, bc
 
    jr bucleForAll
 
 salir:
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; getFreeSpace
+;; Requisitos:
+;;    -
+;; Return:
+;;    hl -> Espacio libre en memoria
+;; Descripcion:
+;;    Devuelve el espacio libre en memoria del array de entidades
 getFreeSpace::
    ld hl, (#freeSpace)
 ret

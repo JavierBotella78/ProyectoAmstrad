@@ -1,88 +1,90 @@
 .include "cpctelera.h.s"
+.include "entityInfo.s"
+
 .globl cpct_getScreenPtr_asm
 .globl cpct_setVideoMode_asm
 .globl cpct_setPALColour_asm
+
+.globl cpct_getScreenPtr_asm
+.globl cpct_drawSolidBox_asm
+
 .globl manEntityForAll
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysRenderInit
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;    Inicializa el render
 sysRenderInit:
 
     ld c, #0
-   call cpct_setVideoMode_asm
+    call cpct_setVideoMode_asm
 
-   cpctm_setBorder_asm HW_BLACK
+    cpctm_setBorder_asm HW_BLACK
 
-   ld l, #0
-   ld h, #HW_BLACK
-   call cpct_setPALColour_asm
+    ld l, #0
+    ld h, #HW_BLACK
+    call cpct_setPALColour_asm
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysRenderUpdateOne
+;; Requisitos:
+;;    ix -> Posicion inicial de memoria de la entidad
+;; Return:
+;;    -
+;; Descripcion:
+;;    Dibuja los objetos dibujables como cajas. Además borra su posicion anterior
 sysRenderUpdateOne:
-    pop hl
 
-    ld bc, #5
-    add hl, bc  ;;prevPos1
+    ld a, indType(ix)      ;; tipo de la entidad
+    ld b, #ETypeRenderable
+    and b
 
-    ld e, (hl)
-    inc hl      ;;prevPos2
-    ld d, (hl)
+    jr z, salirSysRenderUpdateOne ;; si invalido, salir
 
-    dec hl  ;;prevPos1
-    dec hl  ;;color
-    dec hl  ;;vx
-    dec hl  ;;y
-    dec hl  ;;x
-    dec hl  ;;tipo
+    ld d, indPrevPos1(ix)
+    ld e, indPrevPos2(ix)
+    ld a, #0
+    ld c, indWidth(ix)
+    ld b, indHeight(ix)
 
-    push hl
-
-    ld h, d
-    ld l, e
-    ld (hl), #0
-
-    pop hl
+    call cpct_drawSolidBox_asm
 
     ld de, #0xc000
-
-    inc hl      ;;x
-    ld c, (hl)
-
-    inc hl      ;;y
-    ld b, (hl)
-
-    inc hl      ;;vx
-    inc hl      ;;color
-    ld a, (hl)
-
-    push hl
-    push af
+    ld c, indX(ix)
+    ld b, indY(ix)
 
     call cpct_getScreenPtr_asm
 
-    pop af
-    
-    ld (hl), a  ;; Se carga el color en la memoria de video
-    ld d, h
-    ld e, l
+    ld indPrevPos1(ix), h
+    ld indPrevPos2(ix), l
 
-    pop hl
+    ex de, hl
+    ld a, indColor(ix)
+    ld c, indWidth(ix)
+    ld b, indHeight(ix)
 
-    inc hl      ;;prevPos1
-    ld (hl), e
-    inc hl      ;;prevPos2
-    ld (hl), d
+    call cpct_drawSolidBox_asm
 
-
-
-    dec hl  ;;prevPos1
-    dec hl  ;;color
-    dec hl  ;;vx
-    dec hl  ;;y
-    dec hl  ;;x
-    dec hl  ;;tipo
-
+salirSysRenderUpdateOne:
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysRenderUpdate
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;    Inversion de control para el dibujado de todas las entidades.
 sysRenderUpdate::
 
     ld hl, #sysRenderUpdateOne
