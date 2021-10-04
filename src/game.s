@@ -4,6 +4,7 @@
 .globl cpct_waitVSYNC_asm
 .globl cpct_memcpy_asm
 
+.globl sysInputUpdate
 .globl sysPhysicsUpdate
 .globl sysRenderUpdate
 
@@ -13,9 +14,21 @@
 .globl sysRenderInit 
 
 
-initPlayer: ;; 0->type, 1->x, 2->y, 3->vx , 4->vy, 5->ancho(w), 6->alto(h), 7->color, 8-9->prevPos
-   .db #7      ;;Renderable, Movable, Input
-   .db #10
+initPlayer: 
+   .db #ETypeRenderable | #ETypeInput | #ETypeMovable ;; Type
+   .db #10                                            ;; x
+   .db #10                                            ;; y
+   .db #0                                             ;; vx
+   .db #0                                             ;; vy
+   .db #2                                             ;; width
+   .db #8                                             ;; height
+   .db #0xff                                          ;; Color
+   .dw #0xc000                                        ;; prevPos
+
+
+initEnemigo:
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable   
+   .db #60
    .db #10
    .db #0
    .db #0
@@ -25,14 +38,14 @@ initPlayer: ;; 0->type, 1->x, 2->y, 3->vx , 4->vy, 5->ancho(w), 6->alto(h), 7->c
    .dw #0xc000
 
 
-initEnemigo:
-   .db #11      ;;Renderable, Movable, AI
-   .db #60
-   .db #10
-   .db #-1
+initBala:
+   .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable    
+   .db #13
    .db #0
    .db #2
-   .db #8
+   .db #0
+   .db #1
+   .db #2
    .db #0xff
    .dw #0xc000
 
@@ -70,6 +83,7 @@ ret
 manGamePlay::
 
 mainLoop:
+   call sysInputUpdate
    call sysPhysicsUpdate
    call sysRenderUpdate
    
@@ -90,17 +104,31 @@ ret
 ;;    -
 ;; Descripcion:
 ;;    Crea una entidad apartir de una plantilla
+;;
 manGameCreator:
 
    push hl
 
-   call manEntityCreate 
+   call manEntityCreate  
 
    ex de, hl
    pop hl
    ld bc, #EntitySize
 
    call cpct_memcpy_asm
+
+ret
+
+manGameCreatorBala::
+
+   ld iy, #initBala
+
+   ld a, indY(ix)
+   ld indY(iy), a
+
+   ld hl, #initBala
+
+   call manGameCreator
 
 ret
 

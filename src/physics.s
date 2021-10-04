@@ -25,10 +25,27 @@ sysPhysicsUpdateOne:
     add a, b
     ld indX(ix), a
 
+    jp c, destroy
+
+    push af
+    ld a, #80
+    pop de  
+    cp d
+
+    jp c, destroy
+
     ld a, indY(ix)
     ld b, indVy(ix)
     add a, b
     ld indY(ix), a
+
+    ;; TODO: Comprobar que no se salga de pantalla en la y
+
+    jp salirSysPhysicsUpdateOne
+
+destroy:
+
+    call manEntityDestroy
 
 salirSysPhysicsUpdateOne:
     ret

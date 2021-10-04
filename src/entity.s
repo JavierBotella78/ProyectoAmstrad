@@ -3,6 +3,8 @@
 .globl cpct_memset_asm
 .globl cpct_memcpy_asm
 
+.globl sysRenderBorrado
+
 posicionActual:
 .ds 2
 
@@ -90,14 +92,39 @@ manEntityCreate::
 ;;    Destruye una entidad del array.
 manEntityDestroy::
 
-;; TODO
+   ld bc, #EntitySize
+   ld hl, (#freeSpace)
+   add hl, bc
+   ld (#freeSpace), hl
 
-;; Aumentar el freeSpace
-;; Borrar de memoria la entidad, tipo a 0
-;; bajar el puntero de mNextFreeEntity
+   call sysRenderBorrado
 
-   ret
+   ld bc, #-EntitySize
+   ld (posicionActual), ix
+   ld hl, (#posicionActual)
+   ld d, h
+   ld e, l
+   ld hl, (#mNextFreeEntity)
 
+   add hl, bc
+
+   ld (mNextFreeEntity), hl
+
+   ld bc, #EntitySize
+
+   call cpct_memcpy_asm
+
+   ld bc, #EntitySize;; size
+
+   ld a, #0 ;; value
+
+   ld de, (#mNextFreeEntity) ;; puntero al array, primer valor
+
+   call cpct_memset_asm
+
+   ld ix, (#posicionActual)
+
+ret
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

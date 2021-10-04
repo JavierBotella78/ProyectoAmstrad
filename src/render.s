@@ -49,13 +49,7 @@ sysRenderUpdateOne:
 
     jr z, salirSysRenderUpdateOne ;; si invalido, salir
 
-    ld d, indPrevPos1(ix)
-    ld e, indPrevPos2(ix)
-    ld a, #0
-    ld c, indWidth(ix)
-    ld b, indHeight(ix)
-
-    call cpct_drawSolidBox_asm
+    call sysRenderBorrado
 
     ld de, #0xc000
     ld c, indX(ix)
@@ -89,5 +83,17 @@ sysRenderUpdate::
 
     ld hl, #sysRenderUpdateOne
     call manEntityForAll
+
+ret
+
+sysRenderBorrado::
+
+    ld d, indPrevPos1(ix)
+    ld e, indPrevPos2(ix)
+    ld a, #0
+    ld c, indWidth(ix)
+    ld b, indHeight(ix)
+
+    call cpct_drawSolidBox_asm
 
 ret
