@@ -1,6 +1,6 @@
-.include "entityInfo.s"
+.include "../entityInfo.s"
 
-.globl manEntityDestroy
+.globl manEntityMarkToDestroy
 .globl manEntityForAll
 
 
@@ -14,25 +14,20 @@
 ;;    Modifica las entidades que son movibles segun su vx y vy
 sysPhysicsUpdateOne:
 
-    ld a, indType(ix)      ;; tipo de la entidad
-    ld b, #ETypeMovable
-    and b
-
-    jr z, salirSysPhysicsUpdateOne ;; si invalido, salir
-
     ld a, indX(ix)
     ld b, indVx(ix)
     add a, b
-    ld indX(ix), a
 
-    jp c, destroy
+    jp c, destroy       ;; Si sale por la izq, se marca para destruir
 
     push af
     ld a, #80
     pop de  
     cp d
 
-    jp c, destroy
+    jp c, destroy       ;; Si sale por la der, se marca para destruir
+
+    ld indX(ix), d
 
     ld a, indY(ix)
     ld b, indVy(ix)
@@ -45,7 +40,7 @@ sysPhysicsUpdateOne:
 
 destroy:
 
-    call manEntityDestroy
+    call manEntityMarkToDestroy
 
 salirSysPhysicsUpdateOne:
     ret
@@ -61,6 +56,7 @@ salirSysPhysicsUpdateOne:
 sysPhysicsUpdate::
 
     ld hl, #sysPhysicsUpdateOne
+    ld a, #ETypeMovable
     call manEntityForAll
 
 ret

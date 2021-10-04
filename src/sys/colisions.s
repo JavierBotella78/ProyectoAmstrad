@@ -1,4 +1,4 @@
-.include "entityInfo.s"
+.include "../entityInfo.s"
 
 .globl manEntityDestroy
 .globl manEntityForAll

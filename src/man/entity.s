@@ -1,4 +1,4 @@
-.include "entityInfo.s"
+.include "../entityInfo.s"
 
 .globl cpct_memset_asm
 .globl cpct_memcpy_asm
@@ -21,6 +21,9 @@ mNextFreeEntity:
 funcionInversion:
    .ds 2
 
+signature:
+   .ds 1
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; manEntityInit
 ;; Requisitos:
@@ -29,6 +32,7 @@ funcionInversion:
 ;;    -
 ;; Descripcion:
 ;;    Crea el array de entidades.
+;;
 manEntityInit::
 
    ld bc, #EntityArrayBytesSize ;; size
@@ -55,6 +59,7 @@ manEntityInit::
 ;;    hl -> Devuelve el puntero al principio de la entidad creada
 ;; Descripcion:
 ;;    Mueve el puntero de siguiente entidad libre y devuelve el principio de la primera entidad libre
+;;
 manEntityCreate::
    ld bc, (mNextFreeEntity) 
 
@@ -90,6 +95,7 @@ manEntityCreate::
 ;;    -
 ;; Descripcion:
 ;;    Destruye una entidad del array.
+;;
 manEntityDestroy::
 
    ld bc, #EntitySize
@@ -123,6 +129,28 @@ manEntityDestroy::
    call cpct_memset_asm
 
    ld ix, (#posicionActual)
+   ld bc, #-EntitySize 
+   add ix, bc
+
+ret
+
+manEntityMarkToDestroy::
+
+   ld a, indType(ix)
+   ld b, #ETypeDead
+
+   or b
+
+   ld indType(ix), a
+
+ret
+
+manEntityDestroyDead::
+
+   ld hl, #manEntityDestroy
+   ld a, #ETypeDead
+
+   call manEntityForAll
 
 ret
 
@@ -131,28 +159,39 @@ ret
 ;; manEntityForAll
 ;; Requisitos:
 ;;    hl -> funcion a la que llamara para todas las entidades
+;;    a  -> firma para dejar pasar solo los tipo de entidades deseadas
 ;; Return:
 ;;    -
 ;; Descripcion:
 ;;    Recorre todas las entidades y ejecuta la funcion que se le pasa por parametro
+;;
 manEntityForAll::
 
    ld (funcionInversion), hl
    ld ix, #mEntities
 
-bucleForAll:
+   ld (signature), a
 
-   ld a, indType(ix)      ;; tipo de la entidad
-   or a
+   bucleForAll:
 
-   jr z, salir ;; si invalido, salir
+      ld a, indType(ix)      ;; tipo de la entidad
+      or a
 
-   ld bc, #salidaSalto
-   push bc
+      jr z, salir ;; si invalido, salir
 
-   ld hl, (#funcionInversion)
-   
-   jp (hl) ;;hl=direccion de la funcion a la que hay que llamar
+      ld b, indType(ix)      ;; tipo de la entidad
+      ld a, (#signature)
+      and b
+
+      jr z, salidaSalto ;; si invalido, salir
+
+      ld bc, #salidaSalto
+      push bc
+
+      ld hl, (#funcionInversion)
+      
+      jp (hl) ;;hl=direccion de la funcion a la que hay que llamar
+      
    salidaSalto:
 
    ld bc, #EntitySize
@@ -172,6 +211,7 @@ ret
 ;;    hl -> Espacio libre en memoria
 ;; Descripcion:
 ;;    Devuelve el espacio libre en memoria del array de entidades
+;;
 getFreeSpace::
    ld hl, (#freeSpace)
 ret

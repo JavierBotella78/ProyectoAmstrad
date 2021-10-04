@@ -1,5 +1,5 @@
 .include "cpctelera.h.s"
-.include "entityInfo.s"
+.include "../entityInfo.s"
 
 .globl cpct_getScreenPtr_asm
 .globl cpct_setVideoMode_asm
@@ -43,12 +43,6 @@ ret
 ;;    Dibuja los objetos dibujables como cajas. Además borra su posicion anterior
 sysRenderUpdateOne:
 
-    ld a, indType(ix)      ;; tipo de la entidad
-    ld b, #ETypeRenderable
-    and b
-
-    jr z, salirSysRenderUpdateOne ;; si invalido, salir
-
     call sysRenderBorrado
 
     ld de, #0xc000
@@ -82,6 +76,7 @@ ret
 sysRenderUpdate::
 
     ld hl, #sysRenderUpdateOne
+    ld a, #ETypeRenderable
     call manEntityForAll
 
 ret

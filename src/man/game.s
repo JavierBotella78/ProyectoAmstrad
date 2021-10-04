@@ -1,5 +1,5 @@
 .include "cpctelera.h.s"
-.include "entityInfo.s"
+.include "../entityInfo.s"
 
 .globl cpct_waitVSYNC_asm
 .globl cpct_memcpy_asm
@@ -9,6 +9,7 @@
 .globl sysRenderUpdate
 
 .globl manEntityCreate
+.globl manEntityDestroyDead
 
 .globl manEntityInit 
 .globl sysRenderInit 
@@ -39,7 +40,7 @@ initEnemigo:
 
 
 initBala:
-   .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable    
+   .db #ETypeRenderable | #ETypeBullet | #ETypeMovable    
    .db #13
    .db #0
    .db #2
@@ -51,13 +52,14 @@ initBala:
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; manGameInit
+;;    Init
 ;; Requisitos:
 ;;    -
 ;; Return:
 ;;    -
 ;; Descripcion:
 ;;    Inicializa el juego
+;;
 manGameInit::
 
    call manEntityInit ;; Iniciamos todos los valores del array a 0
@@ -73,16 +75,18 @@ ret
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; manGamePlay
+;;    Play
 ;; Requisitos:
 ;;    -
 ;; Return:
 ;;    -
 ;; Descripcion:
 ;;    loop principal del juego
+;;
 manGamePlay::
 
 mainLoop:
+   call manEntityDestroyDead
    call sysInputUpdate
    call sysPhysicsUpdate
    call sysRenderUpdate
@@ -97,7 +101,7 @@ ret
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; manGameCreator
+;;    Creator
 ;; Requisitos:
 ;;    hl -> Plantilla de la entidad
 ;; Return:
@@ -119,7 +123,7 @@ manGameCreator:
 
 ret
 
-manGameCreatorBala::
+manGameBulletCreator::
 
    ld iy, #initBala
 
@@ -134,13 +138,14 @@ ret
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; esperar
+;;    esperar
 ;; Requisitos:
 ;;    -
 ;; Return:
 ;;    -
 ;; Descripcion:
 ;;    Hace pausas en la ejecución del programa entre ciclos
+;;
 esperar:
    ld a, #3
    esperarbucle:
