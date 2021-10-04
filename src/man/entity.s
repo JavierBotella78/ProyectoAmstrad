@@ -174,8 +174,8 @@ manEntityForAll::
 
    bucleForAll:
 
-      ;;push af
-      ;;push hl
+      push af
+      push hl
 
       ld a, indType(ix)      ;; tipo de la entidad
       or a
@@ -196,11 +196,11 @@ manEntityForAll::
       jp (hl) ;;hl=direccion de la funcion a la que hay que llamar
       salidaSalto:
 
-      ;;pop hl
-      ;;ld (funcionInversion), hl
+      pop hl
+      ld (funcionInversion), hl
 
-      ;;pop af
-      ;;ld (signature), a
+      pop af
+      ld (signature), a
 
       ld bc, #EntitySize
       add ix, bc
@@ -208,6 +208,8 @@ manEntityForAll::
    jr bucleForAll
 
 salir:
+   pop hl
+   pop af
 ret
 
 

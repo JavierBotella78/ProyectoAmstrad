@@ -7,6 +7,7 @@
 .globl sysInputUpdate
 .globl sysPhysicsUpdate
 .globl sysRenderUpdate
+.globl sysColisionsUpdate
 
 .globl manEntityCreate
 .globl manEntityDestroyDead
@@ -28,7 +29,7 @@ initPlayer:
 
 
 initEnemigo:
-   .db #ETypeRenderable | #ETypeAI | #ETypeMovable   
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable   
    .db #60
    .db #10
    .db #0
@@ -90,6 +91,7 @@ mainLoop:
    call sysInputUpdate
    call sysPhysicsUpdate
    call sysRenderUpdate
+   call sysColisionsUpdate
    
    call esperar
 

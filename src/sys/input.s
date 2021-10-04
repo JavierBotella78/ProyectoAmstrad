@@ -9,6 +9,8 @@
 
 ConstDelayMovement=4
 
+inputSpeed=40
+
 delayMovement:
     .db #ConstDelayMovement    ;; frames
 
@@ -56,7 +58,7 @@ comprobarTeclas:
 
 wPulsada:
 
-    ld indVy(ix), #-40
+    ld indVy(ix), #-inputSpeed
     ld a, #ConstDelayMovement
     ld (delayMovement), a
 
@@ -64,7 +66,7 @@ wPulsada:
 
 sPulsada:
 
-    ld indVy(ix), #40
+    ld indVy(ix), #inputSpeed
     ld a, #ConstDelayMovement
     ld (delayMovement), a
 
