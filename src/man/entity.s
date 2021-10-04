@@ -174,28 +174,36 @@ manEntityForAll::
 
    bucleForAll:
 
+      ;;push af
+      ;;push hl
+
       ld a, indType(ix)      ;; tipo de la entidad
       or a
 
-      jr z, salir ;; si invalido, salir
+         jr z, salir ;; si invalido, salir
 
       ld b, indType(ix)      ;; tipo de la entidad
       ld a, (#signature)
       and b
 
-      jr z, salidaSalto ;; si invalido, salir
+         jr z, salidaSalto ;; si invalido, no se llama a la funcion
+
+      ld hl, (#funcionInversion)
 
       ld bc, #salidaSalto
       push bc
-
-      ld hl, (#funcionInversion)
       
       jp (hl) ;;hl=direccion de la funcion a la que hay que llamar
-      
-   salidaSalto:
+      salidaSalto:
 
-   ld bc, #EntitySize
-   add ix, bc
+      ;;pop hl
+      ;;ld (funcionInversion), hl
+
+      ;;pop af
+      ;;ld (signature), a
+
+      ld bc, #EntitySize
+      add ix, bc
 
    jr bucleForAll
 
