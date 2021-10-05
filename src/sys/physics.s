@@ -14,6 +14,8 @@
 ;;    Modifica las entidades que son movibles segun su vx y vy
 sysPhysicsUpdateOne:
 
+        ;; Mover x
+
     ld a, indX(ix)
     ld b, indVx(ix)
     add a, b
@@ -29,12 +31,26 @@ sysPhysicsUpdateOne:
 
     ld indX(ix), d
 
+        ;; Mover y
+
     ld a, indY(ix)
     ld b, indVy(ix)
     add a, b
-    ld indY(ix), a
+
+    ld c, #200
+
+    ;; a = y + vy
+
+    ;;  Por arriba
+    
+    cp c
+    
+    jp nc, salirSysPhysicsUpdateOne
+    
 
     ;; TODO: Comprobar que no se salga de pantalla en la y
+
+    ld indY(ix), a
 
     jp salirSysPhysicsUpdateOne
 

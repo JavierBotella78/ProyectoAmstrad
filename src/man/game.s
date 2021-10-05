@@ -130,7 +130,9 @@ manGameBulletCreator::
    ld iy, #initBala
 
    ld a, indY(ix)
-   ld indY(iy), a
+   ld b, #3
+   add a, b
+   ld indY(iy), a 
 
    ld hl, #initBala
 
