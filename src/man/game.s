@@ -1,25 +1,19 @@
 .include "cpctelera.h.s"
-.include "../entityInfo.s"
-;.include "sheriff2.h"
-;;.include "../sprites/sheriff-idleCPC.h"
+.include "game.h.s" 
+.include "entity.h.s"
 
+.include "../sys/render.h.s"
+.include "../sys/colisions.h.s"
+.include "../sys/input.h.s"
+.include "../sys/physics.h.s"
+.include "../sys/ai.h.s"
 
 .globl cpct_waitVSYNC_asm
 .globl cpct_memcpy_asm
 
-.globl sysInputUpdate
-.globl sysPhysicsUpdate
-.globl sysRenderUpdate
-.globl sysColisionsUpdate
-
-.globl manEntityCreate
-.globl manEntityDestroyDead
-
-.globl manEntityInit 
-.globl sysRenderInit 
-.globl _spr_idle
-
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  TEMPLATES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 initPlayer: 
    .db #ETypeRenderable | #ETypeInput | #ETypeMovable ;; Type
@@ -29,6 +23,7 @@ initPlayer:
    .db #0                                             ;; vy
    .db #0x04                                          ;; width
    .db #0x10                                          ;; height
+   .dw #0                                             ;; AI
    .dw #_spr_idle                                     ;; Sprite
    .dw #0xc000                                        ;; prevPos
 
@@ -41,6 +36,7 @@ initEnemigo:
    .db #0                                                               ;; vy
    .db #0x04                                                            ;; width
    .db #0x10                                                            ;; height
+   .dw #sysAIMoveLeft                                                   ;; AI   
    .dw #_spr_idle                                                       ;; Sprite
    .dw #0xc000                                                          ;; prevPos
 
@@ -53,8 +49,10 @@ initBala:
    .db #0                                                ;; vy
    .db #0x04                                             ;; width
    .db #0x10                                             ;; height
+   .dw #0                                                ;; AI
    .dw #_spr_idle                                        ;; Sprite
    .dw #0xc000                                           ;; prevPos
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -93,8 +91,12 @@ manGamePlay::
 
 mainLoop:
    call manEntityDestroyDead
+
    call sysInputUpdate
+   call sysAIUpdate
+
    call sysPhysicsUpdate
+   
    call sysRenderUpdate
    call sysColisionsUpdate
    

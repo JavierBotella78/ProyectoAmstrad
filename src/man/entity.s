@@ -1,9 +1,13 @@
-.include "../entityInfo.s"
+.include "entity.h.s"
+.include "../sys/render.h.s"
+
 
 .globl cpct_memset_asm
 .globl cpct_memcpy_asm
 
-.globl sysRenderBorrado
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  VARIABLES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 posicionActual:
 .ds 2
@@ -23,6 +27,11 @@ funcionInversion:
 
 signature:
    .ds 1
+
+signature2:
+   .ds 1
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; manEntityInit
@@ -174,42 +183,103 @@ manEntityForAll::
 
    bucleForAll:
 
-      push af
-      push hl
-
       ld a, indType(ix)      ;; tipo de la entidad
       or a
 
-         jr z, salir ;; si invalido, salir
+      ret z
 
       ld b, indType(ix)      ;; tipo de la entidad
       ld a, (#signature)
       and b
 
-         jr z, salidaSalto ;; si invalido, no se llama a la funcion
+         jr z, salidaBucleForAll ;; si invalido, no se llama a la funcion
 
       ld hl, (#funcionInversion)
 
-      ld bc, #salidaSalto
+      ld bc, #salidaBucleForAll
       push bc
       
       jp (hl) ;;hl=direccion de la funcion a la que hay que llamar
-      salidaSalto:
-
-      pop hl
-      ld (funcionInversion), hl
-
-      pop af
-      ld (signature), a
+salidaBucleForAll:
 
       ld bc, #EntitySize
       add ix, bc
 
    jr bucleForAll
 
-salir:
-   pop hl
-   pop af
+ret
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;    manEntityForAllMatching
+;; Requisitos:
+;;    hl -> funcion a la que llamara para todas las entidades
+;;    a  -> firma 1 para dejar pasar solo los tipo de entidades deseadas
+;;    b  -> firma 2 para dejar pasar solo los tipo de entidades deseadas
+;; Return:
+;;    -
+;; Descripcion:
+;;    Recorre todas las entidades y ejecuta la funcion que se le pasa por parametro
+;;
+manEntityForAllMatching::
+
+   ld (funcionInversion), hl
+   ld ix, #mEntities
+
+   ld (signature), a
+   ld a, b
+   ld (signature2), a
+
+   bucleForAllMatching:
+
+      ld iy, #mEntities
+         
+      ld a, indType(ix)      ;; tipo de la entidad 1
+      or a
+
+      ret z
+
+      ld b, indType(ix)      ;; tipo de la entidad 1
+      ld a, (#signature)
+      and b
+
+      jr z, salidaBucleForAllMatching ;; si invalido, no se llama a la funcion
+
+      bucleForAllMatching2:
+
+            ld a, indType(iy)      ;; Si la entidad es invalida, sale del bucle
+            or a
+
+            jr z, salidaBucleForAllMatching
+
+            ld b, indType(iy)      ;; Si la entidad no coincide, siguiente entidad
+            ld a, (#signature2)
+            and b
+
+            jr z, salidaBucleForAllMatching2 
+
+            ld hl, (#funcionInversion)
+
+            ld bc, #salidaBucleForAllMatching2
+            push bc
+            
+            jp (hl)        ;; hl=direccion de la funcion a la que hay que llamar
+
+            salidaBucleForAllMatching2:
+
+            ld bc, #EntitySize
+            add iy, bc
+
+      jr bucleForAllMatching2
+
+
+salidaBucleForAllMatching:
+
+      ld bc, #EntitySize
+      add ix, bc
+
+   jr bucleForAllMatching
+
 ret
 
 

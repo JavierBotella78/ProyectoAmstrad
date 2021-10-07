@@ -1,7 +1,5 @@
-.include "../entityInfo.s"
-
-.globl manEntityMarkToDestroy
-.globl manEntityForAll
+.include "physics.h.s"
+.include "../man/entity.h.s"
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -20,10 +18,8 @@ sysPhysicsUpdateOne:
     ld b, indVx(ix)
     add a, b
 
-    jp c, destroy       ;; Si sale por la izq, se marca para destruir
-
     push af
-    ld a, #80
+    ld a, #MaxX
     pop de  
     cp d
 
@@ -37,7 +33,7 @@ sysPhysicsUpdateOne:
     ld b, indVy(ix)
     add a, b
 
-    ld c, #200
+    ld c, #MaxY
 
     ;; a = y + vy
 
@@ -45,21 +41,20 @@ sysPhysicsUpdateOne:
     
     cp c
     
-    jp nc, salirSysPhysicsUpdateOne
+    ret nc
     
 
     ;; TODO: Comprobar que no se salga de pantalla en la y
 
     ld indY(ix), a
 
-    jp salirSysPhysicsUpdateOne
+    ret
 
 destroy:
 
     call manEntityMarkToDestroy
 
-salirSysPhysicsUpdateOne:
-    ret
+ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sysPhysicsUpdate

@@ -1,6 +1,6 @@
 .include "cpctelera.h.s"
-.include "../entityInfo.s"
-;;.include "../sprites/main_palette.h"
+.include "render.h.s"
+.include "../man/entity.h.s"
 
 .globl cpct_getScreenPtr_asm
 .globl cpct_setVideoMode_asm
@@ -13,9 +13,6 @@
 .globl cpct_drawSolidBox_asm
 .globl cpct_drawSprite_asm
 
-.globl _spr_idle
-
-.globl manEntityForAll
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -26,7 +23,7 @@
 ;;    -
 ;; Descripcion:
 ;;    Inicializa el render
-sysRenderInit:
+sysRenderInit::
 
     ld c, #0
     call cpct_setVideoMode_asm
@@ -37,9 +34,9 @@ sysRenderInit:
     ld h, #HW_BLACK
     call cpct_setPALColour_asm
 
-     ld   hl, #_main_palette
-   ld   de, #16
-   call cpct_setPalette_asm
+    ld   hl, #_main_palette
+    ld   de, #16
+    call cpct_setPalette_asm
 
 ret
 
@@ -73,7 +70,6 @@ sysRenderUpdateOne:
 
     call cpct_drawSprite_asm
 
-salirSysRenderUpdateOne:
 ret
 
 

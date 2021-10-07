@@ -1,34 +1,11 @@
-.include "../entityInfo.s"
 
-.globl manEntityDestroy
-.globl manEntityForAll
-.globl manEntityMarkToDestroy
+.include "colisions.h.s"
+.include "../man/entity.h.s"
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      sysColisionsUpdateOne
-;; Requisitos:
-;;      ix -> Posicion inicial de memoria de la entidad bala
-;; Return:
-;;    -
-;; Descripcion:
-;;    Hace de puente para comprobar las colisiones
-;;
-sysColisionsUpdateOne:
-
-
-
-    push ix
-    pop iy
-
-    ld hl, #sysColisionComprobarColision
-    ld a, #ETypeColisionable
-    call manEntityForAll
-
-ret
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;      sysColisionComprobarColision
 ;; Requisitos:
 ;;      ix -> Posicion inicial de memoria de la entidad colisionable
 ;;      iy -> Posicion inicial de memoria de la entidad bala
@@ -37,52 +14,58 @@ ret
 ;; Descripcion:
 ;;    Comprueba si dos entidades han colisionado o no
 ;;
-sysColisionComprobarColision:
+sysColisionsUpdateOne:
 
     ;; x dentro de rango?
 
-    ld a, indX(ix)      ;; x del colisionable
+    ld a, indX(iy)      ;; x del colisionable
     dec a
-    ld b, indX(iy)      ;; x de la bala
+    ld b, indX(ix)      ;; x de la bala
     cp b
 
-    jp nc, finSysColisionComprobarColision ;; No hay carry-> x de la bala < x del colisionable  
+    ret nc ;; No hay carry-> x de la bala < x del colisionable  
 
     inc a
-    ld c, indWidth(ix)
+    ld c, indWidth(iy)
     add a, c
 
     cp b
 
-    jp c, finSysColisionComprobarColision ;; No hay carry-> x + width de colisionable < x de la bala
+    ret c ;; No hay carry-> x + width de colisionable < x de la bala
 
 
     ;; y dentro de rango?
 
-    ld a, indY(ix)      ;; y del colisionable
+    ld a, indY(iy)      ;; y del colisionable
     dec a
-    ld b, indY(iy)      ;; y de la bala
+    ld b, indY(ix)      ;; y de la bala
     cp b
 
-    jp nc, finSysColisionComprobarColision ;; No hay carry-> y de la bala < y del colisionable  
+    ret nc ;; No hay carry-> y de la bala < y del colisionable  
 
     inc a
-    ld c, indHeight(ix)
+    ld c, indHeight(iy)
     add a, c
 
     cp b
 
-    jp c, finSysColisionComprobarColision ;; No hay carry-> x + width de colisionable < x de la bala
+    ret c ;; No hay carry-> x + width de colisionable < x de la bala
 
+        ;;TODO: Hacer una beheaviour como en la ia, al colisionar pues pasan cosas
     call manEntityMarkToDestroy
+
+    push ix
 
     push iy
     pop ix
     
     call manEntityMarkToDestroy
 
+    push ix
+    pop iy
+    
+    pop ix
 
-finSysColisionComprobarColision:
 ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -98,6 +81,7 @@ sysColisionsUpdate::
 
     ld hl, #sysColisionsUpdateOne
     ld a, #ETypeBullet
-    call manEntityForAll
+    ld b, #ETypeColisionable
+    call manEntityForAllMatching
 
 ret

@@ -1,15 +1,14 @@
 .include "cpctelera.h.s"
-.include "../entityInfo.s"
-
-.globl manEntityForAll
-.globl manGameBulletCreator
+.include "input.h.s"
+.include "../man/game.h.s"
+.include "../man/entity.h.s"
 
 .globl cpct_scanKeyboard_asm
 .globl cpct_isKeyPressed_asm
 
-ConstDelayMovement=2
-
-inputSpeed=40
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  VARIABLES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 delayMovement:
     .db #ConstDelayMovement    ;; frames
@@ -76,7 +75,7 @@ kPulsada:
 
     call manGameBulletCreator
 
-    jp salirSysInputUpdateOne
+    ret
 
 seguirComprobando:
 
@@ -85,8 +84,7 @@ seguirComprobando:
 
     jr nz, kPulsada
 
-salirSysInputUpdateOne:
-    ret
+ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      Update
