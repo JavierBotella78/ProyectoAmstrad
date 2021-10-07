@@ -24,6 +24,7 @@ initPlayer:
    .db #0x04                                          ;; width
    .db #0x10                                          ;; height
    .dw #0                                             ;; AI
+   .dw #0                                             ;; Colision
    .dw #_spr_idle                                     ;; Sprite
    .dw #0xc000                                        ;; prevPos
 
@@ -37,6 +38,7 @@ initEnemigo:
    .db #0x04                                                            ;; width
    .db #0x10                                                            ;; height
    .dw #sysAIMoveLeft                                                   ;; AI   
+   .dw #sysColisionsDestroy                                             ;; Colision
    .dw #_spr_idle                                                       ;; Sprite
    .dw #0xc000                                                          ;; prevPos
 
@@ -50,6 +52,7 @@ initBala:
    .db #0x04                                             ;; width
    .db #0x10                                             ;; height
    .dw #0                                                ;; AI
+   .dw #sysColisionsDestroy                              ;; Colision
    .dw #_spr_idle                                        ;; Sprite
    .dw #0xc000                                           ;; prevPos
 
@@ -96,7 +99,7 @@ mainLoop:
    call sysAIUpdate
 
    call sysPhysicsUpdate
-   
+
    call sysRenderUpdate
    call sysColisionsUpdate
    

@@ -52,19 +52,39 @@ sysColisionsUpdateOne:
     ret c ;; No hay carry-> x + width de colisionable < x de la bala
 
         ;;TODO: Hacer una beheaviour como en la ia, al colisionar pues pasan cosas
-    call manEntityMarkToDestroy
+    
+    call sysColisionsBehaviour
 
-    push ix
-
+    push ix         ;; Switch ix and iy
     push iy
     pop ix
     
-    call manEntityMarkToDestroy
+    call sysColisionsBehaviour
 
-    push ix
+    push ix         ;; Switch ix and iy again
     pop iy
-    
     pop ix
+
+ret
+
+
+sysColisionsBehaviour:
+
+    ld h, indColision1(ix)
+    ld l, indColision2(ix)
+
+    ld bc, #salirColision
+    push bc
+
+    jp (hl)
+
+    salirColision:
+
+ret
+
+sysColisionsDestroy:
+
+    call manEntityMarkToDestroy
 
 ret
 

@@ -8,3 +8,4 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 .globl sysColisionsUpdate
+.globl sysColisionsDestroy

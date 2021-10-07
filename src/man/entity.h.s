@@ -3,7 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
     ;; ENTITY INFO
-EntitySize=13  ;; 0->type, 1->x, 2->y, 3->vx , 4->vy, 5->ancho(w), 6->alto(h), 7->color, 8-9->prevPos
+EntitySize=15  ;; 0->type, 1->x, 2->y, 3->vx , 4->vy, 5->ancho(w), 6->alto(h), 7->color, 8-9->prevPos
 EntityArraySize=40
 EntityArrayBytesSize=EntitySize*EntityArraySize
 
@@ -17,10 +17,12 @@ indWidth=5
 indHeight=6
 indAI2=7
 indAI1=8
-indSprite2=9
-indSprite1=10
-indPrevPos2=11
-indPrevPos1=12
+indColision2=9
+indColision1=10
+indSprite2=11
+indSprite1=12
+indPrevPos2=13
+indPrevPos1=14
 
     ;; ENTITY TYPES
 ETypeInvalid=0x00
