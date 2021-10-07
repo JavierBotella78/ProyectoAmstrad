@@ -66,10 +66,10 @@ sysRenderUpdateOne:
     ld indPrevPos2(ix), l
 
     ex de, hl
-    ld hl, #_spr_idle
-   ;;ld a, indColor(ix)
-    ld c, #0x04
-    ld b, #0x10
+    ld h, indSprite1(ix)
+    ld l, indSprite2(ix)
+    ld c, indWidth(ix)
+    ld b, indHeight(ix)
 
     call cpct_drawSprite_asm
 

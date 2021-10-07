@@ -7,7 +7,7 @@
 .globl cpct_scanKeyboard_asm
 .globl cpct_isKeyPressed_asm
 
-ConstDelayMovement=4
+ConstDelayMovement=2
 
 inputSpeed=40
 

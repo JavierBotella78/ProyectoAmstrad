@@ -1,4 +1,4 @@
-EntitySize=10  ;; 0->type, 1->x, 2->y, 3->vx , 4->vy, 5->ancho(w), 6->alto(h), 7->color, 8-9->prevPos
+EntitySize=11  ;; 0->type, 1->x, 2->y, 3->vx , 4->vy, 5->ancho(w), 6->alto(h), 7->color, 8-9->prevPos
 EntityArraySize=40
 EntityArrayBytesSize=EntitySize*EntityArraySize
 
@@ -9,9 +9,10 @@ indVx=3
 indVy=4
 indWidth=5
 indHeight=6
-indColor=7
-indPrevPos2=8
-indPrevPos1=9
+indSprite2=7
+indSprite1=8
+indPrevPos2=9
+indPrevPos1=10
 
 ETypeInvalid=0x00
 ETypeRenderable=0x01

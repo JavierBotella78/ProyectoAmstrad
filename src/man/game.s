@@ -27,34 +27,34 @@ initPlayer:
    .db #10                                            ;; y
    .db #0                                             ;; vx
    .db #0                                             ;; vy
-   .db #0x04                             ; width
-   .db #0x10                             ;; height
-   .db #0xff                                          ;; Color
+   .db #0x04                                          ;; width
+   .db #0x10                                          ;; height
+   .dw #_spr_idle                                     ;; Sprite
    .dw #0xc000                                        ;; prevPos
 
 
 initEnemigo:
-   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable   
-   .db #60
-   .db #10
-   .db #0
-   .db #0
-   .db #2
-   .db #8
-   .db #0xff
-   .dw #0xc000
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable ;; Type
+   .db #60                                                              ;; x
+   .db #10                                                              ;; y
+   .db #0                                                               ;; vx
+   .db #0                                                               ;; vy
+   .db #0x04                                                            ;; width
+   .db #0x10                                                            ;; height
+   .dw #_spr_idle                                                       ;; Sprite
+   .dw #0xc000                                                          ;; prevPos
 
 
 initBala:
-   .db #ETypeRenderable | #ETypeBullet | #ETypeMovable    
-   .db #13
-   .db #0
-   .db #2
-   .db #0
-   .db #1
-   .db #2
-   .db #0xff
-   .dw #0xc000
+   .db #ETypeRenderable | #ETypeBullet | #ETypeMovable   ;; Type     
+   .db #13                                               ;; x
+   .db #0                                                ;; y
+   .db #2                                                ;; vx
+   .db #0                                                ;; vy
+   .db #0x04                                             ;; width
+   .db #0x10                                             ;; height
+   .dw #_spr_idle                                        ;; Sprite
+   .dw #0xc000                                           ;; prevPos
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
