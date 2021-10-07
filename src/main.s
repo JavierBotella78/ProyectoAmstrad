@@ -9,7 +9,10 @@
 .globl manGamePlay
 
 
+
 _main::
+
+  
 
    call cpct_disableFirmware_asm
 

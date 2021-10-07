@@ -1,12 +1,19 @@
 .include "cpctelera.h.s"
 .include "../entityInfo.s"
+;;.include "../sprites/main_palette.h"
 
 .globl cpct_getScreenPtr_asm
 .globl cpct_setVideoMode_asm
 .globl cpct_setPALColour_asm
 
+.globl _main_palette
+.globl cpct_setPalette_asm
+
 .globl cpct_getScreenPtr_asm
 .globl cpct_drawSolidBox_asm
+.globl cpct_drawSprite_asm
+
+.globl _spr_idle
 
 .globl manEntityForAll
 
@@ -29,6 +36,10 @@ sysRenderInit:
     ld l, #0
     ld h, #HW_BLACK
     call cpct_setPALColour_asm
+
+     ld   hl, #_main_palette
+   ld   de, #16
+   call cpct_setPalette_asm
 
 ret
 
@@ -55,11 +66,12 @@ sysRenderUpdateOne:
     ld indPrevPos2(ix), l
 
     ex de, hl
-    ld a, indColor(ix)
-    ld c, indWidth(ix)
-    ld b, indHeight(ix)
+    ld hl, #_spr_idle
+   ;;ld a, indColor(ix)
+    ld c, #0x04
+    ld b, #0x10
 
-    call cpct_drawSolidBox_asm
+    call cpct_drawSprite_asm
 
 salirSysRenderUpdateOne:
 ret

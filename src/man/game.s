@@ -1,5 +1,8 @@
 .include "cpctelera.h.s"
 .include "../entityInfo.s"
+;.include "sheriff2.h"
+;;.include "../sprites/sheriff-idleCPC.h"
+
 
 .globl cpct_waitVSYNC_asm
 .globl cpct_memcpy_asm
@@ -14,6 +17,8 @@
 
 .globl manEntityInit 
 .globl sysRenderInit 
+.globl _spr_idle
+
 
 
 initPlayer: 
@@ -22,8 +27,8 @@ initPlayer:
    .db #10                                            ;; y
    .db #0                                             ;; vx
    .db #0                                             ;; vy
-   .db #2                                             ;; width
-   .db #8                                             ;; height
+   .db #0x04                             ; width
+   .db #0x10                             ;; height
    .db #0xff                                          ;; Color
    .dw #0xc000                                        ;; prevPos
 
