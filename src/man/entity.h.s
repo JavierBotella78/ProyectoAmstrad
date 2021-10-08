@@ -31,7 +31,7 @@ ETypeMovable=0x02
 ETypeInput=0x04
 ETypeAI=0x08
 ETypeColisionable=0x10
-ETypeBullet=0x20
+ETypeColider=0x20
 ETypeDead=0x80
 ETypeDefault=0x7f
 

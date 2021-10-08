@@ -1,6 +1,7 @@
 
 .include "colisions.h.s"
 .include "../man/entity.h.s"
+.include "../man/game.h.s"
 
 
 
@@ -88,9 +89,9 @@ sysColisionsDestroy:
 
 ret
 
-sysColisionsDestroy:
+sysColisionsPlayer:
 
-    call manEntityMarkToDestroy
+    call manGamePlayerColision
 
 ret
 

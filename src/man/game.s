@@ -12,21 +12,31 @@
 .globl cpct_memcpy_asm
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  VARIABLES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+playerLife:
+   .db #4
+
+playerInvulnerability:
+   .db #MaxPlayerInvulnerability
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  TEMPLATES
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 initPlayer: 
-   .db #ETypeRenderable | #ETypeInput | #ETypeMovable ;; Type
-   .db #10                                            ;; x
-   .db #10                                            ;; y
-   .db #0                                             ;; vx
-   .db #0                                             ;; vy
-   .db #0x04                                          ;; width
-   .db #0x10                                          ;; height
-   .dw #0                                             ;; AI
-   .dw #0                                             ;; Colision
-   .dw #_spr_idle                                     ;; Sprite
-   .dw #0xc000                                        ;; prevPos
+   .db #ETypeRenderable | #ETypeInput | #ETypeMovable | #ETypeColider   ;; Type
+   .db #10                                                              ;; x
+   .db #10                                                              ;; y
+   .db #0                                                               ;; vx
+   .db #0                                                               ;; vy
+   .db #0x04                                                            ;; width
+   .db #0x10                                                            ;; height
+   .dw #0                                                               ;; AI
+   .dw #sysColisionsPlayer                                              ;; Colision
+   .dw #_spr_idle                                                       ;; Sprite
+   .dw #0xc000                                                          ;; prevPos
 
 
 initEnemigo:
@@ -44,7 +54,7 @@ initEnemigo:
 
 
 initBala:
-   .db #ETypeRenderable | #ETypeBullet | #ETypeMovable   ;; Type     
+   .db #ETypeRenderable | #ETypeColider | #ETypeMovable  ;; Type     
    .db #13                                               ;; x
    .db #0                                                ;; y
    .db #2                                                ;; vx
@@ -105,6 +115,13 @@ mainLoop:
    
    call esperar
 
+   ld a, (#playerInvulnerability)
+   or a
+   jp z, loop
+
+   dec a
+   ld (playerInvulnerability), a 
+
 
 loop:
    jr    mainLoop
@@ -147,6 +164,26 @@ manGameBulletCreator::
    ld hl, #initBala
 
    call manGameCreator
+
+ret
+
+manGamePlayerColision::
+
+   ld a, (#playerInvulnerability)
+   or a
+   
+   ret nz
+
+   ld a, (#playerLife)
+   dec a
+   ld (playerLife), a 
+
+   ld a, #MaxPlayerInvulnerability
+   ld (playerInvulnerability),  a
+   
+   ret nz
+
+   call manEntityMarkToDestroy
 
 ret
 
