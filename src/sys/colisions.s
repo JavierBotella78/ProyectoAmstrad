@@ -88,6 +88,12 @@ sysColisionsDestroy:
 
 ret
 
+sysColisionsDestroy:
+
+    call manEntityMarkToDestroy
+
+ret
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sysColisionsUpdate
 ;; Requisitos:
@@ -100,7 +106,7 @@ ret
 sysColisionsUpdate::
 
     ld hl, #sysColisionsUpdateOne
-    ld a, #ETypeBullet
+    ld a, #ETypeColider
     ld b, #ETypeColisionable
     call manEntityForAllMatching
 
