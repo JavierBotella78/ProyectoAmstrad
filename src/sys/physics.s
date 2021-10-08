@@ -52,7 +52,15 @@ sysPhysicsUpdateOne:
 
 destroy:
 
-    call manEntityMarkToDestroy
+    ld h, indColision1(ix)
+    ld l, indColision2(ix)
+    
+    ld bc, #salirPhysics
+    push bc
+
+    jp (hl)
+
+    salirPhysics:
 
 ret
 

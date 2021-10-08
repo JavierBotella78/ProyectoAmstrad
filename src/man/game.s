@@ -21,6 +21,9 @@ playerLife:
 playerInvulnerability:
    .db #MaxPlayerInvulnerability
 
+bulletLife:
+   .db #0
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    Init
 ;; Parameters:
@@ -103,9 +106,35 @@ ret
 ;;
 manGameBulletCreator::
 
-;;Comprobar que haya solo una bala
+   ld a, (#bulletLife)
+   or a 
+
+   ret nz
+
+   inc a
+   ld (#bulletLife), a
 
    call sysGeneratorBulletCreator
+
+ret
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;    BulletColision
+;; Parameters:
+;;    -
+;; Return:
+;;    -
+;; Description:
+;;    Decreases the player's life by 1 if it's hit by an enemy
+;;
+manGameBulletColision::
+
+   ld a, (#bulletLife)
+   dec a 
+   ld (#bulletLife), a
+
+   call manEntityMarkToDestroy
 
 ret
 

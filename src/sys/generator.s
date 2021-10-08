@@ -67,7 +67,7 @@ initBullet:
    .db #0x04                                             ;; width
    .db #0x10                                             ;; height
    .dw #0                                                ;; AI
-   .dw #sysColisionsDestroy                              ;; Colision
+   .dw #sysColisionsBullet                               ;; Colision
    .dw #_spr_idle                                        ;; Sprite
    .dw #0xc000                                           ;; prevPos
 

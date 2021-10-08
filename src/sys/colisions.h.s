@@ -9,4 +9,5 @@
 
 .globl sysColisionsUpdate
 .globl sysColisionsDestroy
+.globl sysColisionsBullet
 .globl sysColisionsPlayer

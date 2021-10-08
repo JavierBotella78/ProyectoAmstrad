@@ -89,6 +89,12 @@ sysColisionsDestroy:
 
 ret
 
+sysColisionsBullet:
+
+    call manGameBulletColision
+
+ret
+
 sysColisionsPlayer:
 
     call manGamePlayerColision
