@@ -2,17 +2,13 @@
 ;;  CONSTANTS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-MaxPlayerInvulnerability=45
+InitMinTime2Generate=15
+InitMaxNumberEnemies=5
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  PUBLIC FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-.globl manGameInit
-.globl manGamePlay
-.globl manGameBulletCreator
-.globl manGamePlayerColision
-
-.globl _spr_idle
-
-
+.globl sysGeneratorInit
+.globl sysGeneratorUpdate
+.globl sysGeneratorBulletCreator

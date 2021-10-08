@@ -7,9 +7,9 @@
 .include "../sys/input.h.s"
 .include "../sys/physics.h.s"
 .include "../sys/ai.h.s"
+.include "../sys/generator.h.s"
 
 .globl cpct_waitVSYNC_asm
-.globl cpct_memcpy_asm
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  VARIABLES
@@ -21,89 +21,41 @@ playerLife:
 playerInvulnerability:
    .db #MaxPlayerInvulnerability
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  TEMPLATES
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-initPlayer: 
-   .db #ETypeRenderable | #ETypeInput | #ETypeMovable | #ETypeColider   ;; Type
-   .db #10                                                              ;; x
-   .db #10                                                              ;; y
-   .db #0                                                               ;; vx
-   .db #0                                                               ;; vy
-   .db #0x04                                                            ;; width
-   .db #0x10                                                            ;; height
-   .dw #0                                                               ;; AI
-   .dw #sysColisionsPlayer                                              ;; Colision
-   .dw #_spr_idle                                                       ;; Sprite
-   .dw #0xc000                                                          ;; prevPos
-
-
-initEnemigo:
-   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable ;; Type
-   .db #60                                                              ;; x
-   .db #10                                                              ;; y
-   .db #0                                                               ;; vx
-   .db #0                                                               ;; vy
-   .db #0x04                                                            ;; width
-   .db #0x10                                                            ;; height
-   .dw #sysAIMoveLeft                                                   ;; AI   
-   .dw #sysColisionsDestroy                                             ;; Colision
-   .dw #_spr_idle                                                       ;; Sprite
-   .dw #0xc000                                                          ;; prevPos
-
-
-initBala:
-   .db #ETypeRenderable | #ETypeColider | #ETypeMovable  ;; Type     
-   .db #13                                               ;; x
-   .db #0                                                ;; y
-   .db #2                                                ;; vx
-   .db #0                                                ;; vy
-   .db #0x04                                             ;; width
-   .db #0x10                                             ;; height
-   .dw #0                                                ;; AI
-   .dw #sysColisionsDestroy                              ;; Colision
-   .dw #_spr_idle                                        ;; Sprite
-   .dw #0xc000                                           ;; prevPos
-
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    Init
-;; Requisitos:
+;; Parameters:
 ;;    -
 ;; Return:
 ;;    -
-;; Descripcion:
-;;    Inicializa el juego
+;; Description:
+;;    Initialize the game
 ;;
 manGameInit::
 
    call manEntityInit ;; Iniciamos todos los valores del array a 0
    call sysRenderInit 
-
-   ld hl, #initPlayer
-   call manGameCreator
-
-   ld hl, #initEnemigo
-   call manGameCreator
+   call sysGeneratorInit
 
 ret
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    Play
-;; Requisitos:
+;; Parameters:
 ;;    -
 ;; Return:
 ;;    -
-;; Descripcion:
-;;    loop principal del juego
+;; Description:
+;;    Main game loop
 ;;
 manGamePlay::
 
 mainLoop:
+
    call manEntityDestroyDead
+   call manGamePlayerUpdate
+
+   call sysGeneratorUpdate
 
    call sysInputUpdate
    call sysAIUpdate
@@ -113,60 +65,60 @@ mainLoop:
    call sysRenderUpdate
    call sysColisionsUpdate
    
-   call esperar
-
-   ld a, (#playerInvulnerability)
-   or a
-   jp z, loop
-
-   dec a
-   ld (playerInvulnerability), a 
-
+   call waitHalt
 
 loop:
    jr    mainLoop
    
 ret
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;    Creator
-;; Requisitos:
-;;    hl -> Plantilla de la entidad
+;;    Update
+;; Parameters:
+;;    -
 ;; Return:
 ;;    -
-;; Descripcion:
-;;    Crea una entidad apartir de una plantilla
+;; Description:
+;;    Decreases the player's life by 1 if it's hit by an enemy
 ;;
-manGameCreator:
+manGamePlayerUpdate:
 
-   push hl
+   ld a, (#playerInvulnerability)
+   or a
+   ret z
 
-   call manEntityCreate  
-
-   ex de, hl
-   pop hl
-   ld bc, #EntitySize
-
-   call cpct_memcpy_asm
+   dec a
+   ld (playerInvulnerability), a 
 
 ret
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;    BulletCreator
+;; Parameters:
+;;    -
+;; Return:
+;;    -
+;; Description:
+;;    Decreases the player's life by 1 if it's hit by an enemy
+;;
 manGameBulletCreator::
 
-   ld iy, #initBala
+;;Comprobar que haya solo una bala
 
-   ld a, indY(ix)
-   ld b, #3
-   add a, b
-   ld indY(iy), a 
-
-   ld hl, #initBala
-
-   call manGameCreator
+   call sysGeneratorBulletCreator
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;    PlayerColision
+;; Parameters:
+;;    ix -> Player entity
+;; Return:
+;;    -
+;; Description:
+;;    Decreases the player's life by 1 if it's hit by an enemy
+;;
 manGamePlayerColision::
 
    ld a, (#playerInvulnerability)
@@ -189,15 +141,15 @@ ret
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;    esperar
-;; Requisitos:
+;;    waitHalt
+;; Parameters:
 ;;    -
 ;; Return:
 ;;    -
-;; Descripcion:
-;;    Hace pausas en la ejecución del programa entre ciclos
+;; Description:
+;;    Wait x halts and vsync
 ;;
-esperar:
+waitHalt:
    ld a, #3
    esperarbucle:
    push af

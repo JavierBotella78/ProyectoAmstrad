@@ -88,12 +88,10 @@ manEntityCreate::
    add hl, bc
    ld (#freeSpace), hl
 
-   ld bc, #-EntitySize
-
    pop hl
 
 
-   ret
+ret
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
