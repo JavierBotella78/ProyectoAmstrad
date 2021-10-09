@@ -7,6 +7,7 @@
 .include "colisions.h.s"
 
 .globl cpct_memcpy_asm
+.globl cpct_getRandom_mxor_u8_asm
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  VARIABLES
@@ -33,7 +34,7 @@ numberEnemies:
 initPlayer: 
    .db #ETypeRenderable | #ETypeInput | #ETypeMovable | #ETypeColider   ;; Type
    .db #10                                                              ;; x
-   .db #10                                                              ;; y
+   .db #Fila1                                                           ;; y
    .db #0                                                               ;; vx
    .db #0                                                               ;; vy
    .db #0x04                                                            ;; width
@@ -44,10 +45,36 @@ initPlayer:
    .dw #0xc000                                                          ;; prevPos
 
 
-initEnemy:
+initEnemy1:
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable ;; Type
    .db #60                                                              ;; x
-   .db #10                                                              ;; y
+   .db #Fila1                                                           ;; y
+   .db #0                                                               ;; vx
+   .db #0                                                               ;; vy
+   .db #0x04                                                            ;; width
+   .db #0x10                                                            ;; height
+   .dw #sysAIMoveLeft                                                   ;; AI   
+   .dw #sysColisionsDestroy                                             ;; Colision
+   .dw #_spr_idle                                                       ;; Sprite
+   .dw #0xc000                                                          ;; prevPos
+
+initEnemy2:
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable ;; Type
+   .db #60                                                              ;; x
+   .db #Fila2                                                           ;; y
+   .db #0                                                               ;; vx
+   .db #0                                                               ;; vy
+   .db #0x04                                                            ;; width
+   .db #0x10                                                            ;; height
+   .dw #sysAIMoveLeft                                                   ;; AI   
+   .dw #sysColisionsDestroy                                             ;; Colision
+   .dw #_spr_idle                                                       ;; Sprite
+   .dw #0xc000                                                          ;; prevPos
+
+initEnemy3:
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable ;; Type
+   .db #60                                                              ;; x
+   .db #Fila3                                                           ;; y
    .db #0                                                               ;; vx
    .db #0                                                               ;; vy
    .db #0x04                                                            ;; width
@@ -155,10 +182,34 @@ ret
 ;;
 sysGeneratorEnemy:
 
-   ld hl, #initEnemy
+   call cpct_getRandom_mxor_u8_asm
 
-   ;;TODO: QUE SE GENEREN EN LOS 3 PUNTOS DE LA Y QUE ACORDEMOS
+   ld a, #3
+   and l
 
+   or a
+
+   jp nz, generateEnemy2
+
+   ld hl, #initEnemy1
+
+   jp sysGeneratorEnemyCall
+
+generateEnemy2:
+
+   dec a
+   
+   jp nz, generateEnemy3
+
+   ld hl, #initEnemy2
+
+   jp sysGeneratorEnemyCall
+
+generateEnemy3:
+
+   ld hl, #initEnemy3
+
+sysGeneratorEnemyCall:
    call sysGeneratorTmpl
 
 ret

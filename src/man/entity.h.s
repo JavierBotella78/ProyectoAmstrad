@@ -7,6 +7,10 @@ EntitySize=15  ;; 0->type, 1->x, 2->y, 3->vx , 4->vy, 5->ancho(w), 6->alto(h), 7
 EntityArraySize=40
 EntityArrayBytesSize=EntitySize*EntityArraySize
 
+Fila1=40
+Fila2=80
+Fila3=120
+
     ;; INDEX FOR IX/IY
 indType=0
 indX=1

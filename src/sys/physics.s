@@ -39,13 +39,12 @@ sysPhysicsUpdateOne:
 
     ;;  Por arriba
     
+    dec a
     cp c
     
     ret nc
-    
-
-    ;; TODO: Comprobar que no se salga de pantalla en la y
-
+ 
+    inc a
     ld indY(ix), a
 
     ret
