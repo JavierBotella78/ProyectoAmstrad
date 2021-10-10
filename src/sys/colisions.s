@@ -89,6 +89,13 @@ sysColisionsDestroy:
 
 ret
 
+sysColisionsEnemy:
+
+    call manEntityMarkToDestroy
+    call manGameScore
+
+ret
+
 sysColisionsBullet:
 
     call manGameBulletColision

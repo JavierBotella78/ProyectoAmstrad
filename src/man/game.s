@@ -24,6 +24,9 @@ playerInvulnerability:
 bulletLife:
    .db #0
 
+score:
+   .dw #0
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    Init
 ;; Parameters:
@@ -166,6 +169,19 @@ manGamePlayerColision::
 
    call manEntityMarkToDestroy
 
+ret
+
+
+manGameScore::
+
+   ld hl, (#score)
+   ld c, indScore(ix)
+   ld b, #0
+
+   add hl, bc
+   
+   ld (score), hl
+   
 ret
 
 

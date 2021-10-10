@@ -51,8 +51,8 @@ sysPhysicsUpdateOne:
 
 destroy:
 
-    ld h, indColision1(ix)
-    ld l, indColision2(ix)
+    ld h, indPhysics1(ix)
+    ld l, indPhysics2(ix)
     
     ld bc, #salirPhysics
     push bc

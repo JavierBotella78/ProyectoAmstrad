@@ -13,6 +13,7 @@ MaxPlayerInvulnerability=45
 .globl manGameBulletColision
 .globl manGameBulletCreator
 .globl manGamePlayerColision
+.globl manGameScore
 
 .globl _spr_idle
 

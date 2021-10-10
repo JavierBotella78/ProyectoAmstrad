@@ -41,8 +41,10 @@ initPlayer:
    .db #0x10                                                            ;; height
    .dw #0                                                               ;; AI
    .dw #sysColisionsPlayer                                              ;; Colision
+   .dw #sysColisionsPlayer                                              ;; Colision
    .dw #_spr_idle                                                       ;; Sprite
    .dw #0xc000                                                          ;; prevPos
+   .db #0                                                               ;; score
 
 
 initEnemy1:
@@ -54,9 +56,11 @@ initEnemy1:
    .db #0x04                                                            ;; width
    .db #0x10                                                            ;; height
    .dw #sysAIMoveLeft                                                   ;; AI   
-   .dw #sysColisionsDestroy                                             ;; Colision
+   .dw #sysColisionsEnemy                                               ;; Colision
+   .dw #sysColisionsDestroy                                             ;; Physics
    .dw #_spr_idle                                                       ;; Sprite
    .dw #0xc000                                                          ;; prevPos
+   .db #125                                                             ;; score
 
 initEnemy2:
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable ;; Type
@@ -67,9 +71,11 @@ initEnemy2:
    .db #0x04                                                            ;; width
    .db #0x10                                                            ;; height
    .dw #sysAIMoveLeft                                                   ;; AI   
-   .dw #sysColisionsDestroy                                             ;; Colision
+   .dw #sysColisionsEnemy                                             ;; Colision
+   .dw #sysColisionsDestroy                                             ;; Physics
    .dw #_spr_idle                                                       ;; Sprite
    .dw #0xc000                                                          ;; prevPos
+   .db #100                                                             ;; score
 
 initEnemy3:
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable ;; Type
@@ -80,9 +86,11 @@ initEnemy3:
    .db #0x04                                                            ;; width
    .db #0x10                                                            ;; height
    .dw #sysAIMoveLeft                                                   ;; AI   
-   .dw #sysColisionsDestroy                                             ;; Colision
+   .dw #sysColisionsEnemy                                            ;; Colision
+   .dw #sysColisionsDestroy                                             ;; Physics
    .dw #_spr_idle                                                       ;; Sprite
    .dw #0xc000                                                          ;; prevPos
+   .db #50                                                              ;; score
 
 
 initBullet:
@@ -95,8 +103,10 @@ initBullet:
    .db #0x10                                             ;; height
    .dw #0                                                ;; AI
    .dw #sysColisionsBullet                               ;; Colision
+   .dw #sysColisionsBullet                               ;; Physics
    .dw #_spr_idle                                        ;; Sprite
    .dw #0xc000                                           ;; prevPos
+   .db #0                                                ;; score
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
