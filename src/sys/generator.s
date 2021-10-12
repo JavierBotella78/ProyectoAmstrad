@@ -58,7 +58,7 @@ initEnemy1:
    .dw #sysAIMoveLeft                                                   ;; AI   
    .dw #sysColisionsEnemy                                               ;; Colision
    .dw #sysColisionsDestroy                                             ;; Physics
-   .dw #_spr_idle                                                       ;; Sprite
+   .dw #_spr_drone                                                       ;; Sprite
    .dw #0xc000                                                          ;; prevPos
    .db #125                                                             ;; score
 
@@ -73,7 +73,7 @@ initEnemy2:
    .dw #sysAIMoveLeft                                                   ;; AI   
    .dw #sysColisionsEnemy                                             ;; Colision
    .dw #sysColisionsDestroy                                             ;; Physics
-   .dw #_spr_idle                                                       ;; Sprite
+   .dw #_spr_octo                                                       ;; Sprite
    .dw #0xc000                                                          ;; prevPos
    .db #100                                                             ;; score
 
@@ -88,7 +88,7 @@ initEnemy3:
    .dw #sysAIMoveLeft                                                   ;; AI   
    .dw #sysColisionsEnemy                                            ;; Colision
    .dw #sysColisionsDestroy                                             ;; Physics
-   .dw #_spr_idle                                                       ;; Sprite
+   .dw #_spr_robo                                                       ;; Sprite
    .dw #0xc000                                                          ;; prevPos
    .db #50                                                              ;; score
 
@@ -99,14 +99,30 @@ initBullet:
    .db #0                                                ;; y
    .db #2                                                ;; vx
    .db #0                                                ;; vy
-   .db #0x04                                             ;; width
-   .db #0x10                                             ;; height
+   .db #4                                             ;; width
+   .db #4                                             ;; height
    .dw #0                                                ;; AI
    .dw #sysColisionsBullet                               ;; Colision
    .dw #sysColisionsBullet                               ;; Physics
-   .dw #_spr_idle                                        ;; Sprite
+   .dw #_spr_rainbow                                      ;; Sprite
    .dw #0xc000                                           ;; prevPos
    .db #0                                                ;; score
+
+ ;; initInterf:
+  ;;  .db #ETypeRenderable                                  ;; Type     
+   ;; .db #0                                               ;; x
+   ;; .db #0                                                ;; y
+    ;;.db #0                                                ;; vx
+    ;;.db #0                                                ;; vy
+    ;;.db #31                                             ;; width
+    ;;.db #100                                             ;; height
+    ;;.dw #0                                                ;; AI
+    ;;.dw #0                                                ;; Colision
+    ;;.dw #0                                                ;; Physics
+    ;;.dw #_spr_hud_0                                         ;; Sprite
+    ;;.dw #0xc000                                           ;; prevPos
+    ;;.db #0                                                ;; score
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -122,6 +138,9 @@ sysGeneratorInit::
 
    ld hl, #initPlayer
    call sysGeneratorTmpl
+
+;;    ld hl, #initInterf
+;;   call sysGeneratorTmpl
 
 ret
 
@@ -238,7 +257,7 @@ sysGeneratorBulletCreator::
    ld iy, #initBullet
 
    ld a, indY(ix)
-   ld b, #3
+   ld b, #8
    add a, b
    ld indY(iy), a 
 

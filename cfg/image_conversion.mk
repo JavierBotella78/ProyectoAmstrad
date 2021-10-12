@@ -41,6 +41,16 @@ $(eval $(call IMG2SP, SET_PALETTE_FW, $(PALETTE)))
 $(eval $(call IMG2SP, CONVERT_PALETTE , $(PALETTE), main_palette ))
 $(eval $(call IMG2SP, CONVERT , assets/sheriff2.png , 8, 16, spr_idle))
 
+$(eval $(call IMG2SP, CONVERT , assets/enemies/drone1.png , 8, 16, spr_drone))
+
+$(eval $(call IMG2SP, CONVERT , assets/enemies/octo1.png , 8, 16, spr_octo))
+
+$(eval $(call IMG2SP, CONVERT , assets//enemies/robot1.png , 8, 16, spr_robo))
+
+$(eval $(call IMG2SP, CONVERT , assets/rainbow.png , 8, 4, spr_rainbow))
+
+$(eval $(call IMG2SP, CONVERT , assets/hudtitle2.png , 63, 100, spr_hud))
+
 ##
 ## OLD MACROS (For compatibility)
 ##
