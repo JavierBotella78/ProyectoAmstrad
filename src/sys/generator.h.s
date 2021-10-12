@@ -19,3 +19,6 @@ InitMaxNumberEnemies=99
 .globl _spr_drone
 .globl _spr_rainbow
 .globl _spr_hud_0
+.globl _spr_hud_1
+.globl _spr_hud_2
+.globl _spr_hud_3

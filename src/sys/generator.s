@@ -108,20 +108,67 @@ initBullet:
    .dw #0xc000                                           ;; prevPos
    .db #0                                                ;; score
 
- ;; initInterf:
-  ;;  .db #ETypeRenderable                                  ;; Type     
-   ;; .db #0                                               ;; x
-   ;; .db #0                                                ;; y
-    ;;.db #0                                                ;; vx
-    ;;.db #0                                                ;; vy
-    ;;.db #31                                             ;; width
-    ;;.db #100                                             ;; height
-    ;;.dw #0                                                ;; AI
-    ;;.dw #0                                                ;; Colision
-    ;;.dw #0                                                ;; Physics
-    ;;.dw #_spr_hud_0                                         ;; Sprite
-    ;;.dw #0xc000                                           ;; prevPos
-    ;;.db #0                                                ;; score
+  initInterf:
+    .db #ETypeRenderable                                  ;; Type     
+    .db #0                                             ;; x
+    .db #144                                                ;; y
+    .db #0                                                ;; vx
+    .db #0                                                ;; vy
+    .db #20                                            ;; width
+    .db #56                                             ;; height
+    .dw #0                                                ;; AI
+    .dw #0                                                ;; Colision
+    .dw #0                                                ;; Physics
+    .dw #_spr_hud_0                                         ;; Sprite
+    .dw #0xc000                                           ;; prevPos
+    .db #0                                                ;; score
+
+    initInterf2:
+    .db #ETypeRenderable                                  ;; Type     
+    .db #20                                             ;; x
+    .db #144                                                ;; y
+    .db #0                                                ;; vx
+    .db #0                                                ;; vy
+    .db #20                                            ;; width
+    .db #56                                             ;; height
+    .dw #0                                                ;; AI
+    .dw #0                                                ;; Colision
+    .dw #0                                                ;; Physics
+    .dw #_spr_hud_1                                         ;; Sprite
+    .dw #0xc000                                           ;; prevPos
+    .db #0                                                ;; score
+
+     initInterf3:
+    .db #ETypeRenderable                                  ;; Type     
+    .db #40                                             ;; x
+    .db #144                                                ;; y
+    .db #0                                                ;; vx
+    .db #0                                                ;; vy
+    .db #20                                            ;; width
+    .db #56                                             ;; height
+    .dw #0                                                ;; AI
+    .dw #0                                                ;; Colision
+    .dw #0                                                ;; Physics
+    .dw #_spr_hud_2                                         ;; Sprite
+    .dw #0xc000                                           ;; prevPos
+    .db #0                                                ;; score
+
+    initInterf4:
+    .db #ETypeRenderable                                  ;; Type     
+    .db #60                                             ;; x
+    .db #144                                                ;; y
+    .db #0                                                ;; vx
+    .db #0                                                ;; vy
+    .db #20                                            ;; width
+    .db #56                                             ;; height
+    .dw #0                                                ;; AI
+    .dw #0                                                ;; Colision
+    .dw #0                                                ;; Physics
+    .dw #_spr_hud_3                                         ;; Sprite
+    .dw #0xc000                                           ;; prevPos
+    .db #0                                                ;; score
+
+
 
 
 
@@ -139,8 +186,17 @@ sysGeneratorInit::
    ld hl, #initPlayer
    call sysGeneratorTmpl
 
-;;    ld hl, #initInterf
-;;   call sysGeneratorTmpl
+   ld hl, #initInterf
+   call sysGeneratorTmpl
+
+   ld hl, #initInterf2
+   call sysGeneratorTmpl
+
+   ld hl, #initInterf3
+   call sysGeneratorTmpl
+
+   ld hl, #initInterf4
+   call sysGeneratorTmpl
 
 ret
 
