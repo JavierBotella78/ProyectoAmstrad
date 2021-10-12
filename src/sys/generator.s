@@ -38,11 +38,11 @@ initPlayer:
    .db #Fila1                                                           ;; y
    .db #0                                                               ;; vx
    .db #0                                                               ;; vy
-   .db #0x04                                                            ;; width
-   .db #0x10                                                            ;; height
+   .db #4                                                           ;; width
+   .db #16                                                            ;; height
    .dw #0                                                               ;; AI
    .dw #sysColisionsPlayer                                              ;; Colision
-   .dw #sysColisionsPlayer                                              ;; Colision
+   .dw #sysColisionsPlayer                                              ;; Physics
    .dw #_spr_idle                                                       ;; Sprite
    .dw #0xc000                                                          ;; prevPos
    .db #0                                                               ;; score
@@ -103,8 +103,38 @@ initBullet:
    .db #4                                             ;; width
    .db #4                                             ;; height
    .dw #0                                                ;; AI
-   .dw #sysColisionsBullet                               ;; Colision
-   .dw #sysColisionsBullet                               ;; Physics
+   .dw #sysColisionsDestroy                               ;; Colision
+   .dw #sysColisionsDestroy                               ;; Physics
+   .dw #_spr_rainbow                                      ;; Sprite
+   .dw #0xc000                                           ;; prevPos
+   .db #0                                                ;; score
+
+initPUBullet:
+   .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAI  ;; Type     
+   .db #0                                               ;; x
+   .db #0                                                ;; y
+   .db #0                                                ;; vx
+   .db #0                                                ;; vy
+   .db #4                                             ;; width
+   .db #4                                             ;; height
+   .dw #sysAIMoveLeft                                                ;; AI
+   .dw #sysColisionPUBullet                               ;; Colision
+   .dw #sysColisionsDestroy                               ;; Physics
+   .dw #_spr_idle                                                       ;; Sprite
+   .dw #0xc000                                           ;; prevPos
+   .db #0                                                ;; score
+
+initPUScore:
+   .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAI  ;; Type     
+   .db #0                                               ;; x
+   .db #0                                                ;; y
+   .db #0                                                ;; vx
+   .db #0                                                ;; vy
+   .db #4                                             ;; width
+   .db #4                                             ;; height
+   .dw #sysAIMoveLeft                                                ;; AI
+   .dw #sysColisionPUScore                               ;; Colision
+   .dw #sysColisionsDestroy                               ;; Physics
    .dw #_spr_rainbow                                      ;; Sprite
    .dw #0xc000                                           ;; prevPos
    .db #0                                                ;; score
@@ -214,25 +244,25 @@ ret
 ;;
 sysGeneratorUpdate::
 
-    ld a, (#time2Generate)
-    dec a
-    ld (#time2Generate), a
+   ld a, (#time2Generate)
+   dec a
+   ld (#time2Generate), a
 
-    ret nz
+   ret nz
 
-    ld a, (#minTime2Generate)
-    ld (#time2Generate), a
+   ld a, (#minTime2Generate)
+   ld (#time2Generate), a
 
 
-    ld a, (#numberEnemies)
-    or a
-    
-    ret z
+   ld a, (#numberEnemies)
+   or a
+   
+   ret z
 
-    dec a
-    ld (#numberEnemies), a
+   dec a
+   ld (#numberEnemies), a
 
-    call sysGeneratorEnemy
+   call sysGeneratorEnemy
 
 ret
 
@@ -298,6 +328,45 @@ generateEnemy3:
    ld hl, #initEnemy3
 
 sysGeneratorEnemyCall:
+   call sysGeneratorTmpl
+
+ret
+
+
+
+sysGeneratorPU::
+
+   call cpct_getRandom_mxor_u8_asm
+
+   ld a, #3
+   and l
+
+   or a
+
+   jp nz, generatePU2
+
+   ld hl, #initPUBullet
+   ld iy, #initPUBullet
+
+   jp sysGeneratorPUCall
+
+generatePU2:
+
+   dec a
+   
+   ret nz
+
+   ld hl, #initPUScore
+   ld iy, #initPUScore
+
+sysGeneratorPUCall:
+
+   ld a, indX(ix)
+   ld indX(iy), a
+
+   ld a, indY(ix)
+   ld indY(iy), a
+
    call sysGeneratorTmpl
 
 ret

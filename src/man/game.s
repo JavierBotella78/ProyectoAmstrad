@@ -27,6 +27,12 @@ bulletLife:
 score:
    .dw #0
 
+powerUpBullet:
+   .db #0
+
+powerUpScore:
+   .db #0
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    Init
 ;; Parameters:
@@ -59,7 +65,7 @@ manGamePlay::
 mainLoop:
 
    call manEntityDestroyDead
-   call manGamePlayerUpdate
+   call manGameUpdate
 
    call sysGeneratorUpdate
 
@@ -87,16 +93,36 @@ ret
 ;; Description:
 ;;    Decreases the player's life by 1 if it's hit by an enemy
 ;;
-manGamePlayerUpdate:
+manGameUpdate:
 
-   ld a, (#playerInvulnerability)
+   ld hl, #playerInvulnerability
+   ld a, (hl)
+   call manGameVariableUpdate
+
+   ld hl, #bulletLife
+   ld a, (hl)
+   call manGameVariableUpdate
+
+   ld hl, #powerUpScore
+   ld a, (hl)
+   call manGameVariableUpdate
+
+   ld hl, #powerUpBullet
+   ld a, (hl)
+   call manGameVariableUpdate
+
+ret
+
+manGameVariableUpdate:
+
    or a
    ret z
 
    dec a
-   ld (playerInvulnerability), a 
+   ld (hl), a 
 
 ret
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    BulletCreator
@@ -114,30 +140,22 @@ manGameBulletCreator::
 
    ret nz
 
-   inc a
-   ld (#bulletLife), a
+   ld hl, #powerUpBullet
+   ld b, (hl)
+   or b
 
+   jp nz, ifPowerUpBullet
+
+   ld a, #SingleBulletTime
+
+   jp exitPowerUpBullet
+
+ifPowerUpBullet:
+   ld a, #MultiBulletTime
+
+exitPowerUpBullet:
+   ld (#bulletLife), a
    call sysGeneratorBulletCreator
-
-ret
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;    BulletColision
-;; Parameters:
-;;    -
-;; Return:
-;;    -
-;; Description:
-;;    Decreases the player's life by 1 if it's hit by an enemy
-;;
-manGameBulletColision::
-
-   ld a, (#bulletLife)
-   dec a 
-   ld (#bulletLife), a
-
-   call manEntityMarkToDestroy
 
 ret
 
@@ -181,7 +199,40 @@ manGameScore::
    add hl, bc
    
    ld (score), hl
+
+   ld a, (#powerUpScore)
+   or a
    
+   ret z
+
+   add hl, bc
+   
+   ld (score), hl
+   
+ret
+
+manGamePUBulletColision::
+
+   ld hl, #powerUpBullet
+   call manGamePUColision
+
+ret
+
+manGamePUScoreColision::
+
+   ld hl, #powerUpScore
+   call manGamePUColision
+
+ret
+
+manGamePUColision:
+
+   ld (hl), #PUTime
+
+   ld a, (#playerLife)
+   inc a
+   ld (playerLife), a
+
 ret
 
 

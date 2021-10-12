@@ -1,5 +1,6 @@
 
 .include "colisions.h.s"
+.include "generator.h.s"
 .include "../man/entity.h.s"
 .include "../man/game.h.s"
 
@@ -101,20 +102,29 @@ ret
 
 sysColisionsEnemy:
 
+    call sysGeneratorPU
     call manEntityMarkToDestroy
     call manGameScore
-
-ret
-
-sysColisionsBullet:
-
-    call manGameBulletColision
 
 ret
 
 sysColisionsPlayer:
 
     call manGamePlayerColision
+
+ret
+
+sysColisionPUScore:
+
+    call manGamePUScoreColision
+    call manEntityMarkToDestroy
+
+ret
+
+sysColisionPUBullet:
+
+    call manGamePUBulletColision
+    call manEntityMarkToDestroy
 
 ret
 

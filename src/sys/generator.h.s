@@ -12,6 +12,7 @@ InitMaxNumberEnemies=99
 .globl sysGeneratorInit
 .globl sysGeneratorUpdate
 .globl sysGeneratorBulletCreator
+.globl sysGeneratorPU
 
 .globl _spr_idle
 .globl _spr_robo
