@@ -49,7 +49,7 @@ ret
 ;;    -
 ;; Descripcion:
 ;;    Dibuja los objetos dibujables como cajas. Además borra su posicion anterior
-sysRenderUpdateOne:
+sysRenderUpdateOne::
 
     call sysRenderBorrado
 

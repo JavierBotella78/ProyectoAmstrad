@@ -21,7 +21,16 @@ sysColisionsUpdateOne:
 
     ld a, indX(iy)      ;; x del colisionable
     dec a
-    ld b, indX(ix)      ;; x de la bala
+
+    push af
+
+    ld a, indX(ix)      ;; x de la bala
+    ld b, indWidth(ix)
+    add a, b
+
+    ld b, a
+
+    pop af
     cp b
 
     ret nc ;; No hay carry-> x de la bala < x del colisionable  
@@ -30,6 +39,7 @@ sysColisionsUpdateOne:
     ld c, indWidth(iy)
     add a, c
 
+    ld b, indX(ix)      ;; x de la bala
     cp b
 
     ret c ;; No hay carry-> x + width de colisionable < x de la bala
