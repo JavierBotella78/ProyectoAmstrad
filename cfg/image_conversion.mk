@@ -45,8 +45,11 @@ $(eval $(call IMG2SP, CONVERT , assets/enemies/drone1.png , 8, 16, spr_drone))
 $(eval $(call IMG2SP, CONVERT , assets/enemies/drone2.png , 8, 16, spr_drone2))
 
 $(eval $(call IMG2SP, CONVERT , assets/enemies/octo1.png , 8, 16, spr_octo))
+$(eval $(call IMG2SP, CONVERT , assets/enemies/octo2.png , 8, 16, spr_octo2))
 
 $(eval $(call IMG2SP, CONVERT , assets//enemies/robot1.png , 8, 16, spr_robo))
+$(eval $(call IMG2SP, CONVERT , assets//enemies/robot2.png , 8, 16, spr_robo2))
+$(eval $(call IMG2SP, CONVERT , assets//enemies/robot3.png , 8, 16, spr_robo3))
 
 $(eval $(call IMG2SP, CONVERT , assets/rainbow.png , 8, 4, spr_rainbow))
 

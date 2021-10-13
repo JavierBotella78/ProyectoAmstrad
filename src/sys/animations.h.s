@@ -10,3 +10,5 @@ AnimSize=3
 
 .globl sysAnimationsUpdate
 .globl animationEnemy1
+.globl animationEnemy2
+.globl animationEnemy3

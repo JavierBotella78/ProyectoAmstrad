@@ -12,6 +12,25 @@ animationEnemy1:
     .db #0
     .dw #animationEnemy1
 
+animationEnemy2:
+    .db #5                  ;;actual=0
+    .dw #_spr_octo
+    .db #5                  ;;actual=3
+    .dw #_spr_octo2
+    .db #0
+    .dw #animationEnemy2
+
+animationEnemy3:
+    .db #5                  ;;actual=0
+    .dw #_spr_robo
+    .db #5                  ;;actual=3
+    .dw #_spr_robo2
+    .db #5                 
+    .dw #_spr_robo3
+    .db #0
+    .dw #animationEnemy3
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      sysAnimationsUpdateOne

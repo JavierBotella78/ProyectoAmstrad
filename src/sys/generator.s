@@ -70,7 +70,7 @@ initEnemy1:
    .db #0                                                               ;; AnimActual
 
 initEnemy2:
-   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable ;; Type
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated;; Type
    .db #60                                                              ;; x
    .db #Fila2                                                           ;; y
    .db #0                                                               ;; vx
@@ -84,9 +84,12 @@ initEnemy2:
    .dw #0xc000                                                          ;; prevPos
    .db #100                                                             ;; score
    .db #AITypeEnemy                                                     ;; subType
+   .dw #animationEnemy2                                                 ;; Anim
+   .db #5                                                              ;; AnimCounter
+   .db #0                                                               ;; AnimActual
 
 initEnemy3:
-   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable ;; Type
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated ;; Type
    .db #60                                                              ;; x
    .db #Fila3                                                           ;; y
    .db #0                                                               ;; vx
@@ -100,6 +103,9 @@ initEnemy3:
    .dw #0xc000                                                          ;; prevPos
    .db #50                                                              ;; score
    .db #AITypeEnemy                                                     ;; subType
+   .dw #animationEnemy3                                                 ;; Anim
+   .db #5                                                              ;; AnimCounter
+   .db #0                                                               ;; AnimActual
 
 
 initBullet:
