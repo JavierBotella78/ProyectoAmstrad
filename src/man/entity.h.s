@@ -49,6 +49,8 @@ ETypeDead=0x80
 ETypeDefault=0x7f
 
 AITypeEnemy=0x01
+AITypePU=0x02
+AITypeBullet=0x02
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  PUBLIC FUNCTIONS

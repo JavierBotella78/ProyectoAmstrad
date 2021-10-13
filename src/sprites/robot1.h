@@ -1,6 +1,6 @@
 // Data created with Img2CPC - (c) Retroworks - 2007-2017
-#ifndef _ASSETS__ENEMIES_ROBOT1_H_
-#define _ASSETS__ENEMIES_ROBOT1_H_
+#ifndef _ASSETS_ENEMIES_ROBOT1_H_
+#define _ASSETS_ENEMIES_ROBOT1_H_
 
 #include <types.h>
 #define SPR_ROBO_W 4

@@ -117,44 +117,50 @@ initBullet:
    .db #4                                             ;; width
    .db #4                                             ;; height
    .dw #0                                                ;; AI
-   .dw #sysColisionsDestroy                               ;; Colision
+   .dw #sysColisionsBullet                               ;; Colision
    .dw #sysColisionsDestroy                               ;; Physics
    .dw #_spr_rainbow                                      ;; Sprite
    .dw #0xc000                                           ;; prevPos
    .db #0                                                ;; score
-   .db #0                                                     ;; subType
+   .db #AITypeBullet                                     ;; subType
 
 initPUBullet:
-   .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAI  ;; Type     
+   .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAI | #ETypeAnimated  ;; Type     
    .db #0                                               ;; x
    .db #0                                                ;; y
    .db #0                                                ;; vx
    .db #0                                                ;; vy
-   .db #4                                             ;; width
-   .db #4                                             ;; height
+   .db #7                                             ;; width
+   .db #12                                             ;; height
    .dw #sysAIMoveLeft                                                ;; AI
    .dw #sysColisionPUBullet                               ;; Colision
    .dw #sysColisionsDestroy                               ;; Physics
-   .dw #_spr_idle                                                       ;; Sprite
+   .dw #_spr_powerup1                                                       ;; Sprite
    .dw #0xc000                                           ;; prevPos
    .db #0                                                ;; score
-   .db #0                                                     ;; subType
+   .db #AITypePU                                                     ;; subType
+   .dw #animationPUBullet                                                 ;; Anim
+   .db #5                                                              ;; AnimCounter
+   .db #0                                                               ;; AnimActual
 
 initPUScore:
-   .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAI  ;; Type     
+   .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAI | #ETypeAnimated  ;; Type     
    .db #0                                               ;; x
    .db #0                                                ;; y
    .db #0                                                ;; vx
    .db #0                                                ;; vy
-   .db #4                                             ;; width
-   .db #4                                             ;; height
+   .db #4                                            ;; width
+   .db #12                                             ;; height
    .dw #sysAIMoveLeft                                                ;; AI
    .dw #sysColisionPUScore                               ;; Colision
    .dw #sysColisionsDestroy                               ;; Physics
-   .dw #_spr_rainbow                                      ;; Sprite
+   .dw #_spr_doblescore1                                      ;; Sprite
    .dw #0xc000                                           ;; prevPos
    .db #0                                                ;; score
-   .db #0                                                     ;; subType
+   .db #AITypePU                                                     ;; subType
+   .dw #animationPUScore                                                 ;; Anim
+   .db #5                                                              ;; AnimCounter
+   .db #0                                                               ;; AnimActual
 
 initInterf:
    .db #ETypeRenderable                                  ;; Type     

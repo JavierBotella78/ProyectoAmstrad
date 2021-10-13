@@ -117,13 +117,29 @@ sysColisionsPlayer:
     ld b, #AITypeEnemy
     and b
 
-    ret z
+    ret z           ;; Si es un enemigo, llama a la funcion
 
     call manGamePlayerColision
 
 ret
 
+sysColisionsBullet:
+
+    ld b, #AITypePU
+    and b
+
+    ret nz       ;; Si es un power-up, NO llama a la funcion
+
+    call sysColisionsDestroy
+
+ret
+
 sysColisionPUScore:
+
+    ld b, #AITypeBullet
+    and b
+
+    ret nz       ;; Si es una bala, NO llama a la funcion
 
     call manGamePUScoreColision
     call manEntityMarkToDestroy
@@ -131,6 +147,11 @@ sysColisionPUScore:
 ret
 
 sysColisionPUBullet:
+
+    ld b, #AITypeBullet
+    and b
+
+    ret nz       ;; Si es una bala, NO llama a la funcion
 
     call manGamePUBulletColision
     call manEntityMarkToDestroy

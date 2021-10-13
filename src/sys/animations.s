@@ -13,22 +13,50 @@ animationEnemy1:
     .dw #animationEnemy1
 
 animationEnemy2:
-    .db #5                  ;;actual=0
+    .db #5                 
     .dw #_spr_octo
-    .db #5                  ;;actual=3
+    .db #5                 
     .dw #_spr_octo2
     .db #0
     .dw #animationEnemy2
 
 animationEnemy3:
-    .db #5                  ;;actual=0
+    .db #5               
     .dw #_spr_robo
-    .db #5                  ;;actual=3
+    .db #5                  
     .dw #_spr_robo2
     .db #5                 
     .dw #_spr_robo3
     .db #0
     .dw #animationEnemy3
+
+animationPUScore:
+    .db #5                 
+    .dw #_spr_doblescore1
+    .db #5                 
+    .dw #_spr_doblescore2
+    .db #0
+    .dw #animationPUScore
+
+animationPUBullet:
+    .db #5                 
+    .dw #_spr_powerup1
+    .db #5                 
+    .dw #_spr_powerup2
+    .db #5                 
+    .dw #_spr_powerup3
+    .db #5                 
+    .dw #_spr_powerup4
+    .db #5                 
+    .dw #_spr_powerup5
+    .db #5                 
+    .dw #_spr_powerup6
+    .db #5                 
+    .dw #_spr_powerup7
+    .db #5                 
+    .dw #_spr_powerup8
+    .db #0
+    .dw #animationPUBullet
 
 
 

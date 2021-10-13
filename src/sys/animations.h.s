@@ -12,3 +12,5 @@ AnimSize=3
 .globl animationEnemy1
 .globl animationEnemy2
 .globl animationEnemy3
+.globl animationPUScore
+.globl animationPUBullet

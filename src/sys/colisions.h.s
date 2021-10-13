@@ -11,5 +11,6 @@
 .globl sysColisionsDestroy
 .globl sysColisionsEnemy
 .globl sysColisionsPlayer
+.globl sysColisionsBullet
 .globl sysColisionPUScore
 .globl sysColisionPUBullet
