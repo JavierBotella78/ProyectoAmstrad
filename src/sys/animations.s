@@ -58,6 +58,26 @@ animationPUBullet:
     .db #0
     .dw #animationPUBullet
 
+animationFloor1:
+    .db #SpeedFloor1              
+    .dw #_spr_floor1
+    .db #SpeedFloor1                  
+    .dw #_spr_floor2
+    .db #SpeedFloor1                 
+    .dw #_spr_floor3
+    .db #0
+    .dw #animationFloor1
+
+animationFloor11:
+    .db #SpeedFloor11               
+    .dw #_spr_floor11
+    .db #SpeedFloor11                  
+    .dw #_spr_floor22
+    .db #SpeedFloor11                 
+    .dw #_spr_floor33
+    .db #0
+    .dw #animationFloor11
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -51,8 +51,15 @@ ret
 ;;    Dibuja los objetos dibujables como cajas. Además borra su posicion anterior
 sysRenderUpdateOne::
 
+    ld a, indSubType(ix)
+    ld b, #RenderTypeStatic
+    and b
+
+    jp nz, noBorrado
+
     call sysRenderBorrado
 
+    noBorrado:
     ld de, #0xc000
     ld c, indX(ix)
     ld b, indY(ix)

@@ -8,8 +8,14 @@ EntityArraySize=40
 EntityArrayBytesSize=EntitySize*EntityArraySize
 
 Fila1=40
-Fila2=80
-Fila3=120
+Fila2=Fila1+40
+Fila3=Fila2+40
+
+Offset=12+1
+
+EFila1=Fila1-Offset
+EFila2=Fila2-Offset
+EFila3=Fila3-Offset
 
     ;; INDEX FOR IX/IY
 indType=0
@@ -50,7 +56,9 @@ ETypeDefault=0x7f
 
 AITypeEnemy=0x01
 AITypePU=0x02
-AITypeBullet=0x02
+AITypeBullet=0x04
+
+RenderTypeStatic=0x08
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  PUBLIC FUNCTIONS

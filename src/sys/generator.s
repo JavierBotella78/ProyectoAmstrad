@@ -36,7 +36,7 @@ numberEnemies:
 initPlayer: 
    .db #ETypeRenderable | #ETypeInput | #ETypeMovable | #ETypeColider   ;; Type
    .db #10                                                              ;; x
-   .db #Fila1                                                           ;; y
+   .db #EFila1                                                           ;; y
    .db #0                                                               ;; vx
    .db #0                                                               ;; vy
    .db #4                                                           ;; width
@@ -53,7 +53,7 @@ initPlayer:
 initEnemy1:
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated ;; Type
    .db #60                                                              ;; x
-   .db #Fila1                                                           ;; y
+   .db #EFila1                                                           ;; y
    .db #0                                                               ;; vx
    .db #0                                                               ;; vy
    .db #0x04                                                            ;; width
@@ -72,7 +72,7 @@ initEnemy1:
 initEnemy2:
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated;; Type
    .db #60                                                              ;; x
-   .db #Fila2                                                           ;; y
+   .db #EFila2                                                           ;; y
    .db #0                                                               ;; vx
    .db #0                                                               ;; vy
    .db #0x04                                                            ;; width
@@ -91,7 +91,7 @@ initEnemy2:
 initEnemy3:
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated ;; Type
    .db #60                                                              ;; x
-   .db #Fila3                                                           ;; y
+   .db #EFila3                                                           ;; y
    .db #0                                                               ;; vx
    .db #0                                                               ;; vy
    .db #0x04                                                            ;; width
@@ -222,6 +222,43 @@ initInterf4:
    .dw #0xc000                                           ;; prevPos
    .db #0                                                ;; score
 
+initFloor1:
+   .db #ETypeRenderable | #ETypeAnimated ;; Type
+   .db #0                                                               ;; x
+   .db #Fila3                                                           ;; y
+   .db #0                                                               ;; vx
+   .db #0                                                               ;; vy
+   .db #40                                                              ;; width
+   .db #11                                                              ;; height
+   .dw #0                                                               ;; AI   
+   .dw #0                                                               ;; Colision
+   .dw #0                                                               ;; Physics
+   .dw #_spr_floor1                                                      ;; Sprite
+   .dw #0                                                               ;; prevPos
+   .db #0                                                               ;; score
+   .db #RenderTypeStatic                                                ;; subType
+   .dw #animationFloor1                                                 ;; Anim
+   .db #5                                                               ;; AnimCounter
+   .db #0                                                               ;; AnimActual
+
+initFloor2:
+   .db #ETypeRenderable | #ETypeAnimated ;; Type
+   .db #0                                                               ;; x
+   .db #Fila2                                                           ;; y
+   .db #0                                                               ;; vx
+   .db #0                                                               ;; vy
+   .db #40                                                              ;; width
+   .db #11                                                              ;; height
+   .dw #0                                                               ;; AI   
+   .dw #0                                                               ;; Colision
+   .dw #0                                                               ;; Physics
+   .dw #_spr_floor11                                                      ;; Sprite
+   .dw #0                                                               ;; prevPos
+   .db #0                                                               ;; score
+   .db #RenderTypeStatic                                                ;; subType
+   .dw #animationFloor11                                                 ;; Anim
+   .db #5                                                               ;; AnimCounter
+   .db #0                                                               ;; AnimActual
 
 
 
@@ -236,6 +273,24 @@ initInterf4:
 ;;
 ;;
 sysGeneratorInit::
+
+   ld hl, #initFloor1
+   call sysGeneratorTmpl
+
+   ld hl, #initFloor2
+   call sysGeneratorTmpl
+
+   ld ix, #initFloor1
+   ld a, #40
+   ld indX(ix), a
+   ld hl, #initFloor1 
+   call sysGeneratorTmpl
+
+   ld ix, #initFloor2
+   ld a, #40
+   ld indX(ix), a
+   ld hl, #initFloor2 
+   call sysGeneratorTmpl
 
    ld hl, #initPlayer
    call sysGeneratorTmpl
