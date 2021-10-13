@@ -8,6 +8,7 @@
 .include "../sys/physics.h.s"
 .include "../sys/ai.h.s"
 .include "../sys/generator.h.s"
+.include "../sys/animations.h.s"
 
 .globl cpct_waitVSYNC_asm
 
@@ -71,6 +72,7 @@ mainLoop:
 
    call sysInputUpdate
    call sysAIUpdate
+   call sysAnimationsUpdate
 
    call sysPhysicsUpdate
 

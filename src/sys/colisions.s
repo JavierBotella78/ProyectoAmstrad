@@ -65,11 +65,11 @@ sysColisionsUpdateOne:
 
         ;;TODO: Hacer una beheaviour como en la ia, al colisionar pues pasan cosas
 
-    ld a, indType(iy)
+    ld a, indSubType(iy)
     
     call sysColisionsBehaviour
 
-    ld a, indType(ix)
+    ld a, indSubType(ix)
 
     push ix         ;; Switch ix and iy
     push iy
@@ -114,7 +114,7 @@ ret
 
 sysColisionsPlayer:
 
-    ld b, #ETypeEnemy
+    ld b, #AITypeEnemy
     and b
 
     ret z

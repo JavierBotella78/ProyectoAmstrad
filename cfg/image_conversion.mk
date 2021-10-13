@@ -42,6 +42,7 @@ $(eval $(call IMG2SP, CONVERT_PALETTE , $(PALETTE), main_palette ))
 $(eval $(call IMG2SP, CONVERT , assets/sheriff2.png , 8, 16, spr_idle))
 
 $(eval $(call IMG2SP, CONVERT , assets/enemies/drone1.png , 8, 16, spr_drone))
+$(eval $(call IMG2SP, CONVERT , assets/enemies/drone2.png , 8, 16, spr_drone2))
 
 $(eval $(call IMG2SP, CONVERT , assets/enemies/octo1.png , 8, 16, spr_octo))
 

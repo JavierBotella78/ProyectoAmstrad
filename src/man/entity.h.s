@@ -3,7 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
     ;; ENTITY INFO
-EntitySize=18 
+EntitySize=23 
 EntityArraySize=40
 EntityArrayBytesSize=EntitySize*EntityArraySize
 
@@ -30,6 +30,11 @@ indSprite1=14
 indPrevPos2=15
 indPrevPos1=16
 indScore=17
+indSubType=18
+indAnim2=19
+indAnim1=20
+indAnimCounter=21
+indAnimActual=22
 
     ;; ENTITY TYPES
 ETypeInvalid=0x00
@@ -39,9 +44,11 @@ ETypeInput=0x04
 ETypeAI=0x08
 ETypeColisionable=0x10
 ETypeColider=0x20
-ETypeEnemy=0x40
+ETypeAnimated=0x40
 ETypeDead=0x80
 ETypeDefault=0x7f
+
+AITypeEnemy=0x01
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  PUBLIC FUNCTIONS

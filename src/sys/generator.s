@@ -6,6 +6,7 @@
 .include "ai.h.s"
 .include "colisions.h.s"
 .include "render.h.s"
+.include "animations.h.s"
 
 .globl cpct_memcpy_asm
 .globl cpct_getRandom_mxor_u8_asm
@@ -46,10 +47,11 @@ initPlayer:
    .dw #_spr_idle                                                       ;; Sprite
    .dw #0xc000                                                          ;; prevPos
    .db #0                                                               ;; score
+   .db #0                                                     ;; subType
 
 
 initEnemy1:
-   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeEnemy ;; Type
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated ;; Type
    .db #60                                                              ;; x
    .db #Fila1                                                           ;; y
    .db #0                                                               ;; vx
@@ -62,9 +64,13 @@ initEnemy1:
    .dw #_spr_drone                                                       ;; Sprite
    .dw #0xc000                                                          ;; prevPos
    .db #125                                                             ;; score
+   .db #AITypeEnemy                                                     ;; subType
+   .dw #animationEnemy1                                                 ;; Anim
+   .db #5                                                              ;; AnimCounter
+   .db #0                                                               ;; AnimActual
 
 initEnemy2:
-   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeEnemy ;; Type
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable ;; Type
    .db #60                                                              ;; x
    .db #Fila2                                                           ;; y
    .db #0                                                               ;; vx
@@ -77,9 +83,10 @@ initEnemy2:
    .dw #_spr_octo                                                       ;; Sprite
    .dw #0xc000                                                          ;; prevPos
    .db #100                                                             ;; score
+   .db #AITypeEnemy                                                     ;; subType
 
 initEnemy3:
-   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeEnemy ;; Type
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable ;; Type
    .db #60                                                              ;; x
    .db #Fila3                                                           ;; y
    .db #0                                                               ;; vx
@@ -92,6 +99,7 @@ initEnemy3:
    .dw #_spr_robo                                                       ;; Sprite
    .dw #0xc000                                                          ;; prevPos
    .db #50                                                              ;; score
+   .db #AITypeEnemy                                                     ;; subType
 
 
 initBullet:
@@ -108,6 +116,7 @@ initBullet:
    .dw #_spr_rainbow                                      ;; Sprite
    .dw #0xc000                                           ;; prevPos
    .db #0                                                ;; score
+   .db #0                                                     ;; subType
 
 initPUBullet:
    .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAI  ;; Type     
@@ -123,6 +132,7 @@ initPUBullet:
    .dw #_spr_idle                                                       ;; Sprite
    .dw #0xc000                                           ;; prevPos
    .db #0                                                ;; score
+   .db #0                                                     ;; subType
 
 initPUScore:
    .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAI  ;; Type     
@@ -138,6 +148,7 @@ initPUScore:
    .dw #_spr_rainbow                                      ;; Sprite
    .dw #0xc000                                           ;; prevPos
    .db #0                                                ;; score
+   .db #0                                                     ;; subType
 
 initInterf:
    .db #ETypeRenderable                                  ;; Type     
