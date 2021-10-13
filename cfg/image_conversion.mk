@@ -49,7 +49,7 @@ $(eval $(call IMG2SP, CONVERT , assets//enemies/robot1.png , 8, 16, spr_robo))
 
 $(eval $(call IMG2SP, CONVERT , assets/rainbow.png , 8, 4, spr_rainbow))
 
-$(eval $(call IMG2SP, CONVERT , assets/hudp.png , 40, 56, spr_hud))
+$(eval $(call IMG2SP, CONVERT , assets/hudd.png , 40, 56, spr_hud))
 
 ##
 ## OLD MACROS (For compatibility)
