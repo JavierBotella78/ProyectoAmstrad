@@ -39,6 +39,7 @@ ETypeInput=0x04
 ETypeAI=0x08
 ETypeColisionable=0x10
 ETypeColider=0x20
+ETypeEnemy=0x40
 ETypeDead=0x80
 ETypeDefault=0x7f
 

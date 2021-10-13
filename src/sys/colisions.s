@@ -64,8 +64,12 @@ sysColisionsUpdateOne:
     ret c ;; No hay carry-> x + width de colisionable < x de la bala
 
         ;;TODO: Hacer una beheaviour como en la ia, al colisionar pues pasan cosas
+
+    ld a, indType(iy)
     
     call sysColisionsBehaviour
+
+    ld a, indType(ix)
 
     push ix         ;; Switch ix and iy
     push iy
@@ -109,6 +113,11 @@ sysColisionsEnemy:
 ret
 
 sysColisionsPlayer:
+
+    ld b, #ETypeEnemy
+    and b
+
+    ret z
 
     call manGamePlayerColision
 

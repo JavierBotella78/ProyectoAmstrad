@@ -49,7 +49,7 @@ initPlayer:
 
 
 initEnemy1:
-   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable ;; Type
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeEnemy ;; Type
    .db #60                                                              ;; x
    .db #Fila1                                                           ;; y
    .db #0                                                               ;; vx
@@ -64,7 +64,7 @@ initEnemy1:
    .db #125                                                             ;; score
 
 initEnemy2:
-   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable ;; Type
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeEnemy ;; Type
    .db #60                                                              ;; x
    .db #Fila2                                                           ;; y
    .db #0                                                               ;; vx
@@ -79,7 +79,7 @@ initEnemy2:
    .db #100                                                             ;; score
 
 initEnemy3:
-   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable ;; Type
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeEnemy ;; Type
    .db #60                                                              ;; x
    .db #Fila3                                                           ;; y
    .db #0                                                               ;; vx

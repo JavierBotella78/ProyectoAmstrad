@@ -229,10 +229,6 @@ manGamePUColision:
 
    ld (hl), #PUTime
 
-   ld a, (#playerLife)
-   inc a
-   ld (playerLife), a
-
 ret
 
 
