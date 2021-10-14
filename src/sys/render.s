@@ -2,16 +2,15 @@
 .include "render.h.s"
 .include "../man/entity.h.s"
 
-.globl cpct_getScreenPtr_asm
 .globl cpct_setVideoMode_asm
 .globl cpct_setPALColour_asm
 
 .globl _main_palette
 .globl cpct_setPalette_asm
 
-.globl cpct_getScreenPtr_asm
 .globl cpct_drawSolidBox_asm
 .globl cpct_drawSprite_asm
+.globl cpct_getScreenPtr_asm
 
 
 
@@ -60,14 +59,9 @@ sysRenderUpdateOne::
     call sysRenderBorrado
 
     noBorrado:
-    ld de, #0xc000
-    ld c, indX(ix)
-    ld b, indY(ix)
 
-    call cpct_getScreenPtr_asm
-
-    ld indPrevPos1(ix), h
-    ld indPrevPos2(ix), l
+    ld h, indActualPos1(ix)
+    ld l, indActualPos2(ix)
 
     ex de, hl
     ld h, indSprite1(ix)
@@ -78,6 +72,33 @@ sysRenderUpdateOne::
     call cpct_drawSprite_asm
 
 ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysRenderDrawOnce
+;; Requisitos:
+;;    ix -> Posicion inicial de memoria de la entidad
+;; Return:
+;;    -
+;; Descripcion:
+;;    Dibuja los objetos dibujables como cajas. Además borra su posicion anterior
+sysRenderDrawOnce::
+
+    ld de, #0xc000
+    ld c, indX(ix)
+    ld b, indY(ix)
+
+    call cpct_getScreenPtr_asm
+
+    ex de, hl
+    ld h, indSprite1(ix)
+    ld l, indSprite2(ix)
+    ld c, indWidth(ix)
+    ld b, indHeight(ix)
+
+    call cpct_drawSprite_asm
+
+ret
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

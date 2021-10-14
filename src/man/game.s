@@ -3,6 +3,7 @@
 .include "entity.h.s"
 
 .include "../sys/render.h.s"
+.include "../sys/prerender.h.s"
 .include "../sys/colisions.h.s"
 .include "../sys/input.h.s"
 .include "../sys/physics.h.s"
@@ -34,6 +35,43 @@ powerUpBullet:
 powerUpScore:
    .db #0
 
+numI::
+   .db 6
+
+manIr::
+
+   push af
+
+   ld a, (numI)
+   dec a
+   jr nz, noZero
+      ld a, #6
+noZero:
+   ld (numI), a
+
+   pop af
+
+   ei
+reti
+
+setManIr::
+   im 1
+   call cpct_waitVSYNC_asm
+   halt
+   halt
+   halt
+   call cpct_waitVSYNC_asm
+   di
+   
+   ld a, #0xc3
+   ld (0x38), a
+   
+   ld hl, #manIr
+   ld (0x39), hl
+   ei
+ret
+   
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    Init
 ;; Parameters:
@@ -48,7 +86,8 @@ manGameInit::
    call manEntityInit ;; Iniciamos todos los valores del array a 0
    call sysRenderInit 
    call sysGeneratorInit
-
+   call setManIr
+   call sysPreRenderUpdate
 ret
 
 
@@ -74,15 +113,20 @@ mainLoop:
    call sysAIUpdate
    call sysAnimationsUpdate
 
+   call sysColisionsUpdate
    call sysPhysicsUpdate
 
+loopRender:
+   ld a, (#numI)
+   cp #1
+   jr nz, loopRender
    call sysRenderUpdate
-   call sysColisionsUpdate
-   
+
    call waitHalt
 
-loop:
-   jr    mainLoop
+   call sysPreRenderUpdate
+
+   jp    mainLoop
    
 ret
 
@@ -244,7 +288,7 @@ ret
 ;;    Wait x halts and vsync
 ;;
 waitHalt:
-   ld a, #3
+   ld a, #1
    esperarbucle:
    push af
    halt

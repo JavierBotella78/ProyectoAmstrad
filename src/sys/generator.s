@@ -297,16 +297,16 @@ sysGeneratorInit::
 
    ;;DIBUJADO INICIAL DE LA INTERFAZ
    ld ix, #initInterf
-   call sysRenderUpdateOne
+   call sysRenderDrawOnce
 
    ld ix, #initInterf2
-   call sysRenderUpdateOne
+   call sysRenderDrawOnce
 
    ld ix, #initInterf3
-   call sysRenderUpdateOne
+   call sysRenderDrawOnce
 
    ld ix, #initInterf4
-   call sysRenderUpdateOne
+   call sysRenderDrawOnce
 
 ret
 
