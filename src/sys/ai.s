@@ -2,6 +2,9 @@
 .include "../man/entity.h.s"
 
 
+speedAILeft::
+    .db #-1
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      UpdateOne
 ;; Requisitos:
@@ -26,7 +29,8 @@ ret
 
 sysAIMoveLeft:
 
-    ld indVx(ix), #SpeedAILeft
+    ld a, (#speedAILeft)
+    ld indVx(ix), a
     
 ret
 

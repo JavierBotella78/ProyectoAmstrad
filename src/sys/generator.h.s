@@ -2,8 +2,19 @@
 ;;  CONSTANTS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-InitMinTime2Generate=20
-InitMaxNumberEnemies=99
+InitMaxTime2Generate=20
+MinTime2Generate=15
+
+InitMinNumberEnemies=10
+MaxNumberEnemies=50
+
+SubTime2Generate=1
+AddNumberEnemies=5
+
+SpeedUp1=20
+SpeedUp2=40
+AddSpeedEnemies=-1
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  PUBLIC FUNCTIONS

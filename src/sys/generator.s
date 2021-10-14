@@ -16,17 +16,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 minTime2Generate:
-    .db #InitMinTime2Generate
+    .db #InitMaxTime2Generate
 
 time2Generate:
-    .db #InitMinTime2Generate
+    .db #InitMaxTime2Generate
 
 
 maxNumberEnemies:
-    .db #InitMaxNumberEnemies
+    .db #InitMinNumberEnemies
 
 numberEnemies:
-    .db #InitMaxNumberEnemies
+    .db #InitMinNumberEnemies
+
+speedUp:
+   .db #SpeedUp1
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -326,7 +329,7 @@ sysGeneratorUpdate::
    dec a
    ld (#time2Generate), a
 
-   ret nz
+   ret nz                     ;; Si no da 0, no genera enemigos
 
    ld a, (#minTime2Generate)
    ld (#time2Generate), a
@@ -335,8 +338,59 @@ sysGeneratorUpdate::
    ld a, (#numberEnemies)
    or a
    
-   ret z
+   jp nz, skipResetEnemies           ;; Si no quedan enemigos por generar, aumenta la velocidad y los enemigos.
 
+   ld a, (#maxNumberEnemies)
+   ld c, #MaxNumberEnemies
+   cp c
+
+   jp z, skipToTimer
+
+   ld b, #AddNumberEnemies
+   add a, b
+
+   ;;push af
+   ;;ld a, (#speedUp)
+   ;;ld b, a
+   ;;pop af
+   ;;cp b
+;;
+   ;;jp nz, skipToTimer
+;;
+   ;;push af
+;;
+   ;;ld a, #SpeedUp2
+   ;;ld (speedUp), a
+;;
+   ;;ld a, (#speedAILeft)
+   ;;ld b, #AddSpeedEnemies
+;;
+   ;;add a, b
+;;
+   ;;ld (#speedAILeft), a
+;;
+   ;;pop af
+   
+skipToTimer:
+   ld (numberEnemies), a
+   ld (maxNumberEnemies), a
+
+   ld a, (#minTime2Generate)
+   ld c, #MinTime2Generate
+   cp c
+
+   jp z, skipToEnemies
+
+   ld b, #SubTime2Generate
+   sub a, b
+
+skipToEnemies:
+   ld (minTime2Generate), a
+   ld (time2Generate), a
+
+skipResetEnemies:
+
+   ld a, (#numberEnemies)
    dec a
    ld (#numberEnemies), a
 

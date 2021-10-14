@@ -2,7 +2,7 @@
 ;;  CONSTANTS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-SpeedAILeft=-1
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  PUBLIC FUNCTIONS
@@ -10,3 +10,4 @@ SpeedAILeft=-1
 
 .globl sysAIUpdate
 .globl sysAIMoveLeft
+.globl speedAILeft
