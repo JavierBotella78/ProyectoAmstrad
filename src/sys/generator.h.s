@@ -13,8 +13,6 @@ AddNumberEnemies=5
 
 SpeedUp1=20
 SpeedUp2=40
-AddSpeedEnemies=-1
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  PUBLIC FUNCTIONS

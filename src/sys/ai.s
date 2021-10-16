@@ -5,6 +5,9 @@
 speedAILeft::
     .db #-1
 
+aiCounter::
+    .db #1
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      UpdateOne
 ;; Requisitos:
@@ -27,11 +30,56 @@ sysAIUpdateOne:
 
 ret
 
-sysAIMoveLeft:
+sysAIMoveLeft::
 
     ld a, (#speedAILeft)
     ld indVx(ix), a
     
+ret
+
+sysAIEnemy:
+
+    ld indVx(ix), #0
+    call sysAICheckCounter
+
+ret
+
+sysAIEnemy1::
+
+    call sysAIEnemy
+
+ret
+
+sysAIEnemy2::
+
+    call sysAIEnemy
+
+ret
+
+sysAIEnemy3::
+
+    call sysAIEnemy
+
+ret
+
+sysAICheckCounter:
+
+    ld a, indAICounter(ix)
+    or a
+        
+    jp z, resetAICounter
+ 
+    dec indAICounter(ix)
+
+    ret 
+
+resetAICounter:
+
+    ld a, (#aiCounter)
+    ld indAICounter(ix), a
+
+    call sysAIMoveLeft
+
 ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
