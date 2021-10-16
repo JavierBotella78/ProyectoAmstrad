@@ -9,4 +9,5 @@ inputSpeed=40
 ;;  PUBLIC FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-.GLOBL sysInputUpdate
+.globl sysInputUpdate
+.globl changeRenderable

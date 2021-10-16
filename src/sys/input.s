@@ -1,5 +1,7 @@
 .include "cpctelera.h.s"
 .include "input.h.s"
+.include "render.h.s"
+
 .include "../man/game.h.s"
 .include "../man/entity.h.s"
 
@@ -13,6 +15,8 @@
 delayMovement:
     .db #ConstDelayMovement    ;; frames
 
+changeRenderable::
+    .db #0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      UpdateOne
@@ -24,6 +28,8 @@ delayMovement:
 ;;    Modifica la vx y/o vy de las entidades si se ha pulsado un boton 
 ;;
 sysInputUpdateOne:
+
+    call sysInputChangeRenderable
 
     ld indVy(ix), #0
 
@@ -83,6 +89,25 @@ seguirComprobando:
     call cpct_isKeyPressed_asm
 
     jr nz, kPulsada
+
+ret
+
+sysInputChangeRenderable:
+
+    ld a, (#changeRenderable)
+    or a
+    
+    ret z
+
+    ld a, #0
+    ld (changeRenderable), a
+
+    ld a, indType(ix)
+    ld b, #ETypeRenderable
+    xor b
+    ld indType(ix), a
+
+    call sysRenderBorrado
 
 ret
 

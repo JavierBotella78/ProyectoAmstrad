@@ -2,11 +2,14 @@
 ;;  CONSTANTS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-MaxPlayerInvulnerability=45
+MaxPlayerInvulnerability=60
+MaxPlayerInvSubTime=2
 
 SingleBulletTime=15
 MultiBulletTime=5
 PUTime=40
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  PUBLIC FUNCTIONS

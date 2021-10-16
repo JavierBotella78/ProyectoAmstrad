@@ -23,6 +23,9 @@ playerLife:
 playerInvulnerability:
    .db #MaxPlayerInvulnerability
 
+playerInvSubTime:
+   .db #0
+
 bulletLife:
    .db #0
 
@@ -34,6 +37,10 @@ powerUpBullet:
 
 powerUpScore:
    .db #0
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  INTERRUPCIONES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 numI::
    .db 6
@@ -141,9 +148,31 @@ ret
 ;;
 manGameUpdate:
 
-   ld hl, #playerInvulnerability
-   ld a, (hl)
-   call manGameVariableUpdate
+   ld a, (#playerInvulnerability)
+   or a
+
+   jp z, keepManGameUpdate
+
+   dec a
+   ld (#playerInvulnerability), a 
+
+   ld a, (#playerInvSubTime)
+   dec a
+   ld (#playerInvSubTime), a 
+
+   jp z, changePlayerRender 
+   jp keepManGameUpdate
+
+changePlayerRender:
+
+   ld a, #MaxPlayerInvSubTime
+   ld (#playerInvSubTime), a 
+
+   ld a, #1
+   ld (#changeRenderable), a
+
+
+keepManGameUpdate:
 
    ld hl, #bulletLife
    ld a, (hl)
@@ -225,11 +254,15 @@ manGamePlayerColision::
    ld a, (#playerLife)
    dec a
    ld (playerLife), a 
+   ;;Dibujar estrella rota
 
    ld a, #MaxPlayerInvulnerability
    ld (playerInvulnerability),  a
+
+   ld a, #MaxPlayerInvSubTime
+   ld (playerInvSubTime),  a
    
-   ret nz
+   ret nz ;; Si 0 vidas, game over
 
    call manEntityMarkToDestroy
 
