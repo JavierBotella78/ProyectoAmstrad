@@ -49,7 +49,7 @@ initPlayer:
 
 initEnemy1: 
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated   ;; Type
-   .db #60, #EFila1, #0, #0                                             ;; x, y, vx, vy
+   .db #63, #EFila1, #0, #0                                             ;; x, y, vx, vy
    .db #8, #16                                                          ;; width, height
    .dw #sysAIEnemy1                                                     ;; AI
    .dw #sysColisionsEnemy, #sysColisionsDestroy                         ;; Colision, Physics
@@ -62,7 +62,7 @@ initEnemy1:
 
 initEnemy2: 
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated   ;; Type
-   .db #60, #EFila2, #0, #0                                             ;; x, y, vx, vy
+   .db #63, #EFila2, #0, #0                                             ;; x, y, vx, vy
    .db #8, #16                                                          ;; width, height
    .dw #sysAIEnemy2                                                     ;; AI
    .dw #sysColisionsEnemy, #sysColisionsDestroy                         ;; Colision, Physics
@@ -75,7 +75,7 @@ initEnemy2:
 
 initEnemy3: 
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated   ;; Type
-   .db #60, #EFila3, #0, #0                                             ;; x, y, vx, vy
+   .db #63, #EFila3, #0, #0                                             ;; x, y, vx, vy
    .db #8, #16                                                          ;; width, height
    .dw #sysAIEnemy3                                                     ;; AI
    .dw #sysColisionsEnemy, #sysColisionsDestroy                         ;; Colision, Physics
