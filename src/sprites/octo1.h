@@ -3,8 +3,8 @@
 #define _ASSETS_ENEMIES_OCTO1_H_
 
 #include <types.h>
-#define SPR_OCTO_W 4
+#define SPR_OCTO_W 8
 #define SPR_OCTO_H 16
-extern const u8 spr_octo[4 * 16];
+extern const u8 spr_octo[8 * 16];
 
 #endif

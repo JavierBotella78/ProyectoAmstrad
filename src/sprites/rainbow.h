@@ -3,8 +3,8 @@
 #define _ASSETS_RAINBOW_H_
 
 #include <types.h>
-#define SPR_RAINBOW_W 4
+#define SPR_RAINBOW_W 8
 #define SPR_RAINBOW_H 4
-extern const u8 spr_rainbow[4 * 4];
+extern const u8 spr_rainbow[8 * 4];
 
 #endif

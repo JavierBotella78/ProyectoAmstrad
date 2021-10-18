@@ -41,15 +41,15 @@ $(eval $(call IMG2SP, SET_PALETTE_FW, $(PALETTE)))
 $(eval $(call IMG2SP, CONVERT_PALETTE , $(PALETTE), main_palette ))
 $(eval $(call IMG2SP, CONVERT , assets/sheriff2.png , 8, 16, spr_idle))
 
-$(eval $(call IMG2SP, CONVERT , assets/enemies/drone1.png , 8, 16, spr_drone))
-$(eval $(call IMG2SP, CONVERT , assets/enemies/drone2.png , 8, 16, spr_drone2))
+$(eval $(call IMG2SP, CONVERT , assets/enemies/drone1.png , 16, 16, spr_drone))
+$(eval $(call IMG2SP, CONVERT , assets/enemies/drone2.png , 16, 16, spr_drone2))
 
-$(eval $(call IMG2SP, CONVERT , assets/enemies/octo1.png , 8, 16, spr_octo))
-$(eval $(call IMG2SP, CONVERT , assets/enemies/octo2.png , 8, 16, spr_octo2))
+$(eval $(call IMG2SP, CONVERT , assets/enemies/octo1.png , 16, 16, spr_octo))
+$(eval $(call IMG2SP, CONVERT , assets/enemies/octo2.png , 16, 16, spr_octo2))
 
-$(eval $(call IMG2SP, CONVERT , assets/enemies/robot1.png , 8, 16, spr_robo))
-$(eval $(call IMG2SP, CONVERT , assets/enemies/robot2.png , 8, 16, spr_robo2))
-$(eval $(call IMG2SP, CONVERT , assets/enemies/robot3.png , 8, 16, spr_robo3))
+$(eval $(call IMG2SP, CONVERT , assets/enemies/robot1.png , 16, 16, spr_robo))
+$(eval $(call IMG2SP, CONVERT , assets/enemies/robot2.png , 16, 16, spr_robo2))
+$(eval $(call IMG2SP, CONVERT , assets/enemies/robot3.png , 16, 16, spr_robo3))
 
 $(eval $(call IMG2SP, CONVERT , assets/doblescore1.png , 8, 12, spr_doblescore1))
 $(eval $(call IMG2SP, CONVERT , assets/doblescore2.png , 8, 12, spr_doblescore2))
@@ -63,7 +63,7 @@ $(eval $(call IMG2SP, CONVERT , assets/powerup6.png , 14, 12, spr_powerup6))
 $(eval $(call IMG2SP, CONVERT , assets/powerup7.png , 14, 12, spr_powerup7))
 $(eval $(call IMG2SP, CONVERT , assets/powerup8.png , 14, 12, spr_powerup8))
 
-$(eval $(call IMG2SP, CONVERT , assets/rainbow.png , 8, 4, spr_rainbow))
+$(eval $(call IMG2SP, CONVERT , assets/rainbow.png , 16, 4, spr_rainbow))
 
 $(eval $(call IMG2SP, CONVERT , assets/hudd.png , 40, 56, spr_hud))
 

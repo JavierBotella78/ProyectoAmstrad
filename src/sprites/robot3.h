@@ -3,8 +3,8 @@
 #define _ASSETS_ENEMIES_ROBOT3_H_
 
 #include <types.h>
-#define SPR_ROBO3_W 4
+#define SPR_ROBO3_W 8
 #define SPR_ROBO3_H 16
-extern const u8 spr_robo3[4 * 16];
+extern const u8 spr_robo3[8 * 16];
 
 #endif

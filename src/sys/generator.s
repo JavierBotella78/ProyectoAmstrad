@@ -50,11 +50,11 @@ initPlayer:
 initEnemy1: 
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated   ;; Type
    .db #60, #EFila1, #0, #0                                             ;; x, y, vx, vy
-   .db #4, #16                                                          ;; width, height
+   .db #8, #16                                                          ;; width, height
    .dw #sysAIEnemy1                                                     ;; AI
    .dw #sysColisionsEnemy, #sysColisionsDestroy                         ;; Colision, Physics
    .dw #_spr_drone, #0xc000                                             ;; Sprite, prevPos
-   .db #125, #AITypeEnemy                                               ;; score, subtype
+   .db #125, #AITypeEnemy | #RenderTypeStatic                           ;; score, subtype
    .dw #animationEnemy1                                                 ;; Anim
    .db #5, #0                                                           ;; AnimCounter, AnimActual
    .dw #0
@@ -63,11 +63,11 @@ initEnemy1:
 initEnemy2: 
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated   ;; Type
    .db #60, #EFila2, #0, #0                                             ;; x, y, vx, vy
-   .db #4, #16                                                          ;; width, height
+   .db #8, #16                                                          ;; width, height
    .dw #sysAIEnemy2                                                     ;; AI
    .dw #sysColisionsEnemy, #sysColisionsDestroy                         ;; Colision, Physics
-   .dw #_spr_octo, #0xc000                                             ;; Sprite, prevPos
-   .db #100, #AITypeEnemy                                               ;; score, subtype
+   .dw #_spr_octo, #0xc000                                              ;; Sprite, prevPos
+   .db #100, #AITypeEnemy | #RenderTypeStatic                           ;; score, subtype
    .dw #animationEnemy2                                                 ;; Anim
    .db #5, #0                                                           ;; AnimCounter, AnimActual
    .dw #0
@@ -76,11 +76,11 @@ initEnemy2:
 initEnemy3: 
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated   ;; Type
    .db #60, #EFila3, #0, #0                                             ;; x, y, vx, vy
-   .db #4, #16                                                          ;; width, height
+   .db #8, #16                                                          ;; width, height
    .dw #sysAIEnemy3                                                     ;; AI
    .dw #sysColisionsEnemy, #sysColisionsDestroy                         ;; Colision, Physics
    .dw #_spr_robo, #0xc000                                              ;; Sprite, prevPos
-   .db #50, #AITypeEnemy                                                ;; score, subtype
+   .db #50, #AITypeEnemy | #RenderTypeStatic                                                ;; score, subtype
    .dw #animationEnemy3                                                 ;; Anim
    .db #5, #0                                                           ;; AnimCounter, AnimActual
    .dw #0
@@ -92,7 +92,7 @@ initBullet:
    .db #0                                                ;; y
    .db #2                                                ;; vx
    .db #0                                                ;; vy
-   .db #4                                             ;; width
+   .db #8                                             ;; width
    .db #4                                             ;; height
    .dw #0                                                ;; AI
    .dw #sysColisionsBullet                               ;; Colision
@@ -100,7 +100,7 @@ initBullet:
    .dw #_spr_rainbow                                      ;; Sprite
    .dw #0xc000                                           ;; prevPos
    .db #0                                                ;; score
-   .db #AITypeBullet                                     ;; subType
+   .db #AITypeBullet | #RenderTypeStatic                 ;; subType
 
 initPUBullet:
    .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAnimated  ;; Type     
