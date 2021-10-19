@@ -256,11 +256,55 @@ manGamePlayerColision::
    ld (playerLife), a 
    ;;Dibujar estrella rota
 
+   push ix
+   ld ix, #initStars
+
+   ld b, #3                   ;; 3 ESTRELLAS
+   cp b
+   
+   jp z, stars3
+
+   ld b, #2                   ;; 2 ESTRELLAS
+   cp b
+   
+   jp z, stars2
+
+   ld b, #1                   ;; 1 ESTRELLAS
+   cp b
+   
+   jp z, stars1               ;; 0 ESTRELLAS
+
+   or a
+
+   jp z, stars0
+
+stars3:
+   ld hl, #_spr_stars3
+   jp skipStars
+stars2:
+   ld hl, #_spr_stars2
+   jp skipStars
+stars1:
+   ld hl, #_spr_stars1
+   jp skipStars
+stars0:
+   ld hl, #_spr_stars0
+skipStars:
+   
+   ld indSprite1(ix), h 
+   ld indSprite2(ix), l
+
+   call sysRenderDrawOnce
+   pop ix
+
    ld a, #MaxPlayerInvulnerability
    ld (playerInvulnerability),  a
 
    ld a, #MaxPlayerInvSubTime
    ld (playerInvSubTime),  a
+
+   ld a, (#playerLife)
+   or a
    
    ret nz ;; Si 0 vidas, game over
 

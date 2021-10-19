@@ -61,3 +61,10 @@ SpeedUp2=40
 .globl _spr_hud_1
 .globl _spr_hud_2
 .globl _spr_hud_3
+
+.globl _spr_stars0
+.globl _spr_stars1
+.globl _spr_stars2
+.globl _spr_stars3
+
+.globl initStars

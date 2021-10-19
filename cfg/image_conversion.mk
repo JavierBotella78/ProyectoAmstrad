@@ -75,6 +75,11 @@ $(eval $(call IMG2SP, CONVERT , assets/floor/floor11.png , 80, 11, spr_floor11))
 $(eval $(call IMG2SP, CONVERT , assets/floor/floor22.png , 80, 11, spr_floor22))
 $(eval $(call IMG2SP, CONVERT , assets/floor/floor33.png , 80, 11, spr_floor33))
 
+$(eval $(call IMG2SP, CONVERT , assets/hud/0stars.png , 40, 56, spr_stars0))
+$(eval $(call IMG2SP, CONVERT , assets/hud/1star.png , 40, 56, spr_stars1))
+$(eval $(call IMG2SP, CONVERT , assets/hud/2stars.png , 40, 56, spr_stars2))
+$(eval $(call IMG2SP, CONVERT , assets/hud/3stars.png , 40, 56, spr_stars3))
+
 ##
 ## OLD MACROS (For compatibility)
 ##

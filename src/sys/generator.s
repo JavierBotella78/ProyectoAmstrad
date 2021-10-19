@@ -187,6 +187,14 @@ initFloor2:
    .dw #animationFloor11                  ;; Anim
    .db #5, #0                             ;; AnimCounter, AnimActual
 
+initStars:: 
+   .db #ETypeRenderable       ;; Type  
+   .db #60, #144, #0, #0      ;; x, y, vx, vy
+   .db #20, #56               ;; width, height
+   .dw #0                     ;; AI
+   .dw #0, #0                 ;; Colision, Physics
+   .dw #_spr_stars0, #0xc000   ;; Sprite, prevPos
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sysGeneratorInit
