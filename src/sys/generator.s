@@ -54,7 +54,7 @@ initEnemy1:
    .db #63, #EFila1, #0, #0                                                               ;; x, y, vx, vy
    .db #6, #16                                                                            ;; width, height
    .dw #sysAIEnemy1                                                                       ;; AI
-   .dw #sysColisionsEnemy, #sysColisionsDestroy                                           ;; Colision, Physics
+   .dw #sysColisionsEnemy1, #sysColisionsDestroy                                           ;; Colision, Physics
    .dw #_spr_drone, #0xc000                                                               ;; Sprite, prevPos
    .db #125, #AITypeEnemy | #RenderTypeStatic                                             ;; score, subtype
    .dw #animationEnemy1                                                                   ;; Anim
@@ -68,7 +68,7 @@ initEnemy2:
    .db #63, #EFila2, #0, #0                                                               ;; x, y, vx, vy
    .db #5, #16                                                                            ;; width, height
    .dw #sysAIEnemy2                                                                       ;; AI
-   .dw #sysColisionsEnemy, #sysColisionsDestroy                                           ;; Colision, Physics
+   .dw #sysColisionsEnemy2, #sysColisionsDestroy                                           ;; Colision, Physics
    .dw #_spr_octo, #0xc000                                                                ;; Sprite, prevPos
    .db #100, #AITypeEnemy | #RenderTypeStatic                                             ;; score, subtype
    .dw #animationEnemy2                                                                   ;; Anim
@@ -82,7 +82,7 @@ initEnemy3:
    .db #63, #EFila3, #0, #0                                                               ;; x, y, vx, vy
    .db #6, #16                                                                            ;; width, height
    .dw #sysAIEnemy3                                                                       ;; AI
-   .dw #sysColisionsEnemy, #sysColisionsDestroy                                           ;; Colision, Physics
+   .dw #sysColisionsEnemy3, #sysColisionsDestroy                                           ;; Colision, Physics
    .dw #_spr_robo, #0xc000                                                                ;; Sprite, prevPos
    .db #50, #AITypeEnemy | #RenderTypeStatic                                              ;; score, subtype
    .dw #animationEnemy3                                                                   ;; Anim
@@ -90,6 +90,48 @@ initEnemy3:
    .dw #0                                                                                 ;; actualPos
    .db #0                                                                                 ;; AICounter
    .db #6, #13                                                                            ;; delWitdh, delHeight
+
+initExp1: 
+   .db #ETypeRenderable | #ETypeAI | #ETypeAnimated                     ;; Type 
+   .db #0, #0, #0, #0                                                   ;; x, y, vx, vy
+   .db #4, #16                                                          ;; width, height
+   .dw #sysAIExplosion                                                  ;; AI
+   .dw #0, #0                                                           ;; Colision, Physics
+   .dw #_spr_explosion10, #0xc000                                        ;; Sprite, prevPos
+   .db #0, #RenderTypeStatic                                            ;; score, subtype
+   .dw #animationExplosion1                                             ;; Anim
+   .db #2, #0                                                           ;; AnimCounter, AnimActual
+   .dw #0                                                               ;; actualPos
+   .db #10                                                              ;; AICounter
+   .db #4, #16                                                          ;; delWitdh, delHeight
+
+initExp2: 
+   .db #ETypeRenderable | #ETypeAI | #ETypeAnimated                     ;; Type 
+   .db #0, #0, #0, #0                                                   ;; x, y, vx, vy
+   .db #4, #16                                                          ;; width, height
+   .dw #sysAIExplosion                                                  ;; AI
+   .dw #0, #0                                                           ;; Colision, Physics
+   .dw #_spr_explosion20, #0xc000                                        ;; Sprite, prevPos
+   .db #0, #RenderTypeStatic                                            ;; score, subtype
+   .dw #animationExplosion2                                              ;; Anim
+   .db #2, #0                                                           ;; AnimCounter, AnimActual
+   .dw #0                                                               ;; actualPos
+   .db #10                                                              ;; AICounter
+   .db #4, #13                                                          ;; delWitdh, delHeight
+
+initExp3: 
+   .db #ETypeRenderable | #ETypeAI | #ETypeAnimated                     ;; Type 
+   .db #0, #0, #0, #0                                                   ;; x, y, vx, vy
+   .db #4, #16                                                          ;; width, height
+   .dw #sysAIExplosion                                                  ;; AI
+   .dw #0, #0                                                           ;; Colision, Physics
+   .dw #_spr_explosion30, #0xc000                                        ;; Sprite, prevPos
+   .db #0, #RenderTypeStatic                                            ;; score, subtype
+   .dw #animationExplosion3                                              ;; Anim
+   .db #2, #0                                                           ;; AnimCounter, AnimActual
+   .dw #0                                                               ;; actualPos
+   .db #10                                                              ;; AICounter
+   .db #4, #13                                                          ;; delWitdh, delHeight
 
 initBullet: 
    .db #ETypeRenderable | #ETypeColider | #ETypeMovable                 ;; Type 
@@ -422,7 +464,15 @@ sysGeneratorEnemyCall:
 ret
 
 
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;    PU
+;; Parameters:
+;;    ix -> Enemy that drops power-ups
+;; Return:
+;;    -
+;; Description:
+;;    Creates an entity power-up
+;;
 sysGeneratorPU::
 
    call cpct_getRandom_mxor_u8_asm
@@ -456,6 +506,51 @@ sysGeneratorPUCall:
    ld a, indY(ix)
    ld indY(iy), a
 
+   call sysGeneratorTmpl
+
+ret
+
+sysGeneratorExp1::
+
+   ld iy, #initExp1
+
+   ld a, indX(ix)
+   ld indX(iy), a
+
+   ld a, indY(ix)
+   ld indY(iy), a
+
+   ld hl, #initExp1
+   call sysGeneratorTmpl
+
+ret
+
+sysGeneratorExp2::
+
+   ld iy, #initExp2
+
+   ld a, indX(ix)
+   ld indX(iy), a
+
+   ld a, indY(ix)
+   ld indY(iy), a
+
+   ld hl, #initExp2
+   call sysGeneratorTmpl
+
+ret
+
+sysGeneratorExp3::
+
+   ld iy, #initExp3
+
+   ld a, indX(ix)
+   ld indX(iy), a
+
+   ld a, indY(ix)
+   ld indY(iy), a
+
+   ld hl, #initExp3
    call sysGeneratorTmpl
 
 ret

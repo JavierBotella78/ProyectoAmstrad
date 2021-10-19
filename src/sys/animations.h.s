@@ -6,6 +6,7 @@ AnimSize=3
 
 SpeedFloor1=2
 SpeedFloor11=2
+SpeedExp=3
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  PUBLIC FUNCTIONS
@@ -19,3 +20,6 @@ SpeedFloor11=2
 .globl animationPUBullet
 .globl animationFloor1
 .globl animationFloor11
+.globl animationExplosion1
+.globl animationExplosion2
+.globl animationExplosion3

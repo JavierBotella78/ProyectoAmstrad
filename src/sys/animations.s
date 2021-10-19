@@ -78,6 +78,35 @@ animationFloor11:
     .db #0
     .dw #animationFloor11
 
+animationExplosion1:
+    .db #SpeedExp                  
+    .dw #_spr_explosion11
+    .db #SpeedExp          
+    .dw #_spr_explosion12
+    .db #SpeedExp          
+    .dw #_spr_explosion13
+    .db #SpeedExp          
+    .dw #_spr_explosion14
+
+animationExplosion2:
+    .db #SpeedExp                  
+    .dw #_spr_explosion21
+    .db #SpeedExp          
+    .dw #_spr_explosion22
+    .db #SpeedExp          
+    .dw #_spr_explosion23
+    .db #SpeedExp          
+    .dw #_spr_explosion24
+
+animationExplosion3:
+    .db #SpeedExp                  
+    .dw #_spr_explosion31
+    .db #SpeedExp          
+    .dw #_spr_explosion32
+    .db #SpeedExp          
+    .dw #_spr_explosion33
+    .db #SpeedExp          
+    .dw #_spr_explosion34
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

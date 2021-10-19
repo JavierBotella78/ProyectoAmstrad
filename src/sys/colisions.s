@@ -104,9 +104,29 @@ sysColisionsDestroy:
 
 ret
 
+sysColisionsEnemy1:
+
+    call sysGeneratorExp1
+    call sysColisionsEnemy
+
+ret
+
+sysColisionsEnemy2:
+
+    call sysGeneratorExp2
+    call sysColisionsEnemy
+
+ret
+
+sysColisionsEnemy3:
+
+    call sysGeneratorExp3
+    call sysColisionsEnemy
+
+ret
+
 sysColisionsEnemy:
 
-    call sysGeneratorPU
     call manEntityMarkToDestroy
     call manGameScore
 

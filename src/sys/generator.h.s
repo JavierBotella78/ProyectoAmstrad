@@ -23,6 +23,9 @@ SpeedUp2=40
 .globl sysGeneratorUpdate
 .globl sysGeneratorBulletCreator
 .globl sysGeneratorPU
+.globl sysGeneratorExp1
+.globl sysGeneratorExp2
+.globl sysGeneratorExp3
 
 .globl _spr_idle
 
@@ -67,5 +70,23 @@ SpeedUp2=40
 .globl _spr_stars1
 .globl _spr_stars2
 .globl _spr_stars3
+
+.globl _spr_explosion10
+.globl _spr_explosion11
+.globl _spr_explosion12
+.globl _spr_explosion13
+.globl _spr_explosion14
+
+.globl _spr_explosion20
+.globl _spr_explosion21
+.globl _spr_explosion22
+.globl _spr_explosion23
+.globl _spr_explosion24
+
+.globl _spr_explosion30
+.globl _spr_explosion31
+.globl _spr_explosion32
+.globl _spr_explosion33
+.globl _spr_explosion34
 
 .globl initStars

@@ -1,5 +1,6 @@
 .include "ai.h.s"
 .include "../man/entity.h.s"
+.include "generator.h.s"
 
 
 speedAILeft::
@@ -79,6 +80,25 @@ resetAICounter:
     ld indAICounter(ix), a
 
     call sysAIMoveLeft
+
+ret
+
+
+sysAIExplosion::
+
+    ld a, indAICounter(ix)
+    dec a
+
+    jp z, sysAIExplosionDestroy
+
+    ld indAICounter(ix), a
+
+    ret
+
+sysAIExplosionDestroy:
+
+    call manEntityMarkToDestroy
+    call sysGeneratorPU
 
 ret
 

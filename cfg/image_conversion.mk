@@ -80,6 +80,24 @@ $(eval $(call IMG2SP, CONVERT , assets/hud/1star.png , 40, 56, spr_stars1))
 $(eval $(call IMG2SP, CONVERT , assets/hud/2stars.png , 40, 56, spr_stars2))
 $(eval $(call IMG2SP, CONVERT , assets/hud/3stars.png , 40, 56, spr_stars3))
 
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl10.png , 8, 16, spr_explosion10))
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl11.png , 8, 16, spr_explosion11))
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl12.png , 8, 16, spr_explosion12))
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl13.png , 8, 16, spr_explosion13))
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl14.png , 8, 16, spr_explosion14))
+
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl20.png , 8, 16, spr_explosion20))
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl21.png , 8, 16, spr_explosion21))
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl22.png , 8, 16, spr_explosion22))
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl23.png , 8, 16, spr_explosion23))
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl24.png , 8, 16, spr_explosion24))
+
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl30.png , 8, 16, spr_explosion30))
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl31.png , 8, 16, spr_explosion31))
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl32.png , 8, 16, spr_explosion32))
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl33.png , 8, 16, spr_explosion33))
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl34.png , 8, 16, spr_explosion34))
+
 ##
 ## OLD MACROS (For compatibility)
 ##
