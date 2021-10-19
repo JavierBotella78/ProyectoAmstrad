@@ -49,12 +49,12 @@ sysInputUpdateOne:
 comprobarTeclas:
 
 
-    ld hl, #Key_S
+    ld hl, #Key_A
     call cpct_isKeyPressed_asm
 
     jr nz, sPulsada
     
-    ld hl, #Key_W
+    ld hl, #Key_Q
     call cpct_isKeyPressed_asm
 
     jr nz, wPulsada
@@ -85,7 +85,7 @@ kPulsada:
 
 seguirComprobando:
 
-    ld hl, #Key_K
+    ld hl, #Key_P
     call cpct_isKeyPressed_asm
 
     jr nz, kPulsada
