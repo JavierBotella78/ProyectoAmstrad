@@ -3,7 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
     ;; ENTITY INFO
-EntitySize=26 
+EntitySize=28 
 EntityArraySize=40
 EntityArrayBytesSize=EntitySize*EntityArraySize
 
@@ -44,6 +44,8 @@ indAnimActual=22
 indActualPos2=23
 indActualPos1=24
 indAICounter=25
+indDelWitdh=26
+indDelHeight=27
 
     ;; ENTITY TYPES
 ETypeInvalid=0x00

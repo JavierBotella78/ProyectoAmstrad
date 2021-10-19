@@ -138,8 +138,8 @@ sysRenderBorrado::
     ld d, indPrevPos1(ix)
     ld e, indPrevPos2(ix)
     ld a, #0
-    ld c, indWidth(ix)
-    ld b, indHeight(ix)
+    ld c, indDelWitdh(ix)
+    ld b, indDelHeight(ix)
 
     call cpct_drawSolidBox_asm
 

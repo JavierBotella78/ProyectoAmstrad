@@ -45,6 +45,9 @@ initPlayer:
    .db #0, #0                                                           ;; score, subtype
    .dw #0                                                               ;; Anim
    .db #0, #0                                                           ;; AnimCounter, AnimActual
+   .dw #0                                                                                 ;; actualPos
+   .db #0                                                                                 ;; AICounter
+   .db #4, #16                                                          ;; delWitdh, delHeight
 
 initEnemy1: 
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated  ;; Type
@@ -58,6 +61,7 @@ initEnemy1:
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0                                                                                 ;; actualPos
    .db #0                                                                                 ;; AICounter
+   .db #6, #16                                                                            ;; delWitdh, delHeight
 
 initEnemy2: 
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated  ;; Type
@@ -71,6 +75,7 @@ initEnemy2:
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0                                                                                 ;; actualPos
    .db #0                                                                                 ;; AICounter
+   .db #5, #13                                                                            ;; delWitdh, delHeight
 
 initEnemy3: 
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated  ;; Type
@@ -84,6 +89,7 @@ initEnemy3:
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0                                                                                 ;; actualPos
    .db #0                                                                                 ;; AICounter
+   .db #6, #13                                                                            ;; delWitdh, delHeight
 
 initBullet: 
    .db #ETypeRenderable | #ETypeColider | #ETypeMovable                 ;; Type 
@@ -93,6 +99,11 @@ initBullet:
    .dw #sysColisionsBullet, #sysColisionsDestroy                        ;; Colision, Physics
    .dw #_spr_rainbow, #0xc000                                           ;; Sprite, prevPos
    .db #0, #AITypeBullet | #RenderTypeStatic                            ;; score, subtype
+   .dw #0                                                               ;; Anim
+   .db #0, #0                                                           ;; AnimCounter, AnimActual
+   .dw #0                                                               ;; actualPos
+   .db #0                                                               ;; AICounter
+   .db #6, #4                                                           ;; delWitdh, delHeight
 
 initPUBullet: 
    .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAnimated ;; Type     
@@ -104,6 +115,9 @@ initPUBullet:
    .db #0, #AITypePU | #RenderTypeStatic                                      ;; score, subtype
    .dw #animationPUBullet                                                     ;; Anim
    .db #5, #0                                                                 ;; AnimCounter, AnimActual
+   .dw #0                                                                     ;; actualPos
+   .db #0                                                                     ;; AICounter
+   .db #5, #12                                                                ;; delWitdh, delHeight
 
 initPUScore: 
    .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAnimated ;; Type    
@@ -115,6 +129,9 @@ initPUScore:
    .db #0, #AITypePU | #RenderTypeStatic                                      ;; score, subtype
    .dw #animationPUScore                                                      ;; Anim
    .db #5, #0                                                                 ;; AnimCounter, AnimActual
+   .dw #0                                                                     ;; actualPos
+   .db #0                                                                     ;; AICounter
+   .db #5, #12                                                                ;; delWitdh, delHeight
 
 initInterf: 
    .db #ETypeRenderable       ;; Type  
@@ -150,7 +167,7 @@ initInterf4:
 
 initFloor1: 
    .db #ETypeRenderable | #ETypeAnimated  ;; Type
-   .db #0, #Fila3, #0, #0                ;; x, y, vx, vy
+   .db #0, #Fila3, #0, #0                 ;; x, y, vx, vy
    .db #40, #11                           ;; width, height
    .dw #0                                 ;; AI
    .dw #0, #0                             ;; Colision, Physics
@@ -161,13 +178,13 @@ initFloor1:
 
 initFloor2: 
    .db #ETypeRenderable | #ETypeAnimated  ;; Type
-   .db #0, #Fila2, #0, #0                ;; x, y, vx, vy
+   .db #0, #Fila2, #0, #0                 ;; x, y, vx, vy
    .db #40, #11                           ;; width, height
    .dw #0                                 ;; AI
    .dw #0, #0                             ;; Colision, Physics
-   .dw #_spr_floor11, #0xc000              ;; Sprite, prevPos
+   .dw #_spr_floor11, #0xc000             ;; Sprite, prevPos
    .db #0, #RenderTypeStatic              ;; score, subtype
-   .dw #animationFloor11                   ;; Anim
+   .dw #animationFloor11                  ;; Anim
    .db #5, #0                             ;; AnimCounter, AnimActual
 
 
