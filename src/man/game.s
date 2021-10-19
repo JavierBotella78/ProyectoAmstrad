@@ -1,6 +1,7 @@
 .include "cpctelera.h.s"
 .include "game.h.s" 
 .include "entity.h.s"
+.include "interruptions.h.s"
 
 .include "../sys/render.h.s"
 .include "../sys/prerender.h.s"
@@ -38,46 +39,6 @@ powerUpBullet:
 powerUpScore:
    .db #0
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  INTERRUPCIONES
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-numI::
-   .db 6
-
-manIr::
-
-   push af
-
-   ld a, (numI)
-   dec a
-   jr nz, noZero
-      ld a, #6
-noZero:
-   ld (numI), a
-
-   pop af
-
-   ei
-reti
-
-setManIr::
-   im 1
-   call cpct_waitVSYNC_asm
-   halt
-   halt
-   halt
-   call cpct_waitVSYNC_asm
-   di
-   
-   ld a, #0xc3
-   ld (0x38), a
-   
-   ld hl, #manIr
-   ld (0x39), hl
-   ei
-ret
-   
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    Init
@@ -92,7 +53,7 @@ manGameInit::
 
    call manEntityInit ;; Iniciamos todos los valores del array a 0
    call sysRenderInit 
-   call sysGeneratorInit
+   call sysGeneratorInitGame
    call setManIr
    call sysPreRenderUpdate
 ret
