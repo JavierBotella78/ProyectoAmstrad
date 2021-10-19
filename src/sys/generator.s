@@ -21,7 +21,6 @@ minTime2Generate:
 time2Generate:
     .db #InitMaxTime2Generate
 
-
 maxNumberEnemies:
     .db #InitMinNumberEnemies
 
@@ -48,197 +47,128 @@ initPlayer:
    .db #0, #0                                                           ;; AnimCounter, AnimActual
 
 initEnemy1: 
-   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated   ;; Type
-   .db #63, #EFila1, #0, #0                                             ;; x, y, vx, vy
-   .db #8, #16                                                          ;; width, height
-   .dw #sysAIEnemy1                                                     ;; AI
-   .dw #sysColisionsEnemy, #sysColisionsDestroy                         ;; Colision, Physics
-   .dw #_spr_drone, #0xc000                                             ;; Sprite, prevPos
-   .db #125, #AITypeEnemy | #RenderTypeStatic                           ;; score, subtype
-   .dw #animationEnemy1                                                 ;; Anim
-   .db #5, #0                                                           ;; AnimCounter, AnimActual
-   .dw #0
-   .db #0
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated  ;; Type
+   .db #63, #EFila1, #0, #0                                                               ;; x, y, vx, vy
+   .db #6, #16                                                                            ;; width, height
+   .dw #sysAIEnemy1                                                                       ;; AI
+   .dw #sysColisionsEnemy, #sysColisionsDestroy                                           ;; Colision, Physics
+   .dw #_spr_drone, #0xc000                                                               ;; Sprite, prevPos
+   .db #125, #AITypeEnemy | #RenderTypeStatic                                             ;; score, subtype
+   .dw #animationEnemy1                                                                   ;; Anim
+   .db #5, #0                                                                             ;; AnimCounter, AnimActual
+   .dw #0                                                                                 ;; actualPos
+   .db #0                                                                                 ;; AICounter
 
 initEnemy2: 
-   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated   ;; Type
-   .db #63, #EFila2, #0, #0                                             ;; x, y, vx, vy
-   .db #8, #16                                                          ;; width, height
-   .dw #sysAIEnemy2                                                     ;; AI
-   .dw #sysColisionsEnemy, #sysColisionsDestroy                         ;; Colision, Physics
-   .dw #_spr_octo, #0xc000                                              ;; Sprite, prevPos
-   .db #100, #AITypeEnemy | #RenderTypeStatic                           ;; score, subtype
-   .dw #animationEnemy2                                                 ;; Anim
-   .db #5, #0                                                           ;; AnimCounter, AnimActual
-   .dw #0
-   .db #0
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated  ;; Type
+   .db #63, #EFila2, #0, #0                                                               ;; x, y, vx, vy
+   .db #5, #16                                                                            ;; width, height
+   .dw #sysAIEnemy2                                                                       ;; AI
+   .dw #sysColisionsEnemy, #sysColisionsDestroy                                           ;; Colision, Physics
+   .dw #_spr_octo, #0xc000                                                                ;; Sprite, prevPos
+   .db #100, #AITypeEnemy | #RenderTypeStatic                                             ;; score, subtype
+   .dw #animationEnemy2                                                                   ;; Anim
+   .db #5, #0                                                                             ;; AnimCounter, AnimActual
+   .dw #0                                                                                 ;; actualPos
+   .db #0                                                                                 ;; AICounter
 
 initEnemy3: 
-   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated   ;; Type
-   .db #63, #EFila3, #0, #0                                             ;; x, y, vx, vy
-   .db #8, #16                                                          ;; width, height
-   .dw #sysAIEnemy3                                                     ;; AI
-   .dw #sysColisionsEnemy, #sysColisionsDestroy                         ;; Colision, Physics
-   .dw #_spr_robo, #0xc000                                              ;; Sprite, prevPos
-   .db #50, #AITypeEnemy | #RenderTypeStatic                                                ;; score, subtype
-   .dw #animationEnemy3                                                 ;; Anim
-   .db #5, #0                                                           ;; AnimCounter, AnimActual
-   .dw #0
-   .db #0
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated  ;; Type
+   .db #63, #EFila3, #0, #0                                                               ;; x, y, vx, vy
+   .db #6, #16                                                                            ;; width, height
+   .dw #sysAIEnemy3                                                                       ;; AI
+   .dw #sysColisionsEnemy, #sysColisionsDestroy                                           ;; Colision, Physics
+   .dw #_spr_robo, #0xc000                                                                ;; Sprite, prevPos
+   .db #50, #AITypeEnemy | #RenderTypeStatic                                              ;; score, subtype
+   .dw #animationEnemy3                                                                   ;; Anim
+   .db #5, #0                                                                             ;; AnimCounter, AnimActual
+   .dw #0                                                                                 ;; actualPos
+   .db #0                                                                                 ;; AICounter
 
-initBullet:
-   .db #ETypeRenderable | #ETypeColider | #ETypeMovable  ;; Type     
-   .db #13                                               ;; x
-   .db #0                                                ;; y
-   .db #2                                                ;; vx
-   .db #0                                                ;; vy
-   .db #8                                             ;; width
-   .db #4                                             ;; height
-   .dw #0                                                ;; AI
-   .dw #sysColisionsBullet                               ;; Colision
-   .dw #sysColisionsDestroy                               ;; Physics
-   .dw #_spr_rainbow                                      ;; Sprite
-   .dw #0xc000                                           ;; prevPos
-   .db #0                                                ;; score
-   .db #AITypeBullet | #RenderTypeStatic                 ;; subType
+initBullet: 
+   .db #ETypeRenderable | #ETypeColider | #ETypeMovable                 ;; Type 
+   .db #13, #0, #2, #0                                                  ;; x, y, vx, vy
+   .db #6, #4                                                           ;; width, height
+   .dw #0                                                               ;; AI
+   .dw #sysColisionsBullet, #sysColisionsDestroy                        ;; Colision, Physics
+   .dw #_spr_rainbow, #0xc000                                           ;; Sprite, prevPos
+   .db #0, #AITypeBullet | #RenderTypeStatic                            ;; score, subtype
 
-initPUBullet:
-   .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAnimated  ;; Type     
-   .db #0                                               ;; x
-   .db #0                                                ;; y
-   .db #-1                                                ;; vx
-   .db #0                                                ;; vy
-   .db #7                                             ;; width
-   .db #12                                             ;; height
-   .dw #0                                                ;; AI
-   .dw #sysColisionPUBullet                               ;; Colision
-   .dw #sysColisionsDestroy                               ;; Physics
-   .dw #_spr_powerup1                                                       ;; Sprite
-   .dw #0xc000                                           ;; prevPos
-   .db #0                                                ;; score
-   .db #AITypePU                                                     ;; subType
-   .dw #animationPUBullet                                                 ;; Anim
-   .db #5                                                              ;; AnimCounter
-   .db #0                                                               ;; AnimActual
+initPUBullet: 
+   .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAnimated ;; Type     
+   .db #0, #0, #-1, #0                                                        ;; x, y, vx, vy
+   .db #5, #12                                                                ;; width, height
+   .dw #0                                                                     ;; AI
+   .dw #sysColisionPUBullet, #sysColisionsDestroy                             ;; Colision, Physics
+   .dw #_spr_powerup1, #0xc000                                                ;; Sprite, prevPos
+   .db #0, #AITypePU | #RenderTypeStatic                                      ;; score, subtype
+   .dw #animationPUBullet                                                     ;; Anim
+   .db #5, #0                                                                 ;; AnimCounter, AnimActual
 
-initPUScore:
-   .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAnimated  ;; Type     
-   .db #0                                               ;; x
-   .db #0                                                ;; y
-   .db #-1                                                ;; vx
-   .db #0                                                ;; vy
-   .db #4                                            ;; width
-   .db #12                                             ;; height
-   .dw #0                                                ;; AI
-   .dw #sysColisionPUScore                               ;; Colision
-   .dw #sysColisionsDestroy                               ;; Physics
-   .dw #_spr_doblescore1                                      ;; Sprite
-   .dw #0xc000                                           ;; prevPos
-   .db #0                                                ;; score
-   .db #AITypePU                                                     ;; subType
-   .dw #animationPUScore                                                 ;; Anim
-   .db #5                                                              ;; AnimCounter
-   .db #0                                                               ;; AnimActual
+initPUScore: 
+   .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAnimated ;; Type    
+   .db #0, #0, #-1, #0                                                        ;; x, y, vx, vy
+   .db #5, #12                                                                ;; width, height
+   .dw #0                                                                     ;; AI
+   .dw #sysColisionPUScore, #sysColisionsDestroy                              ;; Colision, Physics
+   .dw #_spr_doblescore1, #0xc000                                             ;; Sprite, prevPos
+   .db #0, #AITypePU | #RenderTypeStatic                                      ;; score, subtype
+   .dw #animationPUScore                                                      ;; Anim
+   .db #5, #0                                                                 ;; AnimCounter, AnimActual
 
-initInterf:
-   .db #ETypeRenderable                                  ;; Type     
-   .db #0                                             ;; x
-   .db #144                                                ;; y
-   .db #0                                                ;; vx
-   .db #0                                                ;; vy
-   .db #20                                            ;; width
-   .db #56                                             ;; height
-   .dw #0                                                ;; AI
-   .dw #0                                                ;; Colision
-   .dw #0                                                ;; Physics
-   .dw #_spr_hud_0                                         ;; Sprite
-   .dw #0xc000                                           ;; prevPos
-   .db #0                                                ;; score
+initInterf: 
+   .db #ETypeRenderable       ;; Type  
+   .db #0, #144, #0, #0       ;; x, y, vx, vy
+   .db #20, #56               ;; width, height
+   .dw #0                     ;; AI
+   .dw #0, #0                 ;; Colision, Physics
+   .dw #_spr_hud_0, #0xc000   ;; Sprite, prevPos
 
-initInterf2:
-   .db #ETypeRenderable                                  ;; Type     
-   .db #20                                             ;; x
-   .db #144                                                ;; y
-   .db #0                                                ;; vx
-   .db #0                                                ;; vy
-   .db #20                                            ;; width
-   .db #56                                             ;; height
-   .dw #0                                                ;; AI
-   .dw #0                                                ;; Colision
-   .dw #0                                                ;; Physics
-   .dw #_spr_hud_1                                         ;; Sprite
-   .dw #0xc000                                           ;; prevPos
-   .db #0                                                ;; score
+initInterf2: 
+   .db #ETypeRenderable       ;; Type  
+   .db #20, #144, #0, #0      ;; x, y, vx, vy
+   .db #20, #56               ;; width, height
+   .dw #0                     ;; AI
+   .dw #0, #0                 ;; Colision, Physics
+   .dw #_spr_hud_1, #0xc000   ;; Sprite, prevPos
 
-initInterf3:
-   .db #ETypeRenderable                                  ;; Type     
-   .db #40                                             ;; x
-   .db #144                                                ;; y
-   .db #0                                                ;; vx
-   .db #0                                                ;; vy
-   .db #20                                            ;; width
-   .db #56                                             ;; height
-   .dw #0                                                ;; AI
-   .dw #0                                                ;; Colision
-   .dw #0                                                ;; Physics
-   .dw #_spr_hud_2                                         ;; Sprite
-   .dw #0xc000                                           ;; prevPos
-   .db #0                                                ;; score
+initInterf3: 
+   .db #ETypeRenderable       ;; Type  
+   .db #40, #144, #0, #0      ;; x, y, vx, vy
+   .db #20, #56               ;; width, height
+   .dw #0                     ;; AI
+   .dw #0, #0                 ;; Colision, Physics
+   .dw #_spr_hud_2, #0xc000   ;; Sprite, prevPos
 
-initInterf4:
-   .db #ETypeRenderable                                  ;; Type     
-   .db #60                                             ;; x
-   .db #144                                                ;; y
-   .db #0                                                ;; vx
-   .db #0                                                ;; vy
-   .db #20                                            ;; width
-   .db #56                                             ;; height
-   .dw #0                                                ;; AI
-   .dw #0                                                ;; Colision
-   .dw #0                                                ;; Physics
-   .dw #_spr_hud_3                                         ;; Sprite
-   .dw #0xc000                                           ;; prevPos
-   .db #0                                                ;; score
+initInterf4: 
+   .db #ETypeRenderable       ;; Type  
+   .db #60, #144, #0, #0      ;; x, y, vx, vy
+   .db #20, #56               ;; width, height
+   .dw #0                     ;; AI
+   .dw #0, #0                 ;; Colision, Physics
+   .dw #_spr_hud_3, #0xc000   ;; Sprite, prevPos
 
-initFloor1:
-   .db #ETypeRenderable | #ETypeAnimated ;; Type
-   .db #0                                                               ;; x
-   .db #Fila3                                                           ;; y
-   .db #0                                                               ;; vx
-   .db #0                                                               ;; vy
-   .db #40                                                              ;; width
-   .db #11                                                              ;; height
-   .dw #0                                                               ;; AI   
-   .dw #0                                                               ;; Colision
-   .dw #0                                                               ;; Physics
-   .dw #_spr_floor1                                                      ;; Sprite
-   .dw #0                                                               ;; prevPos
-   .db #0                                                               ;; score
-   .db #RenderTypeStatic                                                ;; subType
-   .dw #animationFloor1                                                 ;; Anim
-   .db #5                                                               ;; AnimCounter
-   .db #0                                                               ;; AnimActual
+initFloor1: 
+   .db #ETypeRenderable | #ETypeAnimated  ;; Type
+   .db #0, #Fila3, #0, #0                ;; x, y, vx, vy
+   .db #40, #11                           ;; width, height
+   .dw #0                                 ;; AI
+   .dw #0, #0                             ;; Colision, Physics
+   .dw #_spr_floor1, #0xc000              ;; Sprite, prevPos
+   .db #0, #RenderTypeStatic              ;; score, subtype
+   .dw #animationFloor1                   ;; Anim
+   .db #5, #0                             ;; AnimCounter, AnimActual
 
-initFloor2:
-   .db #ETypeRenderable | #ETypeAnimated ;; Type
-   .db #0                                                               ;; x
-   .db #Fila2                                                           ;; y
-   .db #0                                                               ;; vx
-   .db #0                                                               ;; vy
-   .db #40                                                              ;; width
-   .db #11                                                              ;; height
-   .dw #0                                                               ;; AI   
-   .dw #0                                                               ;; Colision
-   .dw #0                                                               ;; Physics
-   .dw #_spr_floor11                                                      ;; Sprite
-   .dw #0                                                               ;; prevPos
-   .db #0                                                               ;; score
-   .db #RenderTypeStatic                                                ;; subType
-   .dw #animationFloor11                                                 ;; Anim
-   .db #5                                                               ;; AnimCounter
-   .db #0                                                               ;; AnimActual
-
-
+initFloor2: 
+   .db #ETypeRenderable | #ETypeAnimated  ;; Type
+   .db #0, #Fila2, #0, #0                ;; x, y, vx, vy
+   .db #40, #11                           ;; width, height
+   .dw #0                                 ;; AI
+   .dw #0, #0                             ;; Colision, Physics
+   .dw #_spr_floor11, #0xc000              ;; Sprite, prevPos
+   .db #0, #RenderTypeStatic              ;; score, subtype
+   .dw #animationFloor11                   ;; Anim
+   .db #5, #0                             ;; AnimCounter, AnimActual
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

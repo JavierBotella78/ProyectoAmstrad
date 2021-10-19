@@ -3,8 +3,8 @@
 #define _ASSETS_POWERUP8_H_
 
 #include <types.h>
-#define SPR_POWERUP8_W 7
+#define SPR_POWERUP8_W 5
 #define SPR_POWERUP8_H 12
-extern const u8 spr_powerup8[7 * 12];
+extern const u8 spr_powerup8[5 * 12];
 
 #endif

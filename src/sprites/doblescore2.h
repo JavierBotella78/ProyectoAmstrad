@@ -3,8 +3,8 @@
 #define _ASSETS_DOBLESCORE2_H_
 
 #include <types.h>
-#define SPR_DOBLESCORE2_W 4
+#define SPR_DOBLESCORE2_W 5
 #define SPR_DOBLESCORE2_H 12
-extern const u8 spr_doblescore2[4 * 12];
+extern const u8 spr_doblescore2[5 * 12];
 
 #endif

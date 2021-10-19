@@ -3,8 +3,8 @@
 #define _ASSETS_ENEMIES_DRONE1_H_
 
 #include <types.h>
-#define SPR_DRONE_W 8
+#define SPR_DRONE_W 6
 #define SPR_DRONE_H 16
-extern const u8 spr_drone[8 * 16];
+extern const u8 spr_drone[6 * 16];
 
 #endif
