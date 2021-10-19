@@ -205,7 +205,7 @@ initStars::
 ;; Descripcion:
 ;;
 ;;
-sysGeneratorInit::
+sysGeneratorInitGame::
 
    ld hl, #initFloor1
    call sysGeneratorTmpl
@@ -243,6 +243,19 @@ sysGeneratorInit::
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysGeneratorInit
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;
+;;
+sysGeneratorInitMenu::
+
+ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sysGeneratorUpdate

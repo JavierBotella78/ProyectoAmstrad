@@ -18,7 +18,8 @@ SpeedUp2=40
 ;;  PUBLIC FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-.globl sysGeneratorInit
+.globl sysGeneratorInitGame
+.globl sysGeneratorInitMenu
 .globl sysGeneratorUpdate
 .globl sysGeneratorBulletCreator
 .globl sysGeneratorPU
