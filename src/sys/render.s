@@ -12,7 +12,17 @@
 .globl cpct_drawSprite_asm
 .globl cpct_getScreenPtr_asm
 .globl cpct_drawSpriteMaskedAlignedTable_asm
+.globl cpct_drawCharM0_asm
+.globl cpct_setDrawCharM0_asm
 
+ptrScreenScore1:
+    .dw #0
+ptrScreenScore2:
+    .dw #0
+ptrScreenScore3:
+    .dw #0
+ptrScreenScore4:
+    .dw #0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sysRenderInit
@@ -36,6 +46,34 @@ sysRenderInit::
     ld   hl, #_main_palette
     ld   de, #16
     call cpct_setPalette_asm
+
+    ld hl, #0x000f
+    call cpct_setDrawCharM0_asm
+
+    cpctm_clearScreen_asm 0
+
+   ld de, #0xc000
+   ld c, #41
+   ld b, #185
+
+   call cpct_getScreenPtr_asm
+
+   ld (ptrScreenScore1), hl
+
+   ld bc, #4
+   add hl, bc
+
+   ld (ptrScreenScore2), hl
+
+   ld bc, #4
+   add hl, bc
+
+   ld (ptrScreenScore3), hl
+
+   ld bc, #4
+   add hl, bc
+
+   ld (ptrScreenScore4), hl
 
 ret
 
@@ -115,7 +153,73 @@ sysRenderDrawOnce::
 
 ret
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysRenderDrawOnce
+;; Requisitos:
+;;    hl -> score to print
+;; Return:
+;;    -
+;; Descripcion:
+;;    Draw the score in the screen
+sysRenderScore::
 
+    ld b, h
+    ld c, l
+    
+    ld a, b
+    rra
+    rra
+    rra
+    rra
+    and #0x0F
+    add #48
+
+
+    ld e, a
+    ld hl, (#ptrScreenScore1)
+
+    push bc
+    call cpct_drawCharM0_asm
+    pop bc
+
+
+    ld a, b
+    and #0x0F
+    add #48
+
+    ld e, a
+    ld hl, (#ptrScreenScore2)
+    push bc
+    call cpct_drawCharM0_asm
+    pop bc
+
+
+    ld a, c
+    rra
+    rra
+    rra
+    rra
+    and #0x0F
+    add #48
+
+    ld e, a
+    ld hl, (#ptrScreenScore3)
+    push bc
+    call cpct_drawCharM0_asm
+    pop bc
+
+
+    ld a, c
+    and #0x0F
+    add #48
+
+    ld e, a
+    ld hl, (#ptrScreenScore4)
+    push bc
+    call cpct_drawCharM0_asm
+    pop bc
+
+ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sysRenderUpdate

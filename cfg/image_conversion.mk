@@ -98,6 +98,13 @@ $(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl32.png , 8, 16, spr_
 $(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl33.png , 8, 16, spr_explosion33))
 $(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl34.png , 8, 16, spr_explosion34))
 
+$(eval $(call IMG2SP, CONVERT , assets/menu-parts/marcobot.png , 74, 12, spr_marcobot))
+$(eval $(call IMG2SP, CONVERT , assets/menu-parts/marcotop.png , 74, 12, spr_marcotop))
+$(eval $(call IMG2SP, CONVERT , assets/menu-parts/marcoleft.png , 6, 200, spr_marcoleft))
+$(eval $(call IMG2SP, CONVERT , assets/menu-parts/marcoright.png , 6, 200, spr_marcoright))
+
+$(eval $(call IMG2SP, CONVERT , assets/menu-parts/cosmic1.png , 124, 11, spr_cosmic1))
+
 ##
 ## OLD MACROS (For compatibility)
 ##

@@ -2,6 +2,7 @@
 ;;  CONSTANTS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+ScreenScore=0xF820
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  PUBLIC FUNCTIONS
@@ -12,3 +13,4 @@
 .globl sysRenderBorrado
 .globl sysRenderUpdateOne
 .globl sysRenderDrawOnce
+.globl sysRenderScore

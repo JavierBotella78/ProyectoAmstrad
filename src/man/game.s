@@ -56,6 +56,9 @@ manGameInit::
    call sysGeneratorInitGame
    call setManIr
    call sysPreRenderUpdate
+
+   ld hl, #0
+   call sysRenderScore
 ret
 
 
@@ -280,19 +283,32 @@ manGameScore::
    ld c, indScore(ix)
    ld b, #0
 
-   add hl, bc
-   
-   ld (score), hl
-
    ld a, (#powerUpScore)
    or a
    
-   ret z
+   jp z, skipDobleScore
 
-   add hl, bc
+   ld a, c
+   add a
+   daa
+   ld c, a
+
+skipDobleScore:
    
+   ld a, l
+   add c
+   daa
+   ld l, a
+
+   ld a, h
+   adc b
+   daa
+   ld h, a
+
    ld (score), hl
-   
+
+   call sysRenderScore
+
 ret
 
 manGamePUBulletColision::

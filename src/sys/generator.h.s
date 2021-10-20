@@ -89,4 +89,13 @@ SpeedUp2=40
 .globl _spr_explosion33
 .globl _spr_explosion34
 
+.globl _spr_marcoleft
+.globl _spr_marcoright 
+.globl _spr_marcobot_0
+.globl _spr_marcotop_0
+.globl _spr_marcobot_1
+.globl _spr_marcotop_1
+
+.globl _spr_cosmic1
+
 .globl initStars

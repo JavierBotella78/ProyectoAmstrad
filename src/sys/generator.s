@@ -56,7 +56,7 @@ initEnemy1:
    .dw #sysAIEnemy1                                                                       ;; AI
    .dw #sysColisionsEnemy1, #sysColisionsDestroy                                           ;; Colision, Physics
    .dw #_spr_drone, #0xc000                                                               ;; Sprite, prevPos
-   .db #125, #AITypeEnemy | #RenderTypeStatic                                             ;; score, subtype
+   .db #0x10, #AITypeEnemy | #RenderTypeStatic                                             ;; score, subtype
    .dw #animationEnemy1                                                                   ;; Anim
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0                                                                                 ;; actualPos
@@ -70,7 +70,7 @@ initEnemy2:
    .dw #sysAIEnemy2                                                                       ;; AI
    .dw #sysColisionsEnemy2, #sysColisionsDestroy                                           ;; Colision, Physics
    .dw #_spr_octo, #0xc000                                                                ;; Sprite, prevPos
-   .db #100, #AITypeEnemy | #RenderTypeStatic                                             ;; score, subtype
+   .db #0x25, #AITypeEnemy | #RenderTypeStatic                                             ;; score, subtype
    .dw #animationEnemy2                                                                   ;; Anim
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0                                                                                 ;; actualPos
@@ -84,7 +84,7 @@ initEnemy3:
    .dw #sysAIEnemy3                                                                       ;; AI
    .dw #sysColisionsEnemy3, #sysColisionsDestroy                                           ;; Colision, Physics
    .dw #_spr_robo, #0xc000                                                                ;; Sprite, prevPos
-   .db #50, #AITypeEnemy | #RenderTypeStatic                                              ;; score, subtype
+   .db #0x40, #AITypeEnemy | #RenderTypeStatic                                              ;; score, subtype
    .dw #animationEnemy3                                                                   ;; Anim
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0                                                                                 ;; actualPos
@@ -237,6 +237,31 @@ initStars::
    .dw #0, #0                 ;; Colision, Physics
    .dw #_spr_stars0, #0xc000   ;; Sprite, prevPos
 
+initMenuBorderVertical: 
+   .db #ETypeRenderable          ;; Type  
+   .db #0, #0, #0, #0            ;; x, y, vx, vy
+   .db #3, #200                 ;; width, height
+   .dw #0                        ;; AI
+   .dw #0, #0                    ;; Colision, Physics
+   .dw #_spr_marcoleft, #0xc000  ;; Sprite, prevPos
+
+initMenuBorderHorizontal: 
+   .db #ETypeRenderable          ;; Type  
+   .db #0, #0, #0, #0            ;; x, y, vx, vy
+   .db #37, #12                  ;; width, height
+   .dw #0                        ;; AI
+   .dw #0, #0                    ;; Colision, Physics
+   .dw #_spr_marcotop_0, #0xc000   ;; Sprite, prevPos
+
+initMenuCosmic: 
+   .db #ETypeRenderable          ;; Type  
+   .db #0, #0, #0, #0            ;; x, y, vx, vy
+   .db #62, #11                  ;; width, height
+   .dw #0                        ;; AI
+   .dw #0, #0                    ;; Colision, Physics
+   .dw #_spr_cosmic1, #0xc000   ;; Sprite, prevPos
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sysGeneratorInit
@@ -296,6 +321,55 @@ ret
 ;;
 ;;
 sysGeneratorInitMenu::
+
+   ld ix, #initMenuBorderVertical
+   ld indX(ix), #0
+   ld hl, #_spr_marcoleft
+   ld indSprite1(ix), h
+   ld indSprite2(ix), l
+   call sysRenderDrawOnce
+
+   ld ix, #initMenuBorderVertical
+   ld indX(ix), #77
+   ld hl, #_spr_marcoright
+   ld indSprite1(ix), h
+   ld indSprite2(ix), l
+   call sysRenderDrawOnce
+
+   ld ix, #initMenuBorderHorizontal
+   ld indX(ix), #3
+   ld indY(ix), #188
+   ld hl, #_spr_marcobot_0
+   ld indSprite1(ix), h
+   ld indSprite2(ix), l
+   call sysRenderDrawOnce
+
+   ld ix, #initMenuBorderHorizontal
+   ld indX(ix), #40
+   ld hl, #_spr_marcobot_1
+   ld indSprite1(ix), h
+   ld indSprite2(ix), l
+   call sysRenderDrawOnce
+
+   ld ix, #initMenuBorderHorizontal
+   ld indX(ix), #3
+   ld indY(ix), #0
+   ld hl, #_spr_marcotop_0
+   ld indSprite1(ix), h
+   ld indSprite2(ix), l
+   call sysRenderDrawOnce
+
+   ld ix, #initMenuBorderHorizontal
+   ld indX(ix), #40
+   ld hl, #_spr_marcotop_1
+   ld indSprite1(ix), h
+   ld indSprite2(ix), l
+   call sysRenderDrawOnce
+
+   ld ix, #initMenuCosmic
+   ld indX(ix), #10
+   ld indY(ix), #20
+   call sysRenderDrawOnce
 
 ret
 
