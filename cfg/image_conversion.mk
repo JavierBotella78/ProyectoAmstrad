@@ -103,7 +103,11 @@ $(eval $(call IMG2SP, CONVERT , assets/menu-parts/marcotop.png , 74, 12, spr_mar
 $(eval $(call IMG2SP, CONVERT , assets/menu-parts/marcoleft.png , 6, 200, spr_marcoleft))
 $(eval $(call IMG2SP, CONVERT , assets/menu-parts/marcoright.png , 6, 200, spr_marcoright))
 
-$(eval $(call IMG2SP, CONVERT , assets/menu-parts/cosmic1.png , 124, 11, spr_cosmic1))
+$(eval $(call IMG2SP, CONVERT , assets/menu-parts/cosmic1.png , 62, 11, spr_cosmic1))
+$(eval $(call IMG2SP, CONVERT , assets/menu-parts/gatlin.png , 84, 14, spr_gatlin))
+$(eval $(call IMG2SP, CONVERT , assets/menu-parts/hashtag.png , 68, 8, spr_hashtag))
+$(eval $(call IMG2SP, CONVERT , assets/menu-parts/francesc.png , 124, 8, spr_francesc))
+$(eval $(call IMG2SP, CONVERT , assets/menu-parts/javier.png , 126, 8, spr_javier))
 
 ##
 ## OLD MACROS (For compatibility)

@@ -54,7 +54,7 @@ initEnemy1:
    .db #63, #EFila1, #0, #0                                                               ;; x, y, vx, vy
    .db #6, #16                                                                            ;; width, height
    .dw #sysAIEnemy1                                                                       ;; AI
-   .dw #sysColisionsEnemy1, #sysColisionsDestroy                                           ;; Colision, Physics
+   .dw #sysColisionsEnemy1, #sysColisionsSubEnemy                                           ;; Colision, Physics
    .dw #_spr_drone, #0xc000                                                               ;; Sprite, prevPos
    .db #0x10, #AITypeEnemy | #RenderTypeStatic                                             ;; score, subtype
    .dw #animationEnemy1                                                                   ;; Anim
@@ -68,7 +68,7 @@ initEnemy2:
    .db #63, #EFila2, #0, #0                                                               ;; x, y, vx, vy
    .db #5, #16                                                                            ;; width, height
    .dw #sysAIEnemy2                                                                       ;; AI
-   .dw #sysColisionsEnemy2, #sysColisionsDestroy                                           ;; Colision, Physics
+   .dw #sysColisionsEnemy2, #sysColisionsSubEnemy                                           ;; Colision, Physics
    .dw #_spr_octo, #0xc000                                                                ;; Sprite, prevPos
    .db #0x25, #AITypeEnemy | #RenderTypeStatic                                             ;; score, subtype
    .dw #animationEnemy2                                                                   ;; Anim
@@ -82,7 +82,7 @@ initEnemy3:
    .db #63, #EFila3, #0, #0                                                               ;; x, y, vx, vy
    .db #6, #16                                                                            ;; width, height
    .dw #sysAIEnemy3                                                                       ;; AI
-   .dw #sysColisionsEnemy3, #sysColisionsDestroy                                           ;; Colision, Physics
+   .dw #sysColisionsEnemy3, #sysColisionsSubEnemy                                           ;; Colision, Physics
    .dw #_spr_robo, #0xc000                                                                ;; Sprite, prevPos
    .db #0x40, #AITypeEnemy | #RenderTypeStatic                                              ;; score, subtype
    .dw #animationEnemy3                                                                   ;; Anim
@@ -256,10 +256,43 @@ initMenuBorderHorizontal:
 initMenuCosmic: 
    .db #ETypeRenderable          ;; Type  
    .db #0, #0, #0, #0            ;; x, y, vx, vy
-   .db #62, #11                  ;; width, height
+   .db #31, #11                  ;; width, height
    .dw #0                        ;; AI
    .dw #0, #0                    ;; Colision, Physics
    .dw #_spr_cosmic1, #0xc000   ;; Sprite, prevPos
+
+
+initMenuGatlin: 
+   .db #ETypeRenderable          ;; Type  
+   .db #0, #0, #0, #0            ;; x, y, vx, vy
+   .db #42, #14                  ;; width, height
+   .dw #0                        ;; AI
+   .dw #0, #0                    ;; Colision, Physics
+   .dw #_spr_gatlin, #0xc000   ;; Sprite, prevPos
+
+initMenuHashtag: 
+   .db #ETypeRenderable          ;; Type  
+   .db #0, #0, #0, #0            ;; x, y, vx, vy
+   .db #34, #8                  ;; width, height
+   .dw #0                        ;; AI
+   .dw #0, #0                    ;; Colision, Physics
+   .dw #_spr_hashtag, #0xc000   ;; Sprite, prevPos
+
+initMenuFrancesc: 
+   .db #ETypeRenderable          ;; Type  
+   .db #0, #0, #0, #0            ;; x, y, vx, vy
+   .db #62, #8                  ;; width, height
+   .dw #0                        ;; AI
+   .dw #0, #0                    ;; Colision, Physics
+   .dw #_spr_francesc, #0xc000   ;; Sprite, prevPos
+
+initMenuJavier: 
+   .db #ETypeRenderable          ;; Type  
+   .db #0, #0, #0, #0            ;; x, y, vx, vy
+   .db #63, #8                  ;; width, height
+   .dw #0                        ;; AI
+   .dw #0, #0                    ;; Colision, Physics
+   .dw #_spr_javier, #0xc000   ;; Sprite, prevPos
 
 
 
@@ -367,8 +400,28 @@ sysGeneratorInitMenu::
    call sysRenderDrawOnce
 
    ld ix, #initMenuCosmic
+   ld indX(ix), #24
+   ld indY(ix), #30
+   call sysRenderDrawOnce
+
+   ld ix, #initMenuGatlin
+   ld indX(ix), #19
+   ld indY(ix), #45
+   call sysRenderDrawOnce
+
+   ld ix, #initMenuHashtag
+   ld indX(ix), #23
+   ld indY(ix), #15
+   call sysRenderDrawOnce
+
+   ld ix, #initMenuJavier
+   ld indX(ix), #9
+   ld indY(ix), #165
+   call sysRenderDrawOnce
+
+   ld ix, #initMenuFrancesc
    ld indX(ix), #10
-   ld indY(ix), #20
+   ld indY(ix), #177
    call sysRenderDrawOnce
 
 ret

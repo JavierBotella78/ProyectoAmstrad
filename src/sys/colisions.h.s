@@ -10,6 +10,7 @@
 .globl sysColisionsUpdate
 .globl sysColisionsDestroy
 .globl sysColisionsEnemy
+.globl sysColisionsSubEnemy
 .globl sysColisionsEnemy1
 .globl sysColisionsEnemy2
 .globl sysColisionsEnemy3

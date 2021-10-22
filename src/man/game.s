@@ -305,6 +305,32 @@ skipDobleScore:
    daa
    ld h, a
 
+   ;;TODO: QUE NO PASE DE 9999 A 0
+
+   ld (score), hl
+
+   call sysRenderScore
+
+ret
+
+manGameSubScore:
+
+   ld hl, (#score)
+   ld c, #0x10
+   ld b, #0
+
+   ld a, l
+   sub c
+   daa
+   ld l, a
+
+   ld a, h
+   sbc b
+   daa
+   ld h, a
+
+   ;;TODO: QUE NO PASE DE 0 A 9999
+
    ld (score), hl
 
    call sysRenderScore

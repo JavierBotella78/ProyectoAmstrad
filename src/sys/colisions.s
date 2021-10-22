@@ -132,6 +132,13 @@ sysColisionsEnemy:
 
 ret
 
+sysColisionsSubEnemy:
+
+    call manEntityMarkToDestroy
+    call manGameSubScore
+
+ret
+
 sysColisionsPlayer:
 
     ld b, #AITypeEnemy
