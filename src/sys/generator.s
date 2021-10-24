@@ -10,6 +10,8 @@
 
 .globl cpct_memcpy_asm
 .globl cpct_getRandom_mxor_u8_asm
+.globl cpct_getScreenPtr_asm
+.globl cpct_drawSolidBox_asm
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  VARIABLES
@@ -295,6 +297,24 @@ initMenuJavier:
    .dw #_spr_javier, #0xc000   ;; Sprite, prevPos
 
 
+sysGeneratorInit::
+
+   ld a, #InitMaxTime2Generate
+   ld (minTime2Generate), a
+
+   ld a, #InitMaxTime2Generate
+   ld (time2Generate), a
+
+   ld a, #InitMinNumberEnemies
+   ld (maxNumberEnemies), a
+
+   ld a, #InitMinNumberEnemies
+   ld (numberEnemies), a
+
+   ld a, #SpeedUp1
+   ld (speedUp), a
+
+ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sysGeneratorInit
@@ -307,10 +327,16 @@ initMenuJavier:
 ;;
 sysGeneratorInitGame::
 
-   ld hl, #initFloor1
+   ld ix, #initFloor1
+   ld a, #0
+   ld indX(ix), a
+   ld hl, #initFloor1 
    call sysGeneratorTmpl
 
-   ld hl, #initFloor2
+   ld ix, #initFloor2
+   ld a, #0
+   ld indX(ix), a
+   ld hl, #initFloor2 
    call sysGeneratorTmpl
 
    ld ix, #initFloor1
@@ -343,6 +369,32 @@ sysGeneratorInitGame::
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysGeneratorInitGameOver
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;
+;;
+sysGeneratorInitGameOver::
+
+   ld de, #0xc000
+   ld c, #10
+   ld b, #20
+
+   call cpct_getScreenPtr_asm
+
+   ex de, hl
+   ld a, #0
+   ld c, #60
+   ld b, #120
+
+   call cpct_drawSolidBox_asm
+
+ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sysGeneratorInit

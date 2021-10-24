@@ -40,6 +40,7 @@ powerUpScore:
    .db #0
 
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    Init
 ;; Parameters:
@@ -53,12 +54,25 @@ manGameInit::
 
    call manEntityInit ;; Iniciamos todos los valores del array a 0
    call sysRenderInit 
+   call sysGeneratorInit
    call sysGeneratorInitGame
    call setManIr
    call sysPreRenderUpdate
 
    ld hl, #0
    call sysRenderScore
+
+   ld a, #4
+   ld (playerLife), a
+
+   ld hl, #0
+   ld (score), hl
+
+   ld a, #0
+   ld (powerUpBullet), a
+
+   ld a, #0
+   ld (powerUpScore), a
 ret
 
 
@@ -97,7 +111,9 @@ loopRender:
 
    call sysPreRenderUpdate
 
-   jp    mainLoop
+   ld a, (#playerLife)
+   or a
+   jp nz, mainLoop
    
 ret
 

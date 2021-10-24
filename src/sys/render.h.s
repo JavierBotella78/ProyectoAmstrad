@@ -14,3 +14,4 @@ ScreenScore=0xF820
 .globl sysRenderUpdateOne
 .globl sysRenderDrawOnce
 .globl sysRenderScore
+.globl sysRenderGameOverCount

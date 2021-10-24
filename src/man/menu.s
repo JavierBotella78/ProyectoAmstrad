@@ -25,6 +25,12 @@ boolMenuLoop:
 
 manMenuInit::
 
+    ld a, #0
+    ld (#boolMenuLoop), a
+
+    ld a, #0
+    ld (#menuCoin), a
+
     call manEntityInit ;; Iniciamos todos los valores del array a 0
     call sysRenderInit 
     call sysGeneratorInitMenu
@@ -43,10 +49,6 @@ manMenuLoop::
     or a
     
     jp z, manMenuLoop
-
-    ld a, #0
-    ld (#boolMenuLoop), a
-
 ret
 
 

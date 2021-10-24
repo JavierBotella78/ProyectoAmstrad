@@ -10,6 +10,24 @@ aiCounter::
     .db #1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      init
+;; Requisitos:
+;;    ix -> Posicion inicial de memoria de la entidad
+;; Return:
+;;    -
+;; Descripcion:
+;;    -
+sysAIInit:
+
+    ld a, #1
+    ld (aiCounter), a
+
+    ld a, #-1
+    ld (speedAILeft), a
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      UpdateOne
 ;; Requisitos:
 ;;    ix -> Posicion inicial de memoria de la entidad

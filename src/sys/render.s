@@ -221,6 +221,26 @@ sysRenderScore::
 
 ret
 
+sysRenderGameOverCount::
+
+    push af
+
+    ld de, #0xc000
+    ld c, #10
+    ld b, #20
+
+    call cpct_getScreenPtr_asm
+
+    pop af
+
+    and #0x0F
+    add #48
+
+    ld e, a
+    call cpct_drawCharM0_asm
+
+ret
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sysRenderUpdate
 ;; Requisitos:
