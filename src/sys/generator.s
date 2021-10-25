@@ -296,6 +296,14 @@ initMenuJavier:
    .dw #0, #0                    ;; Colision, Physics
    .dw #_spr_javier, #0xc000   ;; Sprite, prevPos
 
+   initInsertCoin: 
+   .db #ETypeRenderable          ;; Type  
+   .db #0, #0, #0, #0            ;; x, y, vx, vy
+   .db #45, #12                 ;; width, height
+   .dw #0                        ;; AI
+   .dw #0, #0                    ;; Colision, Physics
+   .dw #_spr_insert, #0xc000   ;; Sprite, prevPos
+
 
 sysGeneratorInit::
 
@@ -474,6 +482,11 @@ sysGeneratorInitMenu::
    ld ix, #initMenuFrancesc
    ld indX(ix), #10
    ld indY(ix), #177
+   call sysRenderDrawOnce
+
+   ld ix, #initInsertCoin
+   ld indX(ix), #17
+   ld indY(ix), #80
    call sysRenderDrawOnce
 
 ret

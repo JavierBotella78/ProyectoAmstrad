@@ -108,7 +108,7 @@ $(eval $(call IMG2SP, CONVERT , assets/menu-parts/gatlin.png , 84, 14, spr_gatli
 $(eval $(call IMG2SP, CONVERT , assets/menu-parts/hashtag.png , 68, 8, spr_hashtag))
 $(eval $(call IMG2SP, CONVERT , assets/menu-parts/francesc.png , 124, 8, spr_francesc))
 $(eval $(call IMG2SP, CONVERT , assets/menu-parts/javier.png , 126, 8, spr_javier))
-
+$(eval $(call IMG2SP, CONVERT , assets/menu-parts/insertcoin.png , 90, 12, spr_insert))
 ##
 ## OLD MACROS (For compatibility)
 ##
