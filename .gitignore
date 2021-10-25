@@ -1,4 +1,5 @@
-obj/
-cosmicGatlin.cdt
 cosmicGatlin.dsk
 cosmicGatlin.sna
+cosmicGatlin.cdt
+obj/
+src/sprites/
