@@ -34,6 +34,12 @@ softResetJump:
 gameOverTimer:
     .dw #20000
 
+blinkGameOverTimer:
+    .dw #0
+
+boolGameOverBlink:
+    .db #0
+
 
 manGameOverInit::
 
@@ -54,6 +60,12 @@ manGameOverInit::
     ld hl, #20000
     ld (#gameOverTimer), hl
 
+    ld hl, #4000
+    ld (#blinkGameOverTimer), hl
+
+    ld a, #0
+    ld (#boolGameOverBlink), a
+
     call sysGeneratorInitGameOver
 
     ld a, (#gameOverCount)
@@ -68,6 +80,7 @@ manGameOverLoop::
 
     call manGameOverCheckInput
     call manGameOverUpdate
+    call manGameOverCheckBlink
 
     ld a, (#boolGameOverLoop)
     or a
@@ -177,6 +190,8 @@ cGameOverPulsada:
     inc a
     ld (#gameOverCoin), a
 
+    call sysGeneratorInitMenuCredit
+
     ret
 
 spaceGameOverPulsada:
@@ -216,3 +231,59 @@ pGameOverPulsada:
 
 ret
 
+
+
+manGameOverCheckBlink:
+
+    ld hl, (#blinkGameOverTimer)
+    dec hl
+    ld (blinkGameOverTimer), hl
+
+    ld a, h
+    or a
+
+    ret nz
+
+    ld a, l
+    or a
+
+    ret nz
+
+    ld a, (#boolGameOverBlink)
+    or a
+
+    jp z, blinkGameOverDraw
+
+    ld hl, #2000
+    ld (blinkGameOverTimer), hl
+
+    ld a, #0
+    ld (boolGameOverBlink), a
+
+    call sysGeneratorMenuErase
+
+    ret
+
+blinkGameOverDraw:
+
+    ld hl, #4000
+    ld (blinkGameOverTimer), hl
+
+
+    ld a, #1
+    ld (boolGameOverBlink), a
+
+    ld a, (#gameOverCoin)
+    or a
+
+    jp z, blinkGameOverDrawInsert
+
+    call sysGeneratorMenuSpace
+
+    ret
+
+blinkGameOverDrawInsert:
+
+    call sysGeneratorMenuInsertCoin
+
+ret
