@@ -21,7 +21,13 @@ SpeedUp2=40
 .globl sysGeneratorInit
 .globl sysGeneratorInitGame
 .globl sysGeneratorInitGameOver
+.globl sysGeneratorInitGameOver2
+.globl sysGeneratorInitMenu2
 .globl sysGeneratorInitMenu
+.globl sysGeneratorInitMenuCredit
+.globl sysGeneratorMenuErase
+.globl sysGeneratorMenuSpace
+.globl sysGeneratorMenuInsertCoin
 .globl sysGeneratorUpdate
 .globl sysGeneratorBulletCreator
 .globl sysGeneratorPU
@@ -107,8 +113,11 @@ SpeedUp2=40
 .globl _spr_javier
 .globl _spr_insert
 .globl _spr_credit0
+.globl _spr_credit1
 
 .globl _spr_continue
+.globl _spr_gameover
+.globl _spr_space
 
 
 

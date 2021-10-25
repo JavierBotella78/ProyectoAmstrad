@@ -22,6 +22,14 @@ menuCoin:
 boolMenuLoop:
     .db #0
 
+controlsTimer:
+    .dw #20000
+
+blinkMenuTimer:
+    .dw #0
+
+boolMenuBlink:
+    .db #0
 
 manMenuInit::
 
@@ -31,8 +39,18 @@ manMenuInit::
     ld a, #0
     ld (#menuCoin), a
 
+    ld hl, #20000
+    ld (#controlsTimer), hl
+
+    ld hl, #4000
+    ld (#blinkMenuTimer), hl
+
+    ld a, #0
+    ld (#boolMenuBlink), a
+
     call manEntityInit ;; Iniciamos todos los valores del array a 0
     call sysRenderInit 
+    call sysRenderInitMenu
     call sysGeneratorInitMenu
     call setManIr
     call sysPreRenderUpdate
@@ -44,11 +62,46 @@ ret
 manMenuLoop::
 
     call manMenuCheckInput
+    call manMenuCheckBlink
 
     ld a, (#boolMenuLoop)
     or a
     
     jp z, manMenuLoop
+
+    ld a, #0
+    ld (boolMenuLoop), a
+
+    call sysGeneratorInitMenu2
+
+manMenuLoop2:
+
+    call manMenuCheckInput2
+
+    ld hl, (#controlsTimer)
+    dec hl
+    ld (controlsTimer), hl
+
+    ld a, h
+    or a
+
+    jp nz, skipControlTimer
+
+    ld a, l
+    or a
+
+    jp nz, skipControlTimer
+
+    ld a, #1
+    ld (boolMenuLoop), a
+
+skipControlTimer:
+
+    ld a, (#boolMenuLoop)
+    or a
+
+    jp z, manMenuLoop2
+
 ret
 
 
@@ -79,6 +132,8 @@ cMenuPulsada:
     inc a
     ld (#menuCoin), a
 
+    call sysGeneratorInitMenuCredit
+
     ret
 
 enterMenuPulsada:
@@ -94,5 +149,82 @@ enterMenuPulsada:
 
     ld a, #1
     ld (boolMenuLoop), a
+
+ret
+
+
+
+manMenuCheckInput2:
+
+    call cpct_scanKeyboard_asm
+
+    ld hl, #Key_P
+    call cpct_isKeyPressed_asm
+
+    jr nz, pMenuPulsada
+
+    ret
+
+pMenuPulsada:
+
+    ld a, #1
+    ld (boolMenuLoop), a
+
+ret
+
+
+
+manMenuCheckBlink:
+
+    ld hl, (#blinkMenuTimer)
+    dec hl
+    ld (blinkMenuTimer), hl
+
+    ld a, h
+    or a
+
+    ret nz
+
+    ld a, l
+    or a
+
+    ret nz
+
+    ld a, (#boolMenuBlink)
+    or a
+
+    jp z, blinkMenuDraw
+
+    ld hl, #2000
+    ld (blinkMenuTimer), hl
+
+    ld a, #0
+    ld (boolMenuBlink), a
+
+    call sysGeneratorMenuErase
+
+    ret
+
+blinkMenuDraw:
+
+    ld hl, #4000
+    ld (blinkMenuTimer), hl
+
+
+    ld a, #1
+    ld (boolMenuBlink), a
+
+    ld a, (#menuCoin)
+    or a
+
+    jp z, blinkMenuDrawInsert
+
+    call sysGeneratorMenuSpace
+
+    ret
+
+blinkMenuDrawInsert:
+
+    call sysGeneratorMenuInsertCoin
 
 ret

@@ -13,6 +13,7 @@
 .globl cpct_getRandom_mxor_u8_asm
 .globl cpct_getScreenPtr_asm
 .globl cpct_drawSolidBox_asm
+.globl cpct_drawStringM0_asm
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  VARIABLES
@@ -37,6 +38,9 @@ speedUp:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  TEMPLATES
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+initHighscore:
+   .asciz "HIGHSCORE - "
 
 initPlayer: 
    .db #ETypeRenderable | #ETypeInput | #ETypeMovable | #ETypeColider | #ETypeAnimated    ;; Type
@@ -297,7 +301,7 @@ initMenuJavier:
    .dw #0, #0                    ;; Colision, Physics
    .dw #_spr_javier, #0xc000   ;; Sprite, prevPos
 
-   initInsertCoin: 
+initInsertCoin: 
    .db #ETypeRenderable          ;; Type  
    .db #0, #0, #0, #0            ;; x, y, vx, vy
    .db #45, #12                 ;; width, height
@@ -305,7 +309,7 @@ initMenuJavier:
    .dw #0, #0                    ;; Colision, Physics
    .dw #_spr_insert, #0xc000   ;; Sprite, prevPos
 
-    initCredit0: 
+initCredit0: 
    .db #ETypeRenderable          ;; Type  
    .db #0, #0, #0, #0            ;; x, y, vx, vy
    .db #23, #12                 ;; width, height
@@ -313,13 +317,37 @@ initMenuJavier:
    .dw #0, #0                    ;; Colision, Physics
    .dw #_spr_credit0, #0xc000   ;; Sprite, prevPos
 
-    initContinue: 
+initCredit1: 
+   .db #ETypeRenderable          ;; Type  
+   .db #0, #0, #0, #0            ;; x, y, vx, vy
+   .db #23, #12                 ;; width, height
+   .dw #0                        ;; AI
+   .dw #0, #0                    ;; Colision, Physics
+   .dw #_spr_credit1, #0xc000   ;; Sprite, prevPos
+
+initContinue: 
    .db #ETypeRenderable          ;; Type  
    .db #0, #0, #0, #0            ;; x, y, vx, vy
    .db #41, #16                ;; width, height
    .dw #0                        ;; AI
    .dw #0, #0                    ;; Colision, Physics
    .dw #_spr_continue, #0xc000   ;; Sprite, prevPos
+
+initGameOver: 
+   .db #ETypeRenderable          ;; Type  
+   .db #0, #0, #0, #0            ;; x, y, vx, vy
+   .db #55, #21                  ;; width, height
+   .dw #0                        ;; AI
+   .dw #0, #0                    ;; Colision, Physics
+   .dw #_spr_gameover, #0xc000   ;; Sprite, prevPos
+
+initSpace: 
+   .db #ETypeRenderable          ;; Type  
+   .db #0, #0, #0, #0            ;; x, y, vx, vy
+   .db #58, #12                  ;; width, height
+   .dw #0                        ;; AI
+   .dw #0, #0                    ;; Colision, Physics
+   .dw #_spr_space, #0xc000   ;; Sprite, prevPos
 
 
 sysGeneratorInit::
@@ -417,19 +445,43 @@ sysGeneratorInitGameOver::
 
    ld ix, #initInsertCoin
    ld indX(ix), #17
-   ld indY(ix), #100
+   ld indY(ix), #125
    call sysRenderDrawOnce
 
-    ld ix, #initCredit0
+   ld ix, #initCredit0
    ld indX(ix), #28
-   ld indY(ix), #123
+   ld indY(ix), #145
    call sysRenderDrawOnce
 
 
 ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; sysGeneratorInit
+;; sysGeneratorInitMenu2
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;
+;;
+sysGeneratorInitGameOver2::
+
+   cpctm_clearScreen_asm 0
+
+   call sysGeneratorDrawBorder
+
+   ld ix, #initGameOver
+   ld indX(ix), #12
+   ld indY(ix), #90
+   call sysRenderDrawOnce
+
+ret
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysGeneratorInitMenu
 ;; Requisitos:
 ;;    -
 ;; Return:
@@ -441,6 +493,13 @@ sysGeneratorInitMenu::
 
    call sysGeneratorDrawBorder
 
+   ld ix, #initMenuHashtag
+   ld indX(ix), #23
+   ld indY(ix), #18
+   call sysRenderDrawOnce
+
+
+
    ld ix, #initMenuCosmic
    ld indX(ix), #24
    ld indY(ix), #33
@@ -451,10 +510,34 @@ sysGeneratorInitMenu::
    ld indY(ix), #48
    call sysRenderDrawOnce
 
-   ld ix, #initMenuHashtag
-   ld indX(ix), #23
-   ld indY(ix), #18
+
+
+   ld de, #0xC000
+   ld c, #8
+   ld b, #90
+
+   call cpct_getScreenPtr_asm
+
+   ld iy, #initHighscore
+
+   call cpct_drawStringM0_asm
+
+   call manGameGetScore
+   call sysRenderScore
+
+
+
+   ld ix, #initInsertCoin
+   ld indX(ix), #17
+   ld indY(ix), #125
    call sysRenderDrawOnce
+
+   ld ix, #initCredit0
+   ld indX(ix), #28
+   ld indY(ix), #145
+   call sysRenderDrawOnce
+
+
 
    ld ix, #initMenuJavier
    ld indX(ix), #9
@@ -466,15 +549,108 @@ sysGeneratorInitMenu::
    ld indY(ix), #177
    call sysRenderDrawOnce
 
-   ld ix, #initInsertCoin
-   ld indX(ix), #17
-   ld indY(ix), #80
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysGeneratorInitMenuCredit
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;
+;;
+sysGeneratorInitMenuCredit::
+
+   ld ix, #initSpace
+   ld indX(ix), #11
+   ld indY(ix), #125
    call sysRenderDrawOnce
 
-    ld ix, #initCredit0
+   ld ix, #initCredit1
    ld indX(ix), #28
-   ld indY(ix), #108
+   ld indY(ix), #145
    call sysRenderDrawOnce
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysGeneratorMenuSpace
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;
+;;
+sysGeneratorMenuSpace::
+
+   ld ix, #initSpace
+   ld indX(ix), #11
+   ld indY(ix), #125
+   call sysRenderDrawOnce
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysGeneratorMenuInsertCoin
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;
+;;
+sysGeneratorMenuInsertCoin::
+
+   ld ix, #initInsertCoin
+   ld indX(ix), #17
+   ld indY(ix), #125
+   call sysRenderDrawOnce
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysGeneratorMenuErase
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;
+;;
+sysGeneratorMenuErase::
+
+   ld de, #0xC000
+   ld c, #11
+   ld b, #125
+
+   call cpct_getScreenPtr_asm
+
+   ex de, hl
+   ld a, #0
+   ld c, #58
+   ld b, #12
+
+   call cpct_drawSolidBox_asm
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysGeneratorInitMenu2
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;
+;;
+sysGeneratorInitMenu2::
+
+   cpctm_clearScreen_asm 0
+
+   call sysGeneratorDrawBorder
 
 ret
 

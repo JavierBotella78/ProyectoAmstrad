@@ -21,8 +21,10 @@ PUTime=40
 .globl manGamePlayerColision
 .globl manGamePUBulletColision
 .globl manGamePUScoreColision
+
 .globl manGameScore
 .globl manGameSubScore
+.globl manGameGetScore
 
 
 

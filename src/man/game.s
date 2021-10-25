@@ -375,6 +375,14 @@ manGamePUColision:
 ret
 
 
+
+manGameGetScore::
+
+   ld hl, (#score)
+
+ret
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    waitHalt
 ;; Parameters:

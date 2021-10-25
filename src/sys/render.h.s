@@ -9,6 +9,7 @@ ScreenScore=0xF820
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 .globl sysRenderInit
+.globl sysRenderInitMenu
 .globl sysRenderUpdate
 .globl sysRenderBorrado
 .globl sysRenderUpdateOne

@@ -109,10 +109,15 @@ $(eval $(call IMG2SP, CONVERT , assets/menu-parts/gatlin.png , 84, 14, spr_gatli
 $(eval $(call IMG2SP, CONVERT , assets/menu-parts/hashtag.png , 68, 8, spr_hashtag))
 $(eval $(call IMG2SP, CONVERT , assets/menu-parts/francesc.png , 124, 8, spr_francesc))
 $(eval $(call IMG2SP, CONVERT , assets/menu-parts/javier.png , 126, 8, spr_javier))
+
+$(eval $(call IMG2SP, CONVERT , assets/menu-parts/pressspace.png , 116, 12, spr_space))
+
 $(eval $(call IMG2SP, CONVERT , assets/menu-parts/insertcoin.png , 90, 12, spr_insert))
 $(eval $(call IMG2SP, CONVERT , assets/menu-parts/credit0.png , 46, 12, spr_credit0))
+$(eval $(call IMG2SP, CONVERT , assets/menu-parts/credit1.png , 46, 12, spr_credit1))
 
 $(eval $(call IMG2SP, CONVERT , assets/menu-parts/continue.png , 82, 16, spr_continue))
+$(eval $(call IMG2SP, CONVERT , assets/menu-parts/gameover.png , 110, 21, spr_gameover))
 ##
 ## OLD MACROS (For compatibility)
 ##

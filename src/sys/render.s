@@ -77,6 +77,41 @@ sysRenderInit::
 
 ret
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysRenderInit
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;    Inicializa el render
+sysRenderInitMenu::
+
+    ld de, #0xc000
+    ld c, #57
+    ld b, #90
+
+    call cpct_getScreenPtr_asm
+
+    ld (ptrScreenScore1), hl
+
+    ld bc, #4
+    add hl, bc
+
+    ld (ptrScreenScore2), hl
+
+    ld bc, #4
+    add hl, bc
+
+    ld (ptrScreenScore3), hl
+
+    ld bc, #4
+    add hl, bc
+
+    ld (ptrScreenScore4), hl
+
+ret
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sysRenderUpdateOne

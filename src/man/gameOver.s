@@ -31,6 +31,9 @@ gameOverSubCount:
 softResetJump:
     .dw #0
 
+gameOverTimer:
+    .dw #20000
+
 
 manGameOverInit::
 
@@ -47,6 +50,9 @@ manGameOverInit::
 
     ld hl, #4000
     ld (gameOverSubCount), hl
+
+    ld hl, #20000
+    ld (#gameOverTimer), hl
 
     call sysGeneratorInitGameOver
 
@@ -67,6 +73,40 @@ manGameOverLoop::
     or a
     
     jp z, manGameOverLoop
+
+    ld a, #0
+    ld (boolGameOverLoop), a
+
+    call sysGeneratorInitGameOver2
+
+manGameOverLoop2:
+
+    call manGameOverCheckInput2
+
+    ld hl, (#gameOverTimer)
+    dec hl
+    ld (gameOverTimer), hl
+
+    ld a, h
+    or a
+
+    jp nz, skipGameOverTimer
+
+    ld a, l
+    or a
+
+    jp nz, skipGameOverTimer
+
+    ld a, #1
+    ld (boolGameOverLoop), a
+
+skipGameOverTimer:
+
+    ld a, (#boolGameOverLoop)
+    or a
+
+    jp z, manGameOverLoop2
+
 ret
 
 manGameOverUpdate:
@@ -154,3 +194,25 @@ spaceGameOverPulsada:
     jp (hl)
 
 ret
+
+
+
+
+manGameOverCheckInput2:
+
+    call cpct_scanKeyboard_asm
+
+    ld hl, #Key_P
+    call cpct_isKeyPressed_asm
+
+    jr nz, pGameOverPulsada
+
+    ret
+
+pGameOverPulsada:
+
+    ld a, #1
+    ld (boolGameOverLoop), a
+
+ret
+
