@@ -54,6 +54,7 @@ manGameInit::
 
    call manEntityInit ;; Iniciamos todos los valores del array a 0
    call sysRenderInit 
+   call sysAIInit
    call sysGeneratorInit
    call sysGeneratorInitGame
    call setManIr

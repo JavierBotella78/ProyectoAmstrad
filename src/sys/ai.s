@@ -17,7 +17,7 @@ aiCounter::
 ;;    -
 ;; Descripcion:
 ;;    -
-sysAIInit:
+sysAIInit::
 
     ld a, #1
     ld (aiCounter), a
