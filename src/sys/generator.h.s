@@ -104,6 +104,11 @@ SpeedUp2=40
 .globl _spr_francesc
 .globl _spr_javier
 .globl _spr_insert
+.globl _spr_credit0
+
+.globl _spr_continue
+
+
 
 
 .globl initStars

@@ -305,6 +305,22 @@ initMenuJavier:
    .dw #0, #0                    ;; Colision, Physics
    .dw #_spr_insert, #0xc000   ;; Sprite, prevPos
 
+    initCredit0: 
+   .db #ETypeRenderable          ;; Type  
+   .db #0, #0, #0, #0            ;; x, y, vx, vy
+   .db #23, #12                 ;; width, height
+   .dw #0                        ;; AI
+   .dw #0, #0                    ;; Colision, Physics
+   .dw #_spr_credit0, #0xc000   ;; Sprite, prevPos
+
+    initContinue: 
+   .db #ETypeRenderable          ;; Type  
+   .db #0, #0, #0, #0            ;; x, y, vx, vy
+   .db #41, #16                ;; width, height
+   .dw #0                        ;; AI
+   .dw #0, #0                    ;; Colision, Physics
+   .dw #_spr_continue, #0xc000   ;; Sprite, prevPos
+
 
 sysGeneratorInit::
 
@@ -394,6 +410,22 @@ sysGeneratorInitGameOver::
 
    call sysGeneratorDrawBorder
 
+   ld ix, #initContinue
+   ld indX(ix), #20
+   ld indY(ix), #55
+   call sysRenderDrawOnce
+
+   ld ix, #initInsertCoin
+   ld indX(ix), #17
+   ld indY(ix), #100
+   call sysRenderDrawOnce
+
+    ld ix, #initCredit0
+   ld indX(ix), #28
+   ld indY(ix), #123
+   call sysRenderDrawOnce
+
+
 ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -411,17 +443,17 @@ sysGeneratorInitMenu::
 
    ld ix, #initMenuCosmic
    ld indX(ix), #24
-   ld indY(ix), #30
+   ld indY(ix), #33
    call sysRenderDrawOnce
 
    ld ix, #initMenuGatlin
    ld indX(ix), #19
-   ld indY(ix), #45
+   ld indY(ix), #48
    call sysRenderDrawOnce
 
    ld ix, #initMenuHashtag
    ld indX(ix), #23
-   ld indY(ix), #15
+   ld indY(ix), #18
    call sysRenderDrawOnce
 
    ld ix, #initMenuJavier
@@ -437,6 +469,11 @@ sysGeneratorInitMenu::
    ld ix, #initInsertCoin
    ld indX(ix), #17
    ld indY(ix), #80
+   call sysRenderDrawOnce
+
+    ld ix, #initCredit0
+   ld indX(ix), #28
+   ld indY(ix), #108
    call sysRenderDrawOnce
 
 ret
