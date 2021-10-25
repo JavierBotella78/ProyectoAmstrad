@@ -4,6 +4,14 @@
 .include "../man/game.h.s"
 
 
+animationPlayer:
+    .db #5                  ;;actual=0
+    .dw #_spr_idle
+    .db #5                  ;;actual=3
+    .dw #_spr_idle2
+    .db #0
+    .dw #animationPlayer
+
 animationEnemy1:
     .db #5                  ;;actual=0
     .dw #_spr_drone

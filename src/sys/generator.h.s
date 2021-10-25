@@ -30,6 +30,8 @@ SpeedUp2=40
 .globl sysGeneratorExp3
 
 .globl _spr_idle
+.globl _spr_idle2
+
 
 .globl _spr_robo
 .globl _spr_robo2

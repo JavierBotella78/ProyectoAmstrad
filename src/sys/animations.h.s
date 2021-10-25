@@ -13,6 +13,7 @@ SpeedExp=3
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 .globl sysAnimationsUpdate
+.globl animationPlayer
 .globl animationEnemy1
 .globl animationEnemy2
 .globl animationEnemy3
