@@ -226,8 +226,8 @@ sysRenderGameOverCount::
     push af
 
     ld de, #0xc000
-    ld c, #10
-    ld b, #20
+    ld c, #39
+    ld b, #100
 
     call cpct_getScreenPtr_asm
 
