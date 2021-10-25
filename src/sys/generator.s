@@ -1,4 +1,5 @@
 .include "generator.h.s"
+.include "cpctelera.h.s"
 
 .include "../man/entity.h.s"
 .include "../man/game.h.s"
@@ -389,18 +390,9 @@ ret
 ;;
 sysGeneratorInitGameOver::
 
-   ld de, #0xc000
-   ld c, #10
-   ld b, #20
+   cpctm_clearScreen_asm 0
 
-   call cpct_getScreenPtr_asm
-
-   ex de, hl
-   ld a, #0
-   ld c, #60
-   ld b, #120
-
-   call cpct_drawSolidBox_asm
+   call sysGeneratorDrawBorder
 
 ret
 
@@ -414,6 +406,44 @@ ret
 ;;
 ;;
 sysGeneratorInitMenu::
+
+   call sysGeneratorDrawBorder
+
+   ld ix, #initMenuCosmic
+   ld indX(ix), #24
+   ld indY(ix), #30
+   call sysRenderDrawOnce
+
+   ld ix, #initMenuGatlin
+   ld indX(ix), #19
+   ld indY(ix), #45
+   call sysRenderDrawOnce
+
+   ld ix, #initMenuHashtag
+   ld indX(ix), #23
+   ld indY(ix), #15
+   call sysRenderDrawOnce
+
+   ld ix, #initMenuJavier
+   ld indX(ix), #9
+   ld indY(ix), #165
+   call sysRenderDrawOnce
+
+   ld ix, #initMenuFrancesc
+   ld indX(ix), #10
+   ld indY(ix), #177
+   call sysRenderDrawOnce
+
+   ld ix, #initInsertCoin
+   ld indX(ix), #17
+   ld indY(ix), #80
+   call sysRenderDrawOnce
+
+ret
+
+
+
+sysGeneratorDrawBorder:
 
    ld ix, #initMenuBorderVertical
    ld indX(ix), #0
@@ -457,36 +487,6 @@ sysGeneratorInitMenu::
    ld hl, #_spr_marcotop_1
    ld indSprite1(ix), h
    ld indSprite2(ix), l
-   call sysRenderDrawOnce
-
-   ld ix, #initMenuCosmic
-   ld indX(ix), #24
-   ld indY(ix), #30
-   call sysRenderDrawOnce
-
-   ld ix, #initMenuGatlin
-   ld indX(ix), #19
-   ld indY(ix), #45
-   call sysRenderDrawOnce
-
-   ld ix, #initMenuHashtag
-   ld indX(ix), #23
-   ld indY(ix), #15
-   call sysRenderDrawOnce
-
-   ld ix, #initMenuJavier
-   ld indX(ix), #9
-   ld indY(ix), #165
-   call sysRenderDrawOnce
-
-   ld ix, #initMenuFrancesc
-   ld indX(ix), #10
-   ld indY(ix), #177
-   call sysRenderDrawOnce
-
-   ld ix, #initInsertCoin
-   ld indX(ix), #17
-   ld indY(ix), #80
    call sysRenderDrawOnce
 
 ret

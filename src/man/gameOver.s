@@ -54,7 +54,6 @@ manGameOverInit::
     call sysRenderGameOverCount
     call sysPreRenderUpdate
 
-
 ret
 
 
