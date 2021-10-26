@@ -1,6 +1,8 @@
 
 .include "colisions.h.s"
 .include "generator.h.s"
+.include "prerender.h.s"
+
 .include "../man/entity.h.s"
 .include "../man/game.h.s"
 .include "render.h.s"
@@ -107,8 +109,13 @@ ret
 
 sysColisionsStar:
 
+    call sysPreRenderUpdateOne
+
     ld b, #63
     ld indX(ix), b
+
+    call sysPreRenderUpdateOne
+    call sysRenderBorrado
 
 ret
 

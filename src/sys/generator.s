@@ -420,6 +420,7 @@ sysGeneratorInitGame::
    ld b, #5
    call sysGeneratorStar
    
+   
 
    ld ix, #initFloor1
    ld a, #0
