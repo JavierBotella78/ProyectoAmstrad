@@ -33,6 +33,7 @@ playerY:
 sysInputUpdateOne:
 
     call sysInputChangeRenderable
+    call sysInputChangeAnimation
 
     ld indVy(ix), #0
 
@@ -70,6 +71,14 @@ wPulsada:
     ld a, #ConstDelayMovement
     ld (delayMovement), a
 
+    ld a, (#playerY)
+    or a
+    
+    jp z, seguirComprobando
+
+    dec a
+    ld (playerY), a
+
     jp seguirComprobando
 
 sPulsada:
@@ -77,6 +86,15 @@ sPulsada:
     ld indVy(ix), #inputSpeed
     ld a, #ConstDelayMovement
     ld (delayMovement), a
+
+    ld a, (#playerY)
+    ld b, #2
+    cp b
+    
+    jp z, seguirComprobando
+
+    inc a
+    ld (playerY), a
 
     jp seguirComprobando
 
@@ -115,6 +133,8 @@ sysInputChangeRenderable:
 ret
 
 sysInputChangeAnimation:
+
+;; Comprobar que sea 0 1 o 2 y cambiar la animacion
 
 ret
 
