@@ -34,6 +34,7 @@ SpeedUp2=40
 .globl sysGeneratorExp1
 .globl sysGeneratorExp2
 .globl sysGeneratorExp3
+.globl sysGeneratorStar
 
 .globl _spr_idle
 .globl _spr_idle2
@@ -118,6 +119,7 @@ SpeedUp2=40
 .globl _spr_continue
 .globl _spr_gameover
 .globl _spr_space
+.globl _spr_star
 
 
 

@@ -56,6 +56,20 @@ initPlayer:
    .db #0                                                                                 ;; AICounter
    .db #4, #16                                                          ;; delWitdh, delHeight
 
+initStar: 
+   .db #ETypeRenderable | #ETypeMovable   ;; Type
+   .db #63, #5, #-1, #0                                                                   ;; x, y, vx, vy
+   .db #2, #1                                                                             ;; width, height
+   .dw #0                                                                                 ;; AI
+   .dw #0, #sysColisionsStar                                                              ;; Colision, Physics
+   .dw #_spr_star, #0xc000                                                                ;; Sprite, prevPos
+   .db #0, #RenderTypeStatic                                                              ;; score, subtype
+   .dw #0                                                                                 ;; Anim
+   .db #0, #0                                                                             ;; AnimCounter, AnimActual
+   .dw #0                                                                                 ;; actualPos
+   .db #0                                                                                 ;; AICounter
+   .db #2, #1                                                                             ;; delWitdh, delHeight
+
 initEnemy1: 
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated  ;; Type
    .db #63, #EFila1, #0, #0                                                               ;; x, y, vx, vy
@@ -236,7 +250,7 @@ initFloor2:
    .dw #animationFloor11                  ;; Anim
    .db #5, #0                             ;; AnimCounter, AnimActual
 
-initStars:: 
+initStars:
    .db #ETypeRenderable       ;; Type  
    .db #60, #144, #0, #0      ;; x, y, vx, vy
    .db #20, #56               ;; width, height
@@ -296,7 +310,7 @@ initMenuFrancesc:
 initMenuJavier: 
    .db #ETypeRenderable          ;; Type  
    .db #0, #0, #0, #0            ;; x, y, vx, vy
-   .db #63, #8                  ;; width, height
+   .db #61, #8                  ;; width, height
    .dw #0                        ;; AI
    .dw #0, #0                    ;; Colision, Physics
    .dw #_spr_javier, #0xc000   ;; Sprite, prevPos
@@ -369,6 +383,16 @@ sysGeneratorInit::
 
 ret
 
+sysGeneratorStar::
+
+   ld ix, #initStar
+   ld indY(ix), a
+   ld indX(ix), b
+   ld hl, #initStar 
+   call sysGeneratorTmpl
+
+ret
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sysGeneratorInitGame
 ;; Requisitos:
@@ -379,6 +403,23 @@ ret
 ;;
 ;;
 sysGeneratorInitGame::
+
+   ld a, #5
+   ld b, #40
+   call sysGeneratorStar
+
+   ld a, #10
+   ld b, #15
+   call sysGeneratorStar
+
+   ld a, #15
+   ld b, #60
+   call sysGeneratorStar
+
+   ld a, #20
+   ld b, #5
+   call sysGeneratorStar
+   
 
    ld ix, #initFloor1
    ld a, #0
@@ -532,7 +573,7 @@ sysGeneratorInitMenu::
 
 
    ld ix, #initMenuJavier
-   ld indX(ix), #9
+   ld indX(ix), #10
    ld indY(ix), #165
    call sysRenderDrawOnce
 

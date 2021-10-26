@@ -18,6 +18,9 @@ delayMovement:
 changeRenderable::
     .db #0
 
+playerY:
+    .db #0
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      UpdateOne
 ;; Requisitos:
@@ -108,6 +111,10 @@ sysInputChangeRenderable:
     ld indType(ix), a
 
     call sysRenderBorrado
+
+ret
+
+sysInputChangeAnimation:
 
 ret
 

@@ -18,3 +18,4 @@
 .globl sysColisionsBullet
 .globl sysColisionPUScore
 .globl sysColisionPUBullet
+.globl sysColisionsStar

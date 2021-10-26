@@ -3,6 +3,7 @@
 .include "generator.h.s"
 .include "../man/entity.h.s"
 .include "../man/game.h.s"
+.include "render.h.s"
 
 
 
@@ -101,6 +102,13 @@ ret
 sysColisionsDestroy:
 
     call manEntityMarkToDestroy
+
+ret
+
+sysColisionsStar:
+
+    ld b, #63
+    ld indX(ix), b
 
 ret
 
