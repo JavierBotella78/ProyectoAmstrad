@@ -370,7 +370,7 @@ sysGeneratorInit::
 ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; sysGeneratorInit
+;; sysGeneratorInitGame
 ;; Requisitos:
 ;;    -
 ;; Return:
@@ -457,7 +457,7 @@ sysGeneratorInitGameOver::
 ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; sysGeneratorInitMenu2
+;; sysGeneratorInitGameOver2
 ;; Requisitos:
 ;;    -
 ;; Return:
@@ -512,15 +512,7 @@ sysGeneratorInitMenu::
 
 
 
-   ld de, #0xC000
-   ld c, #8
-   ld b, #90
-
-   call cpct_getScreenPtr_asm
-
-   ld iy, #initHighscore
-
-   call cpct_drawStringM0_asm
+   ;; DIBUJAR HIGHSCORE
 
    call manGameGetScore
    call sysRenderScore

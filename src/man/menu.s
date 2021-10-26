@@ -48,12 +48,9 @@ manMenuInit::
     ld a, #0
     ld (#boolMenuBlink), a
 
-    call manEntityInit ;; Iniciamos todos los valores del array a 0
     call sysRenderInit 
     call sysRenderInitMenu
     call sysGeneratorInitMenu
-    call setManIr
-    call sysPreRenderUpdate
 
 ret
 

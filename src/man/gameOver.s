@@ -70,7 +70,6 @@ manGameOverInit::
 
     ld a, (#gameOverCount)
     call sysRenderGameOverCount
-    call sysPreRenderUpdate
 
 ret
 
@@ -173,33 +172,9 @@ manGameOverCheckInput:
 
     jr nz, cGameOverPulsada
 
-    ld hl, #Key_Space
-    call cpct_isKeyPressed_asm
-
-    jr nz, spaceGameOverPulsada
-
     ret
 
 cGameOverPulsada:
-
-    ld a, (#gameOverCoin)
-    or a
-    
-    ret nz
-
-    inc a
-    ld (#gameOverCoin), a
-
-    call sysGeneratorInitMenuCredit
-
-    ret
-
-spaceGameOverPulsada:
-
-    ld a, (#gameOverCoin)
-    or a
-    
-    ret z
 
     ld a, (#gameOverCoin)
     dec a

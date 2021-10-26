@@ -57,7 +57,6 @@ manGameInit::
    call sysAIInit
    call sysGeneratorInit
    call sysGeneratorInitGame
-   call setManIr
    call sysPreRenderUpdate
 
    ld hl, #0

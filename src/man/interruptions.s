@@ -31,7 +31,6 @@ setManIr::
    call cpct_waitVSYNC_asm
    halt
    halt
-   halt
    call cpct_waitVSYNC_asm
    di
    

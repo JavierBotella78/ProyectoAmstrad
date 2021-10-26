@@ -58,7 +58,7 @@ manEntityInit::
    ld hl, #EntityArrayBytesSize
    ld (#freeSpace), hl
 
-   ret
+ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; manEntityCreate
