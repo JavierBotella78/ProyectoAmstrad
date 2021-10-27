@@ -10,3 +10,4 @@ MaxY=140
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 .globl sysPhysicsUpdate
+.globl sysPhysicsUpdateOne

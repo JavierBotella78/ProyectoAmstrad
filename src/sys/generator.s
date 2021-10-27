@@ -43,17 +43,17 @@ initHighscore:
    .asciz "HIGHSCORE - "
 
 initPlayer: 
-   .db #ETypeRenderable | #ETypeInput | #ETypeMovable | #ETypeColider | #ETypeAnimated    ;; Type
+   .db #ETypeRenderable | #ETypeInput | #ETypeColider | #ETypeAnimated    ;; Type
    .db #10, #EFila1, #0, #0                                             ;; x, y, vx, vy
    .db #4, #16                                                          ;; width, height
    .dw #0                                                               ;; AI
    .dw #sysColisionsPlayer, #sysColisionsPlayer                         ;; Colision, Physics
    .dw #_spr_idle, #0xc000                                              ;; Sprite, prevPos
-   .db #0, #0                                                           ;; score, subtype
-   .dw #animationPlayer                                                               ;; Anim
+   .db #0, #RenderTypeStatic                                            ;; score, subtype
+   .dw #animationPlayer                                                 ;; Anim
    .db #5, #0                                                           ;; AnimCounter, AnimActual
-   .dw #0                                                                                 ;; actualPos
-   .db #0                                                                                 ;; AICounter
+   .dw #0                                                               ;; actualPos
+   .db #0                                                               ;; AICounter
    .db #4, #16                                                          ;; delWitdh, delHeight
 
 initStar: 

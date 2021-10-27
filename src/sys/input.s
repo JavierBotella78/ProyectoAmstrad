@@ -1,6 +1,8 @@
 .include "cpctelera.h.s"
 .include "input.h.s"
 .include "render.h.s"
+.include "prerender.h.s"
+.include "physics.h.s"
 
 .include "../man/game.h.s"
 .include "../man/entity.h.s"
@@ -22,6 +24,22 @@ playerY:
     .db #0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysInputInit
+;; Requisitos:
+;;    ix -> Posicion inicial de memoria de la entidad
+;; Return:
+;;    -
+;; Descripcion:
+;;    Modifica la vx y/o vy de las entidades si se ha pulsado un boton 
+;;
+sysInputInit::
+
+    ld a, #0
+    ld (playerY), a
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      UpdateOne
 ;; Requisitos:
 ;;    ix -> Posicion inicial de memoria de la entidad
@@ -33,7 +51,7 @@ playerY:
 sysInputUpdateOne:
 
     call sysInputChangeRenderable
-    call sysInputChangeAnimation
+   
 
     ld indVy(ix), #0
 
@@ -66,7 +84,7 @@ comprobarTeclas:
     jp seguirComprobando
 
 wPulsada:
-
+    
     ld indVy(ix), #-inputSpeed
     ld a, #ConstDelayMovement
     ld (delayMovement), a
@@ -78,6 +96,11 @@ wPulsada:
 
     dec a
     ld (playerY), a
+
+    call sysPhysicsUpdateOne
+    call sysPreRenderUpdateOne
+    call sysRenderBorrado
+    call sysInputChangeAnimation
 
     jp seguirComprobando
 
@@ -95,6 +118,11 @@ sPulsada:
 
     inc a
     ld (playerY), a
+
+    call sysPhysicsUpdateOne
+    call sysPreRenderUpdateOne
+    call sysRenderBorrado
+    call sysInputChangeAnimation
 
     jp seguirComprobando
 
@@ -134,7 +162,22 @@ ret
 
 sysInputChangeAnimation:
 
-;; Comprobar que sea 0 1 o 2 y cambiar la animacion
+    ld a, (#playerY)
+    or a
+    
+    jp z, changeAnimationFly
+
+    ;; Animation Floor
+    ld a, #13
+    ld indDelHeight(ix), a
+
+
+    ret 
+    ;; Animation Fly
+changeAnimationFly:
+
+    ld a, #16
+    ld indDelHeight(ix), a
 
 ret
 

@@ -10,7 +10,7 @@
 ;;    -
 ;; Descripcion:
 ;;    Modifica las entidades que son movibles segun su vx y vy
-sysPhysicsUpdateOne:
+sysPhysicsUpdateOne::
 
         ;; Mover x
 

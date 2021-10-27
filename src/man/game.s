@@ -58,6 +58,7 @@ manGameInit::
    call sysGeneratorInit
    call sysGeneratorInitGame
    call sysPreRenderUpdate
+   call sysInputInit
 
    ld hl, #0
    call sysRenderScore
