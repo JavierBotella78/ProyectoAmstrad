@@ -3,6 +3,7 @@
 .include "entity.h.s"
 .include "interruptions.h.s"
 
+
 .include "../sys/render.h.s"
 .include "../sys/prerender.h.s"
 .include "../sys/colisions.h.s"
@@ -13,6 +14,8 @@
 .include "../sys/animations.h.s"
 
 .globl cpct_waitVSYNC_asm
+
+   .globl cpct_akp_musicPlay_asm
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  VARIABLES
@@ -107,6 +110,8 @@ loopRender:
    cp #1
    jr nz, loopRender
    call sysRenderUpdate
+
+   call cpct_akp_musicPlay_asm
 
    call waitHalt
 
