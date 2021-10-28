@@ -11,7 +11,6 @@
 .globl cpct_drawSolidBox_asm
 .globl cpct_drawSprite_asm
 .globl cpct_getScreenPtr_asm
-.globl cpct_drawSpriteMaskedAlignedTable_asm
 .globl _myDrawCharM0
 .globl cpct_setDrawCharM0_asm
 
@@ -137,20 +136,6 @@ sysRenderUpdateOne::
     ld l, indActualPos2(ix)
     ex de, hl
 
-    ;;ld b, indSprite1(ix)
-    ;;ld c, indSprite2(ix)
-;;
-    
-;;
-    ;;ld hl, #0	
-;;
-    ;;ld a, indWidth(ix)
-    ;;ld__ixl_a
-;;
-    ;;ld a, indHeight(ix)
-    ;;ld__ixh_a
-;;
-    ;;call cpct_drawSpriteMaskedAlignedTable_asm
     
     ld h, indSprite1(ix)
     ld l, indSprite2(ix)
@@ -214,7 +199,9 @@ sysRenderScore::
     ld hl, (#ptrScreenScore1)
 
     push bc
+    push ix
     call _myDrawCharM0
+    pop ix
     pop bc
 
 
@@ -225,7 +212,9 @@ sysRenderScore::
     ld e, a
     ld hl, (#ptrScreenScore2)
     push bc
+    push ix
     call _myDrawCharM0
+    pop ix
     pop bc
 
 
@@ -240,7 +229,9 @@ sysRenderScore::
     ld e, a
     ld hl, (#ptrScreenScore3)
     push bc
+    push ix
     call _myDrawCharM0
+    pop ix
     pop bc
 
 
@@ -251,7 +242,9 @@ sysRenderScore::
     ld e, a
     ld hl, (#ptrScreenScore4)
     push bc
+    push ix
     call _myDrawCharM0
+    pop ix
     pop bc
 
 ret

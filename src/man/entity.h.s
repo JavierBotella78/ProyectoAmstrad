@@ -77,3 +77,4 @@ RenderTypeStatic=0x08
 .globl manEntityForAll
 .globl manEntityForAllMatching
 .globl getFreeSpace
+.globl getNextFreeEntity

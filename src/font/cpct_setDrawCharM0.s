@@ -91,7 +91,7 @@
 ;; Global symbols
 ;;
 .globl dc_mode0_ct   ;; Colour conversion table (16 values to convert PEN values [0-15] to their screen pixel format)
-.globl my_dc_2pxtableM0 ;; Screen Pixel Format conversion table (4 pairs of pixels BG-BG, BG-FG, FG-BG, FG-FG)
+.globl dc_2pxtableM0 ;; Screen Pixel Format conversion table (4 pairs of pixels BG-BG, BG-FG, FG-BG, FG-FG)
 
 .module cpct_strings
 
@@ -124,7 +124,7 @@ _mySetDrawCharM0_asm::
 
    ;; Produce the 4 combinations for pairs of pixels (BG-BG, BG-FG, FG-BG, FG-FG)
    ;; and store them in the placeholders inside <cpct_drawCharM0>
-   ld    hl, #my_dc_2pxtableM0;; [3] HL Points to the 4-byte colour conversion table inside cpct_drawCharM0
+   ld    hl, #dc_2pxtableM0;; [3] HL Points to the 4-byte colour conversion table inside cpct_drawCharM0
 
    ;; Calculate and store BG-BG mode 0 pixel pair
    ld     a, b             ;; [1] A = Right Pixel is BG coloured

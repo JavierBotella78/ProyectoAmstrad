@@ -106,17 +106,19 @@ mainLoop:
    call sysColisionsUpdate
    call sysPhysicsUpdate
 
+   
+
 loopRender:
    ld a, (#numI)
    cp #1
    jr nz, loopRender
    call sysRenderUpdate
 
+   call sysPreRenderUpdate
+
    call cpct_akp_musicPlay_asm
 
    call waitHalt
-
-   call sysPreRenderUpdate
 
    ld a, (#playerLife)
    or a
