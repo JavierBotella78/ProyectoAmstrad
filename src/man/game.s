@@ -15,7 +15,8 @@
 
 .globl cpct_waitVSYNC_asm
 
-   .globl cpct_akp_musicPlay_asm
+.globl cpct_akp_musicPlay_asm
+.globl cpct_akp_stop_asm
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  VARIABLES
@@ -120,6 +121,8 @@ loopRender:
    ld a, (#playerLife)
    or a
    jp nz, mainLoop
+
+call cpct_akp_stop_asm
    
 ret
 
