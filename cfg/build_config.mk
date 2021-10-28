@@ -49,7 +49,8 @@
 # Name of the project (without spaces, as it will be used as filename)
 #   and Z80 memory location where code will start in the generated binary
 PROJNAME   := cosmicGatlin
-Z80CODELOC := 0x4000
+Z80CODELOC := 0x036C
+
 
 ##
 ## Folders 

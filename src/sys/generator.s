@@ -6,6 +6,7 @@
 
 .include "ai.h.s"
 .include "colisions.h.s"
+.include "prerender.h.s"
 .include "render.h.s"
 .include "animations.h.s"
 
@@ -13,7 +14,6 @@
 .globl cpct_getRandom_mxor_u8_asm
 .globl cpct_getScreenPtr_asm
 .globl cpct_drawSolidBox_asm
-.globl cpct_drawStringM0_asm
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  VARIABLES
@@ -52,7 +52,7 @@ initPlayer:
    .db #0, #RenderTypeStatic                                            ;; score, subtype
    .dw #animationPlayer                                                 ;; Anim
    .db #5, #0                                                           ;; AnimCounter, AnimActual
-   .dw #0                                                               ;; actualPos
+   .dw #0xc000                                                          ;; actualPos
    .db #0                                                               ;; AICounter
    .db #4, #16                                                          ;; delWitdh, delHeight
 
@@ -66,7 +66,7 @@ initStar:
    .db #0, #RenderTypeStatic                                                              ;; score, subtype
    .dw #0                                                                                 ;; Anim
    .db #0, #0                                                                             ;; AnimCounter, AnimActual
-   .dw #0                                                                                 ;; actualPos
+   .dw #0xc000                                                          ;; actualPos
    .db #0                                                                                 ;; AICounter
    .db #2, #1                                                                             ;; delWitdh, delHeight
 
@@ -80,7 +80,7 @@ initEnemy1:
    .db #0x10, #AITypeEnemy | #RenderTypeStatic                                             ;; score, subtype
    .dw #animationEnemy1                                                                   ;; Anim
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
-   .dw #0                                                                                 ;; actualPos
+   .dw #0xc000                                                          ;; actualPos
    .db #0                                                                                 ;; AICounter
    .db #6, #16                                                                            ;; delWitdh, delHeight
 
@@ -94,7 +94,7 @@ initEnemy2:
    .db #0x25, #AITypeEnemy | #RenderTypeStatic                                             ;; score, subtype
    .dw #animationEnemy2                                                                   ;; Anim
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
-   .dw #0                                                                                 ;; actualPos
+   .dw #0xc000                                                          ;; actualPos
    .db #0                                                                                 ;; AICounter
    .db #5, #13                                                                            ;; delWitdh, delHeight
 
@@ -108,7 +108,7 @@ initEnemy3:
    .db #0x40, #AITypeEnemy | #RenderTypeStatic                                              ;; score, subtype
    .dw #animationEnemy3                                                                   ;; Anim
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
-   .dw #0                                                                                 ;; actualPos
+   .dw #0xc000                                                          ;; actualPos
    .db #0                                                                                 ;; AICounter
    .db #6, #13                                                                            ;; delWitdh, delHeight
 
@@ -122,7 +122,7 @@ initExp1:
    .db #0, #RenderTypeStatic                                            ;; score, subtype
    .dw #animationExplosion1                                             ;; Anim
    .db #2, #0                                                           ;; AnimCounter, AnimActual
-   .dw #0                                                               ;; actualPos
+   .dw #0xc000                                                          ;; actualPos
    .db #10                                                              ;; AICounter
    .db #4, #16                                                          ;; delWitdh, delHeight
 
@@ -136,7 +136,7 @@ initExp2:
    .db #0, #RenderTypeStatic                                            ;; score, subtype
    .dw #animationExplosion2                                              ;; Anim
    .db #2, #0                                                           ;; AnimCounter, AnimActual
-   .dw #0                                                               ;; actualPos
+   .dw #0xc000                                                          ;; actualPos
    .db #10                                                              ;; AICounter
    .db #4, #13                                                          ;; delWitdh, delHeight
 
@@ -150,7 +150,7 @@ initExp3:
    .db #0, #RenderTypeStatic                                            ;; score, subtype
    .dw #animationExplosion3                                              ;; Anim
    .db #2, #0                                                           ;; AnimCounter, AnimActual
-   .dw #0                                                               ;; actualPos
+   .dw #0xc000                                                          ;; actualPos
    .db #10                                                              ;; AICounter
    .db #4, #13                                                          ;; delWitdh, delHeight
 
@@ -164,7 +164,7 @@ initBullet:
    .db #0, #AITypeBullet | #RenderTypeStatic                            ;; score, subtype
    .dw #0                                                               ;; Anim
    .db #0, #0                                                           ;; AnimCounter, AnimActual
-   .dw #0                                                               ;; actualPos
+   .dw #0xc000                                                          ;; actualPos
    .db #0                                                               ;; AICounter
    .db #6, #4                                                           ;; delWitdh, delHeight
 
@@ -178,7 +178,7 @@ initPUBullet:
    .db #0, #AITypePU | #RenderTypeStatic                                      ;; score, subtype
    .dw #animationPUBullet                                                     ;; Anim
    .db #5, #0                                                                 ;; AnimCounter, AnimActual
-   .dw #0                                                                     ;; actualPos
+   .dw #0xc000                                                          ;; actualPos
    .db #0                                                                     ;; AICounter
    .db #5, #12                                                                ;; delWitdh, delHeight
 
@@ -192,7 +192,7 @@ initPUScore:
    .db #0, #AITypePU | #RenderTypeStatic                                      ;; score, subtype
    .dw #animationPUScore                                                      ;; Anim
    .db #5, #0                                                                 ;; AnimCounter, AnimActual
-   .dw #0                                                                     ;; actualPos
+   .dw #0xc000                                                          ;; actualPos
    .db #0                                                                     ;; AICounter
    .db #5, #12                                                                ;; delWitdh, delHeight
 
@@ -773,7 +773,7 @@ sysGeneratorUpdate::
    ld b, #AddNumberEnemies
    add a, b
 
-;; CAMBIO DE VELOCIDAD
+;; CAMBIO DE VELOCIDAD----------------------------------------------------------------------------------
 
    ld b, #SpeedUp2
    cp b
@@ -847,8 +847,11 @@ ret
 ;;
 sysGeneratorTmpl:
 
-   push hl
+   push ix
+   call getNextFreeEntity
 
+
+   push hl
    call manEntityCreate  
 
    ex de, hl
@@ -856,6 +859,10 @@ sysGeneratorTmpl:
    ld bc, #EntitySize
 
    call cpct_memcpy_asm
+
+   call sysPreRenderUpdateOne
+
+   pop ix
 
 ret
 

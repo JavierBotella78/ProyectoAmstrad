@@ -294,3 +294,16 @@ getFreeSpace::
    ld hl, (#freeSpace)
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; getFreeSpace
+;; Requisitos:
+;;    -
+;; Return:
+;;    hl -> Espacio libre en memoria
+;; Descripcion:
+;;    Devuelve el espacio libre en memoria del array de entidades
+;;
+getNextFreeEntity::
+   ld ix, (#mNextFreeEntity)
+ret
