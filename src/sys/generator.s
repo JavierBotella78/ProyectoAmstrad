@@ -13,7 +13,6 @@
 .globl cpct_getRandom_mxor_u8_asm
 .globl cpct_getScreenPtr_asm
 .globl cpct_drawSolidBox_asm
-.globl cpct_drawStringM0_asm
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  VARIABLES

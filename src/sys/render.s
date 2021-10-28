@@ -12,7 +12,7 @@
 .globl cpct_drawSprite_asm
 .globl cpct_getScreenPtr_asm
 .globl cpct_drawSpriteMaskedAlignedTable_asm
-.globl cpct_drawCharM0_asm
+.globl _myDrawCharM0
 .globl cpct_setDrawCharM0_asm
 
 ptrScreenScore1:
@@ -214,7 +214,7 @@ sysRenderScore::
     ld hl, (#ptrScreenScore1)
 
     push bc
-    call cpct_drawCharM0_asm
+    call _myDrawCharM0
     pop bc
 
 
@@ -225,7 +225,7 @@ sysRenderScore::
     ld e, a
     ld hl, (#ptrScreenScore2)
     push bc
-    call cpct_drawCharM0_asm
+    call _myDrawCharM0
     pop bc
 
 
@@ -240,7 +240,7 @@ sysRenderScore::
     ld e, a
     ld hl, (#ptrScreenScore3)
     push bc
-    call cpct_drawCharM0_asm
+    call _myDrawCharM0
     pop bc
 
 
@@ -251,7 +251,7 @@ sysRenderScore::
     ld e, a
     ld hl, (#ptrScreenScore4)
     push bc
-    call cpct_drawCharM0_asm
+    call _myDrawCharM0
     pop bc
 
 ret
@@ -272,7 +272,7 @@ sysRenderGameOverCount::
     add #48
 
     ld e, a
-    call cpct_drawCharM0_asm
+    call _myDrawCharM0
 
 ret
 
