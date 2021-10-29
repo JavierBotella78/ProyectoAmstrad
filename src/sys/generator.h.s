@@ -35,6 +35,9 @@ SpeedUp2=40
 .globl sysGeneratorExp2
 .globl sysGeneratorExp3
 .globl sysGeneratorStar
+.globl sysGeneratorSetEnemy1
+.globl sysGeneratorSetEnemy2
+.globl sysGeneratorSetEnemy3
 
 .globl _spr_idle
 .globl _spr_idle2
@@ -145,3 +148,6 @@ SpeedUp2=40
 
 
 .globl initStars
+.globl initEnemy4
+.globl initEnemy5
+.globl initEnemy6

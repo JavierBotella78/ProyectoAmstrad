@@ -2,6 +2,7 @@
 
 
 .include "../sys/ai.h.s"
+.include "../sys/generator.h.s"
 
 
 
@@ -142,7 +143,14 @@ ret
 ;;
 manDifficultyLvl2:
 
-  
+    ld hl, #initEnemy4
+    call sysGeneratorSetEnemy1
+
+    ld hl, #initEnemy5
+    call sysGeneratorSetEnemy2
+
+    ld hl, #initEnemy6
+    call sysGeneratorSetEnemy3
 
 ret
 

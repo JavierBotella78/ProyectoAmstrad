@@ -48,9 +48,6 @@ enemy2:
 enemy3:
    .dw #initEnemy3
 
-enemy4:
-   .dw #initEnemy4
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  TEMPLATES
@@ -1075,4 +1072,44 @@ sysGeneratorBulletCreator::
 
    call sysGeneratorTmpl
 
+ret
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;    sysGeneratorSetEnemy1
+;; Parameters:
+;;    ix -> Player entity
+;; Return:
+;;    -
+;; Description:
+;;    Creates a bullet-type entity at the player's vertical position
+;;
+sysGeneratorSetEnemy1:
+   ld (enemy1), hl
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;    sysGeneratorSetEnemy2
+;; Parameters:
+;;    ix -> Player entity
+;; Return:
+;;    -
+;; Description:
+;;    Creates a bullet-type entity at the player's vertical position
+;;
+sysGeneratorSetEnemy2:
+   ld (enemy2), hl
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;    sysGeneratorSetEnemy3
+;; Parameters:
+;;    ix -> Player entity
+;; Return:
+;;    -
+;; Description:
+;;    Creates a bullet-type entity at the player's vertical position
+;;
+sysGeneratorSetEnemy3:
+   ld (enemy3), hl
 ret
