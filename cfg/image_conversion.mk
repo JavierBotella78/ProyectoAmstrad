@@ -131,10 +131,26 @@ $(eval $(call IMG2SP, CONVERT , assets/menu-parts/gameover.png , 110, 21, spr_ga
 
 $(eval $(call IMG2SP, CONVERT , assets/star.png , 4, 1, spr_star))
 
+$(eval $(call IMG2SP, CONVERT , assets/new-enemies/newdrone1.png , 12, 16, spr_newdrone1))
+$(eval $(call IMG2SP, CONVERT , assets/new-enemies/newdrone2.png , 12, 16, spr_newdrone2))
+$(eval $(call IMG2SP, CONVERT , assets/new-enemies/newdrone3.png , 12, 16, spr_newdrone3))
+
+$(eval $(call IMG2SP, CONVERT , assets/new-enemies/knight1.png , 12, 16, spr_knight1))
+$(eval $(call IMG2SP, CONVERT , assets/new-enemies/knight2.png , 12, 16, spr_knight2))
+$(eval $(call IMG2SP, CONVERT , assets/new-enemies/knight3.png , 12, 16, spr_knight3))
+
+$(eval $(call IMG2SP, CONVERT , assets/new-enemies/newrobot1.png , 12, 16, spr_newrobot1))
+$(eval $(call IMG2SP, CONVERT , assets/new-enemies/newrobot2.png , 12, 16, spr_newrobot2))
+$(eval $(call IMG2SP, CONVERT , assets/new-enemies/newrobot3.png , 12, 16, spr_newrobot3))
+
 $(eval $(call IMG2SP, SET_FOLDER, assets/screens/  ))
 $(eval $(call IMG2SP, SET_IMG_FORMAT,screen))
 $(eval $(call IMG2SP, SET_OUTPUT, bin ))  #{ bin, c }
 $(eval $(call IMG2SP, CONVERT , assets/controlspowers.png , 160, 200, controlspowers))	
+
+
+
+
 
 ##
 ## OLD MACROS (For compatibility)
