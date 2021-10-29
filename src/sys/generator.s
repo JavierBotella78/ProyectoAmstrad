@@ -3,6 +3,7 @@
 
 .include "../man/entity.h.s"
 .include "../man/game.h.s"
+.include "assets/screens/controlspowers.h.s"
 
 .include "ai.h.s"
 .include "colisions.h.s"
@@ -14,6 +15,8 @@
 .globl cpct_getRandom_mxor_u8_asm
 .globl cpct_getScreenPtr_asm
 .globl cpct_drawSolidBox_asm
+.globl cpct_zx7b_decrunch_s_asm
+.globl _controlspowers
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  VARIABLES
@@ -680,11 +683,14 @@ ret
 ;; Descripcion:
 ;;
 ;;
+
 sysGeneratorInitMenu2::
 
    cpctm_clearScreen_asm 0
-
-   call sysGeneratorDrawBorder
+   ld    hl, #_controlspowers_end
+   ld    de, #0xFFFF
+   call cpct_zx7b_decrunch_s_asm
+   ;call sysGeneratorDrawBorder
 
 ret
 

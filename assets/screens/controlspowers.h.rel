@@ -1,0 +1,11 @@
+XL2
+H 1 areas 8 global symbols
+S .__.H$L. Def0000
+S _controlspowers_end Ref0000
+S _controlspowers_size Def4000
+S .__.ABS. Def0000
+S _controlspowers_size_z Def05E5
+S .__.CPU. Def0000
+S _controlspowers Ref0000
+S .__.$$$. Def2710
+A _CODE size 0 flags 0 addr 0

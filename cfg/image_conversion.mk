@@ -120,6 +120,12 @@ $(eval $(call IMG2SP, CONVERT , assets/menu-parts/continue.png , 82, 16, spr_con
 $(eval $(call IMG2SP, CONVERT , assets/menu-parts/gameover.png , 110, 21, spr_gameover))
 
 $(eval $(call IMG2SP, CONVERT , assets/star.png , 4, 1, spr_star))
+
+$(eval $(call IMG2SP, SET_FOLDER, assets/screens/  ))
+$(eval $(call IMG2SP, SET_IMG_FORMAT,screen))
+$(eval $(call IMG2SP, SET_OUTPUT, bin ))  #{ bin, c }
+$(eval $(call IMG2SP, CONVERT , assets/controlspowers.png , 160, 200, controlspowers))	
+
 ##
 ## OLD MACROS (For compatibility)
 ##

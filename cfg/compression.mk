@@ -38,6 +38,9 @@
 #$(eval $(call ADD2PACK,mygraphics,gfx/background.bin))
 #$(eval $(call PACKZX7B,mygraphics,src/))
 
+$(eval $(call ADD2PACK,controlspowers,assets/screens/controlspowers.bin))
+$(eval $(call PACKZX7B,controlspowers,assets/screens/))
+
 
 
 
