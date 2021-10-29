@@ -3,6 +3,8 @@
 .include "render.h.s"
 .include "prerender.h.s"
 .include "physics.h.s"
+.include "animations.h.s"
+.include "generator.h.s"
 
 .include "../man/game.h.s"
 .include "../man/entity.h.s"
@@ -14,13 +16,22 @@
 ;;  VARIABLES
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-delayMovement:
-    .db #ConstDelayMovement    ;; frames
-
 changeRenderable::
     .db #0
 
 playerY:
+    .db #0
+
+playerYTimer:
+    .db #0
+
+playerYSpeed:
+    .db #0
+
+playerOnAir:
+    .db #0
+
+boolPlayerOnAir:
     .db #0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -37,6 +48,18 @@ sysInputInit::
     ld a, #0
     ld (playerY), a
 
+    ld a, #0
+    ld (playerYTimer), a
+
+    ld a, #0
+    ld (playerYSpeed), a
+
+    ld a, #0
+    ld (playerOnAir), a
+
+    ld a, #0
+    ld (boolPlayerOnAir), a
+
 ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -51,25 +74,35 @@ ret
 sysInputUpdateOne:
 
     call sysInputChangeRenderable
+    call sysInputChangeAnimation
+    
    
 
     ld indVy(ix), #0
 
-    call cpct_scanKeyboard_asm
-
-
-    ld a, (#delayMovement)
+    ld a, (#playerYTimer)
     or a
 
     jr z, comprobarTeclas
 
     dec a
-    ld (delayMovement), a
+    ld (playerYTimer), a
+
+    jp nz, noChangeOnAir
     
-    jr nz, seguirComprobando
+    ld a, #0
+    ld (playerOnAir), a
+
+    ld a, #1
+    ld (boolPlayerOnAir), a
+
+noChangeOnAir:
+    call sysInputUpdatePlayerSpeed
+
+    ret
 
 comprobarTeclas:
-
+    call cpct_scanKeyboard_asm
 
     ld hl, #Key_A
     call cpct_isKeyPressed_asm
@@ -85,10 +118,6 @@ comprobarTeclas:
 
 wPulsada:
     
-    ld indVy(ix), #-inputSpeed
-    ld a, #ConstDelayMovement
-    ld (delayMovement), a
-
     ld a, (#playerY)
     or a
     
@@ -97,18 +126,11 @@ wPulsada:
     dec a
     ld (playerY), a
 
-    call sysPhysicsUpdateOne
-    call sysPreRenderUpdateOne
-    call sysRenderBorrado
-    call sysInputChangeAnimation
+    call sysInputGoUp
 
     jp seguirComprobando
 
 sPulsada:
-
-    ld indVy(ix), #inputSpeed
-    ld a, #ConstDelayMovement
-    ld (delayMovement), a
 
     ld a, (#playerY)
     ld b, #2
@@ -119,10 +141,7 @@ sPulsada:
     inc a
     ld (playerY), a
 
-    call sysPhysicsUpdateOne
-    call sysPreRenderUpdateOne
-    call sysRenderBorrado
-    call sysInputChangeAnimation
+    call sysInputGoDown
 
     jp seguirComprobando
 
@@ -141,6 +160,108 @@ seguirComprobando:
 
 ret
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysInputGoDown
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;    - 
+;;
+sysInputGoDown:
+    ld a, #inputSpeed
+    ld (playerYSpeed), a
+
+    call sysInputResetTimer
+
+ret
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysInputGoUp
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;    - 
+;;
+sysInputGoUp:
+
+    ld a, #-inputSpeed
+    ld (playerYSpeed), a
+
+    call sysInputResetTimer
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysInputUpdatePlayerSpeed
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;    - 
+;;
+sysInputUpdatePlayerSpeed:
+
+    ld a, (#playerYSpeed)
+    ld indVy(ix), a
+
+    call sysInputPostCheck
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysInputResetTimer
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;    - 
+;;
+sysInputResetTimer:
+
+    ld a, #4
+    ld (playerYTimer), a
+
+    ld a, #1        
+    ld (playerOnAir), a
+
+    ld a, #1        
+    ld (boolPlayerOnAir), a
+
+    call sysInputChangeAnimation
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysInputPostCheck
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;    - 
+;;
+sysInputPostCheck:
+
+    call sysPhysicsUpdateOne
+    call sysPreRenderUpdateOne
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysInputChangeRenderable
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;    - 
+;;
 sysInputChangeRenderable:
 
     ld a, (#changeRenderable)
@@ -160,24 +281,101 @@ sysInputChangeRenderable:
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysInputChangeAnimation
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;    - 
+;;
 sysInputChangeAnimation:
+
+    ld a, (#boolPlayerOnAir)
+    or a
+    
+    ret z
+
+    dec a
+    ld (boolPlayerOnAir), a
+    
+    ld a, #1
+    ld indAnimCounter(ix), a
+    ld a, #0
+    ld indAnimActual(ix), a
+
+    ld a, (#playerOnAir)
+    or a
+    
+    jp nz, changeAnimationFly
 
     ld a, (#playerY)
     or a
     
-    jp z, changeAnimationFly
+    jp z, changeAnimationUpperFloor
 
     ;; Animation Floor
     ld a, #13
     ld indDelHeight(ix), a
 
+    ld hl, #animationPlayer
+    ld indAnim1(ix), h
+    ld indAnim2(ix), l
+    ld hl, #_spr_idle
+    ld indSprite1(ix), h
+    ld indSprite2(ix), l
+
 
     ret 
+
+    ;; Animation Upper Floor
+changeAnimationUpperFloor:
+
+    ld a, #16
+    ld indDelHeight(ix), a
+
+    ;; Animacion jetpack
+    ld hl, #animationPlayerJetpack
+    ld indAnim1(ix), h
+    ld indAnim2(ix), l
+    ld hl, #_spr_jetpack1
+    ld indSprite1(ix), h
+    ld indSprite2(ix), l
+
+ret
     ;; Animation Fly
 changeAnimationFly:
 
     ld a, #16
     ld indDelHeight(ix), a
+
+    ld b, #inputSpeed
+    ld a, (#playerYSpeed)
+    cp b
+
+    jp z, animacionBajada
+    ;;Animacion subida
+
+    ld hl, #animationPlayerUp
+    ld indAnim1(ix), h
+    ld indAnim2(ix), l
+    ld hl, #_spr_up1
+    ld indSprite1(ix), h
+    ld indSprite2(ix), l
+
+    ret
+
+animacionBajada:
+    ;;Animacion bajada
+
+    ld hl, #animationPlayerDown
+    ld indAnim1(ix), h
+    ld indAnim2(ix), l
+    ld hl, #_spr_down1
+    ld indSprite2(ix), h
+    ld indSprite2(ix), l
 
 ret
 

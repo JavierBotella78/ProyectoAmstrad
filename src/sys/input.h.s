@@ -2,8 +2,7 @@
 ;;  CONSTANTS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-ConstDelayMovement=3
-inputSpeed=40
+inputSpeed=10
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  PUBLIC FUNCTIONS
