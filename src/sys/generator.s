@@ -3,6 +3,7 @@
 
 .include "../man/entity.h.s"
 .include "../man/game.h.s"
+.include "../man/difficulty.h.s"
 .include "assets/screens/controlspowers.h.s"
 
 .include "ai.h.s"
@@ -36,6 +37,16 @@ numberEnemies:
 
 speedUp:
    .db #SpeedUp1
+
+
+enemy1:
+   .dw #initEnemy1
+
+enemy2:
+   .dw #initEnemy2
+
+enemy3:
+   .dw #initEnemy3
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -388,6 +399,15 @@ sysGeneratorInit::
 
    ld a, #SpeedUp1
    ld (speedUp), a
+
+   ld hl, #initEnemy1
+   ld (enemy1), hl
+
+   ld hl, #initEnemy2
+   ld (enemy2), hl
+
+   ld hl, #initEnemy3
+   ld (enemy3), hl
 
 ret
 
@@ -777,7 +797,7 @@ sysGeneratorUpdate::
    ld a, (#numberEnemies)
    or a
    
-   jp nz, skipResetEnemies           ;; Si no quedan enemigos por generar, aumenta la velocidad y los enemigos.
+   jp nz, skipResetEnemies           ;; Si no quedan enemigos por generar, aumenta la dificultad
 
    ld a, (#maxNumberEnemies)
    ld c, #MaxNumberEnemies
@@ -788,40 +808,12 @@ sysGeneratorUpdate::
    ld b, #AddNumberEnemies
    add a, b
 
-;; CAMBIO DE VELOCIDAD----------------------------------------------------------------------------------
-
-   ld b, #SpeedUp2
-   cp b
-
-   jp z, changeSpeed2
-
-   ld b, #SpeedUp1
-   cp b
-
-   jp z, changeSpeed1
-
-   jp skipToTimer
-
-changeSpeed2:
-
+;; CAMBIO DE DIFICULTAD----------------------------------------------------------------------------------
    push af
 
-   ld a, (#speedAILeft)
-   dec a
-   ld (speedAILeft), a
-   
-   pop af
+   call manDifficultyIncrease
+   call manDifficultyUpdate
 
-   jp skipToTimer
-
-changeSpeed1:
-
-   push af
-
-   ld a, (#aiCounter)
-   dec a
-   ld (aiCounter), a
-   
    pop af
    
 skipToTimer:
@@ -901,7 +893,7 @@ sysGeneratorEnemy:
 
    jp nz, generateEnemy2
 
-   ld hl, #initEnemy1
+   ld hl, (#enemy1)
 
    jp sysGeneratorEnemyCall
 
@@ -911,13 +903,13 @@ generateEnemy2:
    
    jp nz, generateEnemy3
 
-   ld hl, #initEnemy2
+   ld hl, (#enemy2)
 
    jp sysGeneratorEnemyCall
 
 generateEnemy3:
 
-   ld hl, #initEnemy3
+   ld hl, (#enemy3)
 
 sysGeneratorEnemyCall:
    call sysGeneratorTmpl

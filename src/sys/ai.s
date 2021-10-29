@@ -3,10 +3,10 @@
 .include "generator.h.s"
 
 
-speedAILeft::
+speedAILeft:
     .db #-1
 
-aiCounter::
+aiCounter:
     .db #1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -128,10 +128,42 @@ ret
 ;;    -
 ;; Descripcion:
 ;;    Inversion de control para la modificacion de posicion de todas las entidades.
+;;
 sysAIUpdate::
 
     ld hl, #sysAIUpdateOne
     ld a, #ETypeAI
     call manEntityForAll
+
+ret
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysAISetAICounter
+;; Requisitos:
+;;      a -> New ai counter
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+sysAISetAICounter::
+
+    ld (aiCounter), a
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysAISetAICounter
+;; Requisitos:
+;;      a -> New ai counter
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+sysAISetSpeedAILeft::
+
+    ld (speedAILeft), a
 
 ret
