@@ -3,3 +3,9 @@ cosmicGatlin.sna
 cosmicGatlin.cdt
 obj/
 src/sprites/
+assets/screens/controlspowers.rst
+src/banger.h.s
+src/banger.s
+src/banger2.h.s
+src/banger2.s
+
