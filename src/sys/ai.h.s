@@ -34,6 +34,8 @@
 .globl sysAIEnemy1
 .globl sysAIEnemy2
 .globl sysAIEnemy3
+.globl sysAIEnemy5_1
+.globl sysAIEnemy5_2
 .globl sysAIExplosion
 
 .globl sysAISetAICounter

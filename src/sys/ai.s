@@ -21,6 +21,7 @@
 .include "ai.h.s"
 .include "../man/entity.h.s"
 .include "generator.h.s"
+.include "animations.h.s"
 
 
 speedAILeft:
@@ -150,6 +151,95 @@ ret
 sysAIEnemy3::
 
     call sysAIEnemy
+
+ret
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAIEnemy5_1
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+sysAIEnemy5_1::
+
+    ld a, #-1
+    ld indVx(ix), a
+
+    ld hl, #sysAIEnemy5_2
+    ld de, #animationEnemy5_2
+    ld bc, #_spr_knight1
+    ld a, #10
+    call sysAIEnemy5Counter
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAIEnemy5_2
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+sysAIEnemy5_2::
+
+    ld a, #0
+    ld indVx(ix), a
+
+    
+    ld hl, #sysAIEnemy5_1
+    ld de, #animationEnemy5_1
+    ld bc, #_spr_knight2
+    ld a, #20
+    call sysAIEnemy5Counter
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAIEnemy5Counter
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+sysAIEnemy5Counter:
+
+    push af
+    ld a, indAICounter(ix)
+    or a
+
+    jp z, changeEnemy5State
+
+    dec a
+    ld indAICounter(ix), a
+    pop af
+
+    ret
+
+changeEnemy5State: 
+    pop af
+    ld indAICounter(ix), a
+
+    ld indAI1(ix), h
+    ld indAI2(ix), l
+
+    ld indSprite1(ix), b
+    ld indSprite2(ix), c
+
+    ld indAnim1(ix), d
+    ld indAnim2(ix), e
+
+    ld a, indSubType(ix)
+    ld b, #AITypeInmortal
+    xor a, b
+    ld indSubType(ix), a
 
 ret
 

@@ -130,6 +130,8 @@ manDifficultyLvl0:
 
     ld a, #1
     call sysAISetAICounter
+    ld a, #-1
+    call sysAISetSpeedAILeft
 
 ret
 
@@ -147,8 +149,6 @@ manDifficultyLvl1:
 
     ld a, #0
     call sysAISetAICounter
-    ld a, #-1
-    call sysAISetSpeedAILeft
 
 ret
 
@@ -163,8 +163,6 @@ ret
 ;;      -
 ;;
 manDifficultyLvl2:
-
-
 
     ld hl, #initEnemy6
     call sysGeneratorSetEnemy3

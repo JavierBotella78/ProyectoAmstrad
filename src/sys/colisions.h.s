@@ -33,6 +33,7 @@
 .globl sysColisionsSubEnemy
 .globl sysColisionsEnemy1
 .globl sysColisionsEnemy2
+.globl sysColisionsEnemy5
 .globl sysColisionsEnemy3
 .globl sysColisionsPlayer
 .globl sysColisionsBullet

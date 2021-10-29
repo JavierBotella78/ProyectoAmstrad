@@ -90,15 +90,19 @@ animationEnemy4:
     .db #0
     .dw #animationEnemy4
 
-animationEnemy5:
-    .db #5               
-    .dw #_spr_knight1
+animationEnemy5_1:
     .db #5                  
     .dw #_spr_knight2
     .db #5                 
     .dw #_spr_knight3
     .db #0
-    .dw #animationEnemy5
+    .dw #animationEnemy5_1
+
+animationEnemy5_2:
+    .db #5               
+    .dw #_spr_knight1
+    .db #0
+    .dw #animationEnemy5_2
 
 animationEnemy6:
     .db #5               

@@ -153,6 +153,18 @@ sysColisionsEnemy2:
 
 ret
 
+sysColisionsEnemy5:
+
+    ld a, indSubType(ix)
+    ld b, #AITypeInmortal
+    and b
+
+    ret z
+
+    call sysColisionsEnemy2
+
+ret
+
 sysColisionsEnemy3:
 
     call sysGeneratorExp3

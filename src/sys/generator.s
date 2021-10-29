@@ -155,20 +155,20 @@ initEnemy4:
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0xc000                                                          ;; actualPos
    .db #0                                                                                 ;; AICounter
-   .db #6, #13 
+   .db #6, #16 
 
 initEnemy5: 
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated  ;; Type
    .db #63, #EFila2, #0, #0                                                               ;; x, y, vx, vy
    .db #6, #16                                                                            ;; width, height
-   .dw #sysAIEnemy2                                                                      ;; AI
-   .dw #sysColisionsEnemy2, #sysColisionsSubEnemy                                           ;; Colision, Physics
-   .dw #_spr_knight1, #0xc000                                                                ;; Sprite, prevPos
-   .db #0x40, #AITypeEnemy | #RenderTypeStatic                                              ;; score, subtype
-   .dw #animationEnemy5                                                                   ;; Anim
+   .dw #sysAIEnemy5_1                                                                       ;; AI
+   .dw #sysColisionsEnemy5, #sysColisionsSubEnemy                                         ;; Colision, Physics
+   .dw #_spr_knight2, #0xc000                                                             ;; Sprite, prevPos
+   .db #0x40, #AITypeEnemy | #RenderTypeStatic                                            ;; score, subtype
+   .dw #animationEnemy5_1                                                                 ;; Anim
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
-   .dw #0xc000                                                          ;; actualPos
-   .db #0                                                                                 ;; AICounter
+   .dw #0xc000                                                                            ;; actualPos
+   .db #20                                                                                 ;; AICounter
    .db #6, #13 
 
 initEnemy6: 

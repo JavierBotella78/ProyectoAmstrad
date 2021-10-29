@@ -82,8 +82,10 @@ ETypeDefault=0x7f
 AITypeEnemy=0x01
 AITypePU=0x02
 AITypeBullet=0x04
+AITypeInmortal=0x08
 
 RenderTypeStatic=0x08
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  PUBLIC FUNCTIONS
