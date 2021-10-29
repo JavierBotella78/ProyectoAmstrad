@@ -18,6 +18,20 @@ difficultyArray:
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; manDifficultyInit
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+manDifficultyInit::
+    ld a, #0
+    ld (difficultyLvl), a
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; manDifficultyUpdate
 ;; Requisitos:
 ;;      -
@@ -71,7 +85,11 @@ manDifficultyIncrease::
     inc a
     inc a
 
-    ;; Comprobar que no se salga de rango
+    ld b, #MAXDIFFICULTYLVL
+    cp b
+    
+    ret nc
+
     ld (#difficultyLvl), a
 
 ret

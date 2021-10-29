@@ -2,6 +2,7 @@
 .include "game.h.s" 
 .include "entity.h.s"
 .include "interruptions.h.s"
+.include "difficulty.h.s"
 
 
 .include "../sys/render.h.s"
@@ -66,6 +67,7 @@ manGameInit::
    call sysGeneratorInitGame
    call sysPreRenderUpdate
    call sysInputInit
+   call manDifficultyInit
 
    ld hl, #0
    call sysRenderScore
@@ -119,6 +121,7 @@ loopRender:
 
    call sysPreRenderUpdate
 
+   call cpct_akp_musicPlay_asm
    call cpct_akp_musicPlay_asm
 
    call waitHalt
