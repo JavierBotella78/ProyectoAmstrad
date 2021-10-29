@@ -305,6 +305,8 @@ sysInputChangeAnimation:
     ld indAnimCounter(ix), a
     ld a, #0
     ld indAnimActual(ix), a
+    ld a, #0
+    ld indSubType(ix), a
 
     ld a, (#playerOnAir)
     or a
@@ -326,6 +328,8 @@ sysInputChangeAnimation:
     ld hl, #_spr_idle
     ld indSprite1(ix), h
     ld indSprite2(ix), l
+    ld a, #RenderTypeStatic
+    ld indSubType(ix), a
 
 
     ret 
@@ -343,6 +347,8 @@ changeAnimationUpperFloor:
     ld hl, #_spr_jetpack1
     ld indSprite1(ix), h
     ld indSprite2(ix), l
+    ld a, #RenderTypeStatic
+    ld indSubType(ix), a
 
 ret
     ;; Animation Fly

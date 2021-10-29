@@ -42,9 +42,6 @@ speedUp:
 ;;  TEMPLATES
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-initHighscore:
-   .asciz "HIGHSCORE - "
-
 initPlayer: 
    .db #ETypeRenderable | #ETypeInput | #ETypeColider | #ETypeAnimated    ;; Type
    .db #10, #EFila1, #0, #0                                             ;; x, y, vx, vy
@@ -302,6 +299,14 @@ initMenuHashtag:
    .dw #0, #0                    ;; Colision, Physics
    .dw #_spr_hashtag, #0xc000   ;; Sprite, prevPos
 
+initMenuHighscore: 
+   .db #ETypeRenderable          ;; Type  
+   .db #0, #0, #0, #0            ;; x, y, vx, vy
+   .db #41, #8                  ;; width, height
+   .dw #0                        ;; AI
+   .dw #0, #0                    ;; Colision, Physics
+   .dw #_spr_highscore, #0xc000   ;; Sprite, prevPos
+
 initMenuFrancesc: 
    .db #ETypeRenderable          ;; Type  
    .db #0, #0, #0, #0            ;; x, y, vx, vy
@@ -538,6 +543,8 @@ sysGeneratorInitMenu::
 
    call sysGeneratorDrawBorder
 
+
+
    ld ix, #initMenuHashtag
    ld indX(ix), #23
    ld indY(ix), #18
@@ -557,9 +564,12 @@ sysGeneratorInitMenu::
 
 
 
-   ;; DIBUJAR HIGHSCORE
-
-   call manGameGetScore
+   ld ix, #initMenuHighscore
+   ld indX(ix), #10
+   ld indY(ix), #90
+   call sysRenderDrawOnce
+   
+   call manGameGetHighscore
    call sysRenderScore
 
 
@@ -690,7 +700,6 @@ sysGeneratorInitMenu2::
    ld    hl, #_controlspowers_end
    ld    de, #0xFFFF
    call cpct_zx7b_decrunch_s_asm
-   ;call sysGeneratorDrawBorder
 
 ret
 

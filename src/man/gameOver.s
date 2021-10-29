@@ -38,7 +38,7 @@ blinkGameOverTimer:
     .dw #0
 
 boolGameOverBlink:
-    .db #0
+    .db #1
 
 
 manGameOverInit::
@@ -63,7 +63,7 @@ manGameOverInit::
     ld hl, #4000
     ld (#blinkGameOverTimer), hl
 
-    ld a, #0
+    ld a, #1
     ld (#boolGameOverBlink), a
 
     call sysGeneratorInitGameOver

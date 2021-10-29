@@ -34,6 +34,9 @@ playerInvSubTime:
 bulletLife:
    .db #0
 
+highscore:
+   .dw #0
+
 score:
    .dw #0
 
@@ -124,7 +127,8 @@ loopRender:
    or a
    jp nz, mainLoop
 
-call cpct_akp_stop_asm
+   call cpct_akp_stop_asm
+   call manGameChangeHighscore
    
 ret
 
@@ -332,8 +336,11 @@ skipDobleScore:
    daa
    ld h, a
 
-   ;;TODO: QUE NO PASE DE 9999 A 0
+   jp nc, skipMaxScore
 
+   ld hl, #0x9999
+
+skipMaxScore:
    ld (score), hl
 
    call sysRenderScore
@@ -356,7 +363,11 @@ manGameSubScore:
    daa
    ld h, a
 
-   ;;TODO: QUE NO PASE DE 0 A 9999
+   jp nc, skipMinScore
+
+   ld hl, #0
+
+skipMinScore:
 
    ld (score), hl
 
@@ -385,10 +396,35 @@ manGamePUColision:
 ret
 
 
-
-manGameGetScore::
+manGameChangeHighscore:
 
    ld hl, (#score)
+   ld bc, (#highscore)
+
+   ld a, h
+   cp b
+   ret c
+
+   jp z, sameUpperScore
+
+   ld (#highscore), hl
+
+   ret
+
+sameUpperScore:
+   ld a, l
+   cp c
+
+   ret c
+
+   ld (#highscore), hl
+
+ret
+
+
+manGameGetHighscore::
+
+   ld hl, (#highscore)
 
 ret
 

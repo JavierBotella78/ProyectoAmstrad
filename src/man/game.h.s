@@ -24,7 +24,7 @@ PUTime=40
 
 .globl manGameScore
 .globl manGameSubScore
-.globl manGameGetScore
+.globl manGameGetHighscore
 
 
 

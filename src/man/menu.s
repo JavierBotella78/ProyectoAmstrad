@@ -29,7 +29,7 @@ blinkMenuTimer:
     .dw #0
 
 boolMenuBlink:
-    .db #0
+    .db #1
 
 manMenuInit::
 
@@ -45,7 +45,7 @@ manMenuInit::
     ld hl, #4000
     ld (#blinkMenuTimer), hl
 
-    ld a, #0
+    ld a, #1
     ld (#boolMenuBlink), a
 
     call sysRenderInit 
