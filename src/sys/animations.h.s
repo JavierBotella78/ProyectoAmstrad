@@ -20,6 +20,9 @@ SpeedExp=3
 .globl animationEnemy1
 .globl animationEnemy2
 .globl animationEnemy3
+.globl animationEnemy4
+.globl animationEnemy5
+.globl animationEnemy6
 .globl animationPUScore
 .globl animationPUBullet
 .globl animationFloor1

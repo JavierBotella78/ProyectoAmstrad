@@ -57,6 +57,18 @@ SpeedUp2=40
 .globl _spr_drone
 .globl _spr_drone2
 
+.globl _spr_newdrone1
+.globl _spr_newdrone2
+.globl _spr_newdrone3
+
+.globl _spr_knight1
+.globl _spr_knight2
+.globl _spr_knight3
+
+.globl _spr_newrobot1
+.globl _spr_newrobot2
+.globl _spr_newrobot3
+
 .globl _spr_doblescore1
 .globl _spr_doblescore2
 

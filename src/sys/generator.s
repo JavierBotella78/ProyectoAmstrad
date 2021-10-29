@@ -48,6 +48,9 @@ enemy2:
 enemy3:
    .dw #initEnemy3
 
+enemy4:
+   .dw #initEnemy4
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  TEMPLATES
@@ -122,6 +125,48 @@ initEnemy3:
    .dw #0xc000                                                          ;; actualPos
    .db #0                                                                                 ;; AICounter
    .db #6, #13                                                                            ;; delWitdh, delHeight
+
+initEnemy4: 
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated  ;; Type
+   .db #63, #EFila1, #0, #0                                                               ;; x, y, vx, vy
+   .db #6, #16                                                                            ;; width, height
+   .dw #sysAIEnemy1                                                                      ;; AI
+   .dw #sysColisionsEnemy1, #sysColisionsSubEnemy                                           ;; Colision, Physics
+   .dw #_spr_newdrone1, #0xc000                                                                ;; Sprite, prevPos
+   .db #0x40, #AITypeEnemy | #RenderTypeStatic                                              ;; score, subtype
+   .dw #animationEnemy4                                                                   ;; Anim
+   .db #5, #0                                                                             ;; AnimCounter, AnimActual
+   .dw #0xc000                                                          ;; actualPos
+   .db #0                                                                                 ;; AICounter
+   .db #6, #13 
+
+initEnemy5: 
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated  ;; Type
+   .db #63, #EFila2, #0, #0                                                               ;; x, y, vx, vy
+   .db #6, #16                                                                            ;; width, height
+   .dw #sysAIEnemy2                                                                      ;; AI
+   .dw #sysColisionsEnemy2, #sysColisionsSubEnemy                                           ;; Colision, Physics
+   .dw #_spr_knight1, #0xc000                                                                ;; Sprite, prevPos
+   .db #0x40, #AITypeEnemy | #RenderTypeStatic                                              ;; score, subtype
+   .dw #animationEnemy5                                                                   ;; Anim
+   .db #5, #0                                                                             ;; AnimCounter, AnimActual
+   .dw #0xc000                                                          ;; actualPos
+   .db #0                                                                                 ;; AICounter
+   .db #6, #13 
+
+initEnemy6: 
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated  ;; Type
+   .db #63, #EFila3, #0, #0                                                               ;; x, y, vx, vy
+   .db #6, #16                                                                            ;; width, height
+   .dw #sysAIEnemy3                                                                      ;; AI
+   .dw #sysColisionsEnemy3, #sysColisionsSubEnemy                                           ;; Colision, Physics
+   .dw #_spr_knight1, #0xc000                                                                ;; Sprite, prevPos
+   .db #0x40, #AITypeEnemy | #RenderTypeStatic                                              ;; score, subtype
+   .dw #animationEnemy6                                                                   ;; Anim
+   .db #5, #0                                                                             ;; AnimCounter, AnimActual
+   .dw #0xc000                                                          ;; actualPos
+   .db #0                                                                                 ;; AICounter
+   .db #6, #13 
 
 initExp1: 
    .db #ETypeRenderable | #ETypeAI | #ETypeAnimated                     ;; Type 

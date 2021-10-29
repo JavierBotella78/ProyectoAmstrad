@@ -1,6 +1,7 @@
 .include "difficulty.h.s"
 
-.include "../sys/AI.h.s"
+
+.include "../sys/ai.h.s"
 
 
 
@@ -141,7 +142,7 @@ ret
 ;;
 manDifficultyLvl2:
 
-    ;; Cambiar algún enemigo
+  
 
 ret
 

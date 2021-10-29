@@ -60,6 +60,36 @@ animationEnemy3:
     .db #0
     .dw #animationEnemy3
 
+animationEnemy4:
+    .db #5               
+    .dw #_spr_newdrone1
+    .db #5                  
+    .dw #_spr_newdrone2
+    .db #5                 
+    .dw #_spr_newdrone3
+    .db #0
+    .dw #animationEnemy4
+
+animationEnemy5:
+    .db #5               
+    .dw #_spr_knight1
+    .db #5                  
+    .dw #_spr_knight2
+    .db #5                 
+    .dw #_spr_knight3
+    .db #0
+    .dw #animationEnemy5
+
+animationEnemy6:
+    .db #5               
+    .dw #_spr_newrobot1
+    .db #5                  
+    .dw #_spr_newrobot2
+    .db #5                 
+    .dw #_spr_newrobot3
+    .db #0
+    .dw #animationEnemy6
+
 animationPUScore:
     .db #5                 
     .dw #_spr_doblescore1
