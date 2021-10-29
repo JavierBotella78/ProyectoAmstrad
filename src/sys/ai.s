@@ -30,13 +30,14 @@ aiCounter:
     .db #1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;      init
+;;      sysAIInit
 ;; Requisitos:
-;;    ix -> Posicion inicial de memoria de la entidad
+;;      -
 ;; Return:
-;;    -
+;;      -
 ;; Descripcion:
-;;    -
+;;      -
+;;
 sysAIInit::
 
     ld a, #1
@@ -48,13 +49,14 @@ sysAIInit::
 ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;      UpdateOne
+;;      sysAIUpdateOne
 ;; Requisitos:
-;;    ix -> Posicion inicial de memoria de la entidad
+;;      -
 ;; Return:
-;;    -
+;;      -
 ;; Descripcion:
-;;    Modifica las entidades que son movibles segun su vx y vy
+;;      -
+;;
 sysAIUpdateOne:
 
     ld h, indAI1(ix)
@@ -69,6 +71,16 @@ sysAIUpdateOne:
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAIMoveLeft
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysAIMoveLeft::
 
     ld a, (#speedAILeft)
@@ -76,6 +88,16 @@ sysAIMoveLeft::
     
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAIEnemy
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysAIEnemy:
 
     ld indVx(ix), #0
@@ -83,24 +105,64 @@ sysAIEnemy:
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAIEnemy1
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysAIEnemy1::
 
     call sysAIEnemy
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAIEnemy2
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysAIEnemy2::
 
     call sysAIEnemy
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAIEnemy3
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysAIEnemy3::
 
     call sysAIEnemy
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAICheckCounter
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysAICheckCounter:
 
     ld a, indAICounter(ix)
@@ -121,7 +183,15 @@ resetAICounter:
 
 ret
 
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAIExplosion
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysAIExplosion::
 
     ld a, indAICounter(ix)
