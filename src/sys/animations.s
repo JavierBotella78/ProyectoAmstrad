@@ -12,6 +12,28 @@ animationPlayer:
     .db #0
     .dw #animationPlayer
 
+animationPlayerJetpack:
+    .db #5                  ;;actual=0
+    .dw #_spr_jetpack1
+    .db #5                  ;;actual=3
+    .dw #_spr_jetpack2
+    .db #5                  ;;actual=6
+    .dw #_spr_jetpack3
+    .db #0
+    .dw #animationPlayer
+
+animationPlayerDown:
+    .db #10                  ;;actual=3
+    .dw #_spr_down2
+    .db #0
+    .dw #animationPlayerDown
+
+animationPlayerUp:
+    .db #10                  ;;actual=3
+    .dw #_spr_up2
+    .db #0
+    .dw #animationPlayerUp
+
 animationEnemy1:
     .db #5                  ;;actual=0
     .dw #_spr_drone

@@ -38,7 +38,14 @@ SpeedUp2=40
 
 .globl _spr_idle
 .globl _spr_idle2
+.globl _spr_down1
+.globl _spr_down2
+.globl _spr_up1
+.globl _spr_up2
 
+.globl _spr_jetpack1
+.globl _spr_jetpack2
+.globl _spr_jetpack3
 
 .globl _spr_robo
 .globl _spr_robo2

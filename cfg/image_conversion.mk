@@ -39,8 +39,17 @@ $(eval $(call IMG2SP, SET_FOLDER, src/sprites/  ))
 $(eval $(call IMG2SP, SET_OUTPUT, c ))  #{ bin, c }
 $(eval $(call IMG2SP, SET_PALETTE_FW, $(PALETTE)))
 $(eval $(call IMG2SP, CONVERT_PALETTE , $(PALETTE), main_palette ))
+
 $(eval $(call IMG2SP, CONVERT , assets/sheriff2.png , 8, 16, spr_idle))
 $(eval $(call IMG2SP, CONVERT , assets/sheriff.png , 8, 16, spr_idle2))
+$(eval $(call IMG2SP, CONVERT , assets/move/sheriff-downCPC.png , 8, 16, spr_down1))
+$(eval $(call IMG2SP, CONVERT , assets/move/sheriff-downCPC2.png , 8, 16, spr_down2))
+$(eval $(call IMG2SP, CONVERT , assets/move/sheriff-upCPC.png , 8, 16, spr_up1))
+$(eval $(call IMG2SP, CONVERT , assets/move/sheriff-upCPC2.png , 8, 16, spr_up2))
+
+$(eval $(call IMG2SP, CONVERT , assets/move/sheriffjetpack1.png , 8, 16, spr_jetpack1))
+$(eval $(call IMG2SP, CONVERT , assets/move/sheriffjetpack2.png , 8, 16, spr_jetpack2))
+$(eval $(call IMG2SP, CONVERT , assets/move/sheriffjetpack3.png , 8, 16, spr_jetpack3))
 
 $(eval $(call IMG2SP, CONVERT , assets/enemies/drone1.png , 12, 16, spr_drone))
 $(eval $(call IMG2SP, CONVERT , assets/enemies/drone2.png , 12, 16, spr_drone2))

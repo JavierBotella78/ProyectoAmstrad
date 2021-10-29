@@ -48,9 +48,9 @@ initPlayer:
    .db #4, #16                                                          ;; width, height
    .dw #0                                                               ;; AI
    .dw #sysColisionsPlayer, #sysColisionsPlayer                         ;; Colision, Physics
-   .dw #_spr_idle, #0xc000                                              ;; Sprite, prevPos
-   .db #0, #RenderTypeStatic                                            ;; score, subtype
-   .dw #animationPlayer                                                 ;; Anim
+   .dw #_spr_jetpack1, #0xc000                                              ;; Sprite, prevPos
+   .db #0, #0                                         ;; score, subtype
+   .dw #animationPlayerJetpack                                                 ;; Anim
    .db #5, #0                                                           ;; AnimCounter, AnimActual
    .dw #0xc000                                                          ;; actualPos
    .db #0                                                               ;; AICounter
