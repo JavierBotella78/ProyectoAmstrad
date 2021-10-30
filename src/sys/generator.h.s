@@ -22,8 +22,8 @@
 ;;  CONSTANTS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-InitMaxTime2Generate=20
-MinTime2Generate=15
+InitMaxTime2Generate=25
+MinTime2Generate=20
 
 InitMinNumberEnemies=10
 MaxNumberEnemies=50

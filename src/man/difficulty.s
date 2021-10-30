@@ -238,4 +238,10 @@ manDifficultyLvl6:
     ld a, #-2
     call sysAISetSpeedAILeft
 
+    ld hl, #initEnemy6
+    call sysGeneratorSetEnemy3
+
+    ld a, #0
+    call sysGeneratorSetBoolEnemy3Full
+
 ret

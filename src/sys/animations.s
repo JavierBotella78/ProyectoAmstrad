@@ -99,7 +99,7 @@ animationEnemy5_1:
     .dw #animationEnemy5_1
 
 animationEnemy5_2:
-    .db #5               
+    .db #50               
     .dw #_spr_knight1
     .db #0
     .dw #animationEnemy5_2

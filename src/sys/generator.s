@@ -74,6 +74,9 @@ boolEnemy3full:
 enemy3full:
    .db #0
 
+lastGenerated:
+   .db #0
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  TEMPLATES
@@ -198,7 +201,7 @@ initEnemy5:
    .dw #sysAIEnemy5_1                                                                       ;; AI
    .dw #sysColisionsEnemy5, #sysColisionsSubEnemy                                         ;; Colision, Physics
    .dw #_spr_knight2, #0xc000                                                             ;; Sprite, prevPos
-   .db #0x40, #AITypeEnemy | #RenderTypeStatic                                            ;; score, subtype
+   .db #0x40, #AITypeEnemy | #RenderTypeStatic | #AITypeInmortal                                          ;; score, subtype
    .dw #animationEnemy5_1                                                                 ;; Anim
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0xc000                                                                            ;; actualPos
@@ -1078,6 +1081,37 @@ sysGeneratorEnemy:
    ld a, #3
    and l
 
+   or a
+   
+   jp z, escero
+   dec a
+
+escero:
+   push af
+
+   ld a, (#lastGenerated)
+   ld b, a
+   
+   pop af
+
+   cp b
+
+   jp nz, noGenerarOtro
+
+   inc a
+   and #3
+
+   ld b, #3
+
+   cp b
+   
+   jp nz, noGenerarOtro
+
+   ld a, #0
+
+
+noGenerarOtro:
+   ld (#lastGenerated), a
    or a
 
    jp nz, generateEnemy2

@@ -84,7 +84,7 @@ AITypePU=0x02
 AITypeBullet=0x04
 AITypeInmortal=0x08
 
-RenderTypeStatic=0x08
+RenderTypeStatic=0x10
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
