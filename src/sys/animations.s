@@ -104,7 +104,7 @@ animationEnemy5_2:
     .db #0
     .dw #animationEnemy5_2
 
-animationEnemy6:
+animationEnemy6_1:
     .db #5               
     .dw #_spr_newrobot1
     .db #5                  
@@ -112,7 +112,13 @@ animationEnemy6:
     .db #5                 
     .dw #_spr_newrobot3
     .db #0
-    .dw #animationEnemy6
+    .dw #animationEnemy6_1
+
+animationEnemy6_2:
+    .db #50  
+    .dw #_spr_newrobot4
+    .db #0
+    .dw #animationEnemy6_2
 
 animationPUScore:
     .db #5                 

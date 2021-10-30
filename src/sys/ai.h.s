@@ -36,6 +36,8 @@
 .globl sysAIEnemy3
 .globl sysAIEnemy5_1
 .globl sysAIEnemy5_2
+.globl sysAIEnemy6_1
+.globl sysAIEnemy6_2
 .globl sysAIEnemy7_1
 .globl sysAIEnemy7_2
 .globl sysAIEnemyBullet

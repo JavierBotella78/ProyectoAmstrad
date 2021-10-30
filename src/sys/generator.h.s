@@ -95,6 +95,7 @@ SpeedUp2=40
 .globl _spr_newrobot1
 .globl _spr_newrobot2
 .globl _spr_newrobot3
+.globl _spr_newrobot4
 
 .globl _spr_ffirehs
 

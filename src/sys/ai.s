@@ -245,6 +245,94 @@ ret
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAIEnemy6_1
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+sysAIEnemy6_1::
+
+    ld a, #-1
+    ld indVx(ix), a
+
+    ld hl, #sysAIEnemy6_2
+    ld de, #animationEnemy6_2
+    ld bc, #_spr_newrobot4
+    ld a, #10
+    call sysAIEnemy6Counter
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAIEnemy6_2
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+sysAIEnemy6_2::
+
+    ld a, #0
+    ld indVx(ix), a
+    
+    ld hl, #sysAIEnemy6_1
+    ld de, #animationEnemy6_1
+    ld bc, #_spr_newrobot1
+    ld a, #30
+    call sysAIEnemy6Counter
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAIEnemy5Counter
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+sysAIEnemy6Counter:
+
+    push af
+    ld a, indAICounter(ix)
+    or a
+
+    jp z, changeEnemy6State
+
+    dec a
+    ld indAICounter(ix), a
+    pop af
+
+    ret
+
+changeEnemy6State: 
+    pop af
+    ld indAICounter(ix), a
+
+    ld indAI1(ix), h
+    ld indAI2(ix), l
+
+    ld indSprite1(ix), b
+    ld indSprite2(ix), c
+
+    ld indAnim1(ix), d
+    ld indAnim2(ix), e
+
+    ld a, indType(ix)
+    ld b, #ETypeColisionable
+    xor a, b
+    ld indType(ix), a
+
+ret
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      sysAIEnemy7
 ;; Requisitos:
 ;;      -
