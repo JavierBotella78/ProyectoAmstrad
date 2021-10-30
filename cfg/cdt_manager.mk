@@ -161,8 +161,8 @@ $(eval $(call CDTMAN, SET_FILENAME, Game))
 ## ##  binary that will be finally loaded and executed. Loader will display  ##
 ## ##  then name "RACING YEAH" when loading after typing in RUN"             ##
 ## ##                                                                        ##
-## $(eval $(call CDTMAN, SET_FILENAME   , Racing Yeah))                      ##
-## $(eval $(call CDTMAN, GEN_MINILOADER , img/ldscreen.gif))                 ##
+$(eval $(call CDTMAN, SET_FILENAME   , Cosmic Gatlin))                      
+$(eval $(call CDTMAN, GEN_MINILOADER , loader/sombrero.png))                 
 ##                                                                           ##
 ## EXAMPLE 2:                                                                ##
 ##                                                                           ##
