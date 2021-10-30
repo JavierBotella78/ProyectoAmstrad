@@ -74,7 +74,7 @@ $(eval $(call IMG2SP, CONVERT , assets/powerup7.png , 10, 12, spr_powerup7))
 $(eval $(call IMG2SP, CONVERT , assets/powerup8.png , 10, 12, spr_powerup8))
 
 $(eval $(call IMG2SP, CONVERT , assets/rainbow.png , 12, 4, spr_rainbow))
-$(eval $(call IMG2SP, CONVERT , assets/wobniar.png , 12, 4, spr_wobniar))
+$(eval $(call IMG2SP, CONVERT , assets/rainbow2.png , 12, 4, spr_wobniar))
 
 $(eval $(call IMG2SP, CONVERT , assets/hudd.png , 40, 56, spr_hud))
 
