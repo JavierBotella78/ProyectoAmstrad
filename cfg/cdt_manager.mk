@@ -24,7 +24,7 @@
 ############################################################################
 
 ## Set the name of your main game file in the CDT here
-$(eval $(call CDTMAN, SET_FILENAME, Game))
+$(eval $(call CDTMAN, SET_FILENAME, Loader))
 
 ###############################################################################
 ##                    CASSETE FILE MANAGER HELP INDEX                        ##
@@ -162,7 +162,7 @@ $(eval $(call CDTMAN, SET_FILENAME, Game))
 ## ##  then name "RACING YEAH" when loading after typing in RUN"             ##
 ## ##                                                                        ##
 $(eval $(call CDTMAN, SET_FILENAME   , Cosmic Gatlin))                      
-$(eval $(call CDTMAN, GEN_MINILOADER , loader/sombrero.png))                 
+$(eval $(call CDTMAN, GEN_MINILOADER , assets/sombrero.png))                 
 ##                                                                           ##
 ## EXAMPLE 2:                                                                ##
 ##                                                                           ##
