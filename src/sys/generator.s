@@ -95,8 +95,8 @@ initPlayer:
 
 initStar: 
    .db #ETypeRenderable | #ETypeMovable   ;; Type
-   .db #63, #5, #-1, #0                                                                   ;; x, y, vx, vy
-   .db #2, #1                                                                             ;; width, height
+   .db #63, #5, #-2, #0                                                                   ;; x, y, vx, vy
+   .db #3, #1                                                                             ;; width, height
    .dw #0                                                                                 ;; AI
    .dw #0, #sysColisionsStar                                                              ;; Colision, Physics
    .dw #_spr_star, #0xc000                                                                ;; Sprite, prevPos
@@ -105,12 +105,12 @@ initStar:
    .db #0, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0xc000                                                          ;; actualPos
    .db #0                                                                                 ;; AICounter
-   .db #2, #1                                                                             ;; delWitdh, delHeight
+   .db #3, #1                                                                             ;; delWitdh, delHeight
 
 initStar2: 
    .db #ETypeRenderable | #ETypeMovable   ;; Type
-   .db #63, #5, #-1, #0                                                                   ;; x, y, vx, vy
-   .db #2, #1                                                                             ;; width, height
+   .db #63, #5, #-2, #0                                                                   ;; x, y, vx, vy
+   .db #3, #1                                                                             ;; width, height
    .dw #0                                                                                 ;; AI
    .dw #0, #sysColisionsStar                                                              ;; Colision, Physics
    .dw #_spr_star2, #0xc000                                                                ;; Sprite, prevPos
@@ -119,7 +119,7 @@ initStar2:
    .db #0, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0xc000                                                          ;; actualPos
    .db #0                                                                                 ;; AICounter
-   .db #2, #1                                                                             ;; delWitdh, delHeight
+   .db #3, #1                                                                             ;; delWitdh, delHeight
 
 initStar3: 
    .db #ETypeRenderable | #ETypeMovable   ;; Type
@@ -607,11 +607,11 @@ sysGeneratorInitGame::
 
    ld a, #15
    ld b, #60
-   call sysGeneratorStar3
+   call sysGeneratorStar
 
    ld a, #20
    ld b, #5
-   call sysGeneratorStar
+   call sysGeneratorStar3
    
    ld a, #30
    ld b, #50
@@ -627,7 +627,7 @@ sysGeneratorInitGame::
 
    ld a, #45
    ld b, #30
-   call sysGeneratorStar
+   call sysGeneratorStar3
 
      ld a, #50
    ld b, #70

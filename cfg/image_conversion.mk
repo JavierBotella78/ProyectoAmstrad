@@ -137,7 +137,7 @@ $(eval $(call IMG2SP, CONVERT , assets/menu-parts/continue.png , 82, 16, spr_con
 $(eval $(call IMG2SP, CONVERT , assets/menu-parts/gameover.png , 110, 21, spr_gameover))
 
 $(eval $(call IMG2SP, CONVERT , assets/star.png , 4, 1, spr_star))
-$(eval $(call IMG2SP, CONVERT , assets/star2.png , 4, 1, spr_star2))
+$(eval $(call IMG2SP, CONVERT , assets/star2.png , 6, 1, spr_star2))
 $(eval $(call IMG2SP, CONVERT , assets/star3.png , 4, 1, spr_star3))
 
 
