@@ -74,6 +74,7 @@ $(eval $(call IMG2SP, CONVERT , assets/powerup7.png , 10, 12, spr_powerup7))
 $(eval $(call IMG2SP, CONVERT , assets/powerup8.png , 10, 12, spr_powerup8))
 
 $(eval $(call IMG2SP, CONVERT , assets/rainbow.png , 12, 4, spr_rainbow))
+$(eval $(call IMG2SP, CONVERT , assets/wobniar.png , 12, 4, spr_wobniar))
 
 $(eval $(call IMG2SP, CONVERT , assets/hudd.png , 40, 56, spr_hud))
 
@@ -107,6 +108,12 @@ $(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl31.png , 8, 16, spr_
 $(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl32.png , 8, 16, spr_explosion32))
 $(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl33.png , 8, 16, spr_explosion33))
 $(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl34.png , 8, 16, spr_explosion34))
+
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl40.png , 4, 8, spr_explosion40))
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl41.png , 4, 8, spr_explosion41))
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl42.png , 4, 8, spr_explosion42))
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl43.png , 4, 8, spr_explosion43))
+$(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl44.png , 4, 8, spr_explosion44))
 
 $(eval $(call IMG2SP, CONVERT , assets/menu-parts/marcobot.png , 74, 12, spr_marcobot))
 $(eval $(call IMG2SP, CONVERT , assets/menu-parts/marcotop.png , 74, 12, spr_marcotop))
@@ -142,6 +149,8 @@ $(eval $(call IMG2SP, CONVERT , assets/new-enemies/knight3.png , 12, 16, spr_kni
 $(eval $(call IMG2SP, CONVERT , assets/new-enemies/newrobot1.png , 12, 16, spr_newrobot1))
 $(eval $(call IMG2SP, CONVERT , assets/new-enemies/newrobot2.png , 12, 16, spr_newrobot2))
 $(eval $(call IMG2SP, CONVERT , assets/new-enemies/newrobot3.png , 12, 16, spr_newrobot3))
+
+$(eval $(call IMG2SP, CONVERT , assets/new-enemies/ffirehs.png , 12, 16, spr_ffirehs))
 
 $(eval $(call IMG2SP, SET_FOLDER, assets/screens/  ))
 $(eval $(call IMG2SP, SET_IMG_FORMAT,screen))

@@ -57,7 +57,7 @@ sysColisionsUpdateOne:
     pop af
     cp b
 
-    ret nc ;; No hay carry-> x de la bala < x del colisionable  
+    ret nc ;; No hay carry-> x + width de la bala < x del colisionable  
 
     inc a
     ld c, indWidth(iy)
@@ -73,20 +73,30 @@ sysColisionsUpdateOne:
 
     ld a, indY(iy)      ;; y del colisionable
     dec a
-    ld b, indY(ix)      ;; y de la bala
+
+    push af
+
+    ld a, indY(ix)      ;; y de la bala
+    ld b, indHeight(ix)
+    add a, b
+
+    ld b, a
+
+    pop af
+
+
     cp b
 
-    ret nc ;; No hay carry-> y de la bala < y del colisionable  
+    ret nc ;; No hay carry-> y + height de la bala < y del colisionable  
 
     inc a
     ld c, indHeight(iy)
     add a, c
 
+    ld b, indY(ix)      ;; y de la bala
     cp b
 
-    ret c ;; No hay carry-> x + width de colisionable < x de la bala
-
-        ;;TODO: Hacer una beheaviour como en la ia, al colisionar pues pasan cosas
+    ret c ;; No hay carry-> y + height de colisionable < y de la bala
 
     ld a, indSubType(iy)
     
@@ -106,7 +116,15 @@ sysColisionsUpdateOne:
 
 ret
 
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysColisionsBehaviour
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysColisionsBehaviour:
 
     ld h, indColision1(ix)
@@ -121,12 +139,31 @@ sysColisionsBehaviour:
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysColisionsDestroy
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysColisionsDestroy:
 
     call manEntityMarkToDestroy
 
 ret
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysColisionsStar
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysColisionsStar:
 
     call sysPreRenderUpdateOne
@@ -139,6 +176,16 @@ sysColisionsStar:
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysColisionsEnemy1
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysColisionsEnemy1:
 
     call sysGeneratorExp1
@@ -146,6 +193,16 @@ sysColisionsEnemy1:
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysColisionsEnemy2
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysColisionsEnemy2:
 
     call sysGeneratorExp2
@@ -153,6 +210,33 @@ sysColisionsEnemy2:
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysColisionsEnemy3
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+sysColisionsEnemy3:
+
+    call sysGeneratorExp3
+    call sysColisionsEnemy
+
+ret
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysColisionsEnemy5
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysColisionsEnemy5:
 
     ld a, indSubType(ix)
@@ -165,13 +249,52 @@ sysColisionsEnemy5:
 
 ret
 
-sysColisionsEnemy3:
 
-    call sysGeneratorExp3
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysColisionsEnemy7
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+sysColisionsEnemy7:
+
+    ld a, #0
+    call sysGeneratorSetEnemy3Full
+
+    call sysColisionsEnemy3
+
+ret
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysColisionsEnemyBullet
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+sysColisionsEnemyBullet:
+
+    call sysGeneratorExp4
     call sysColisionsEnemy
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysColisionsEnemy
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysColisionsEnemy:
 
     call manEntityMarkToDestroy
@@ -179,6 +302,16 @@ sysColisionsEnemy:
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysColisionsSubEnemy
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysColisionsSubEnemy:
 
     call manEntityMarkToDestroy
@@ -186,6 +319,16 @@ sysColisionsSubEnemy:
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysColisionsPlayer
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysColisionsPlayer:
 
     ld b, #AITypeEnemy
@@ -197,6 +340,16 @@ sysColisionsPlayer:
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysColisionsBullet
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysColisionsBullet:
 
     ld b, #AITypePU
@@ -208,6 +361,16 @@ sysColisionsBullet:
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysColisionPUScore
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysColisionPUScore:
 
     ld b, #AITypeBullet
@@ -220,6 +383,16 @@ sysColisionPUScore:
 
 ret
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysColisionPUBullet
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
 sysColisionPUBullet:
 
     ld b, #AITypeBullet

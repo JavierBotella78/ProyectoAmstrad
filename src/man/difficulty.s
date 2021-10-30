@@ -150,6 +150,12 @@ manDifficultyLvl1:
     ld a, #0
     call sysAISetAICounter
 
+     ld hl, #initEnemy7
+    call sysGeneratorSetEnemy3
+
+    ld a, #1
+    call sysGeneratorSetBoolEnemy3Full
+
 ret
 
 
@@ -215,7 +221,10 @@ ret
 ;;
 manDifficultyLvl5:
 
-    ld a, #-2
-    call sysAISetSpeedAILeft
+    ld hl, #initEnemy7
+    call sysGeneratorSetEnemy3
+
+    ld a, #1
+    call sysGeneratorSetBoolEnemy3Full
 
 ret

@@ -245,6 +245,70 @@ ret
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAIEnemy7
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+sysAIEnemy7_1::
+
+    ld indVx(ix), #-1
+
+    ld a, indAICounter(ix)
+    or a
+
+    jp z, changeEnemy7State
+
+    dec a
+    ld indAICounter(ix), a
+
+    ret
+
+changeEnemy7State:
+
+    ld hl, #sysAIEnemy7_2
+
+    ld indAI1(ix), h
+    ld indAI2(ix), l
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAIEnemy7_2
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+sysAIEnemy7_2::
+
+    ld indVx(ix), #0
+
+ret
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAIEnemyBullet
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+sysAIEnemyBullet::
+
+    ld indVx(ix), #-1
+
+ret
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      sysAICheckCounter
 ;; Requisitos:
 ;;      -
@@ -299,6 +363,34 @@ sysAIExplosionDestroy:
     call sysGeneratorPU
 
 ret
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysAIExplosion2
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+sysAIExplosion2::
+
+    ld a, indAICounter(ix)
+    dec a
+
+    jp z, sysAIExplosionDestroy2
+
+    ld indAICounter(ix), a
+
+    ret
+
+sysAIExplosionDestroy2:
+
+    call manEntityMarkToDestroy
+
+ret
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sysPhysicsUpdate

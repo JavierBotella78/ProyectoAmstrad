@@ -68,6 +68,12 @@ enemy2:
 enemy3:
    .dw #initEnemy3
 
+boolEnemy3full:
+   .db #0
+
+enemy3full:
+   .db #0
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  TEMPLATES
@@ -185,6 +191,21 @@ initEnemy6:
    .db #0                                                                                 ;; AICounter
    .db #6, #13 
 
+
+initEnemy7: 
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable                   ;; Type
+   .db #63, #EFila3, #0, #0                                                               ;; x, y, vx, vy
+   .db #6, #16                                                                            ;; width, height
+   .dw #sysAIEnemy7_1                                                                       ;; AI
+   .dw #sysColisionsEnemy7, #sysColisionsSubEnemy                                         ;; Colision, Physics
+   .dw #_spr_ffirehs, #0xc000                                                             ;; Sprite, prevPos
+   .db #0x40, #AITypeEnemy | #RenderTypeStatic                                            ;; score, subtype
+   .dw #0                                                                                 ;; Anim
+   .db #0, #0                                                                             ;; AnimCounter, AnimActual
+   .dw #0xc000                                                                            ;; actualPos
+   .db #6                                                                                 ;; AICounter
+   .db #6, #13 
+
 initExp1: 
    .db #ETypeRenderable | #ETypeAI | #ETypeAnimated                     ;; Type 
    .db #0, #0, #0, #0                                                   ;; x, y, vx, vy
@@ -227,6 +248,20 @@ initExp3:
    .db #10                                                              ;; AICounter
    .db #4, #13                                                          ;; delWitdh, delHeight
 
+initExp4: 
+   .db #ETypeRenderable | #ETypeAI | #ETypeAnimated                     ;; Type 
+   .db #0, #0, #0, #0                                                   ;; x, y, vx, vy
+   .db #2, #8                                                          ;; width, height
+   .dw #sysAIExplosion2                                                ;; AI
+   .dw #0, #0                                                           ;; Colision, Physics
+   .dw #_spr_explosion40, #0xc000                                        ;; Sprite, prevPos
+   .db #0, #RenderTypeStatic                                            ;; score, subtype
+   .dw #animationExplosion4                                              ;; Anim
+   .db #2, #0                                                           ;; AnimCounter, AnimActual
+   .dw #0xc000                                                          ;; actualPos
+   .db #10                                                              ;; AICounter
+   .db #2, #5                                                          ;; delWitdh, delHeight
+
 initBullet: 
    .db #ETypeRenderable | #ETypeColider | #ETypeMovable                 ;; Type 
    .db #13, #0, #2, #0                                                  ;; x, y, vx, vy
@@ -235,6 +270,20 @@ initBullet:
    .dw #sysColisionsBullet, #sysColisionsDestroy                        ;; Colision, Physics
    .dw #_spr_rainbow, #0xc000                                           ;; Sprite, prevPos
    .db #0, #AITypeBullet | #RenderTypeStatic                            ;; score, subtype
+   .dw #0                                                               ;; Anim
+   .db #0, #0                                                           ;; AnimCounter, AnimActual
+   .dw #0xc000                                                          ;; actualPos
+   .db #0                                                               ;; AICounter
+   .db #6, #4                                                           ;; delWitdh, delHeight
+
+initEnemyBullet: 
+   .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAI ;; Type 
+   .db #50, #EFila3+8, #0, #0                                             ;; x, y, vx, vy
+   .db #6, #4                                                           ;; width, height
+   .dw #sysAIEnemyBullet                                                ;; AI
+   .dw #sysColisionsEnemyBullet, #sysColisionsDestroy                   ;; Colision, Physics
+   .dw #_spr_wobniar, #0xc000                                           ;; Sprite, prevPos
+   .db #0, #AITypeEnemy | #RenderTypeStatic                             ;; score, subtype
    .dw #0                                                               ;; Anim
    .db #0, #0                                                           ;; AnimCounter, AnimActual
    .dw #0xc000                                                          ;; actualPos
@@ -470,6 +519,12 @@ sysGeneratorInit::
 
    ld hl, #initEnemy3
    ld (enemy3), hl
+
+   ld a, #0
+   ld (enemy3full), a
+
+   ld a, #0
+   ld (boolEnemy3full), a
 
 ret
 
@@ -971,7 +1026,26 @@ generateEnemy2:
 
 generateEnemy3:
 
+   ld a, (#enemy3full)
+   or a
+
+   jp nz, enemy3bullet
+
    ld hl, (#enemy3)
+
+   ld a, (#boolEnemy3full)
+   or a
+
+   jp z, sysGeneratorEnemyCall
+
+   ld a, #1
+   ld (enemy3full), a
+
+   jp sysGeneratorEnemyCall
+
+enemy3bullet:
+
+   ld hl, #initEnemyBullet
 
 sysGeneratorEnemyCall:
    call sysGeneratorTmpl
@@ -1070,6 +1144,21 @@ sysGeneratorExp3::
 
 ret
 
+sysGeneratorExp4::
+
+   ld iy, #initExp4
+
+   ld a, indX(ix)
+   ld indX(iy), a
+
+   ld a, indY(ix)
+   ld indY(iy), a
+
+   ld hl, #initExp4
+   call sysGeneratorTmpl
+
+ret
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    BulletCreator
 ;; Parameters:
@@ -1098,38 +1187,69 @@ ret
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    sysGeneratorSetEnemy1
 ;; Parameters:
-;;    ix -> Player entity
+;;    -
 ;; Return:
 ;;    -
 ;; Description:
-;;    Creates a bullet-type entity at the player's vertical position
+;;    -
 ;;
-sysGeneratorSetEnemy1:
+sysGeneratorSetEnemy1::
    ld (enemy1), hl
 ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    sysGeneratorSetEnemy2
 ;; Parameters:
-;;    ix -> Player entity
+;;    -
 ;; Return:
 ;;    -
 ;; Description:
-;;    Creates a bullet-type entity at the player's vertical position
+;;    -
 ;;
-sysGeneratorSetEnemy2:
+sysGeneratorSetEnemy2::
    ld (enemy2), hl
 ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    sysGeneratorSetEnemy3
 ;; Parameters:
-;;    ix -> Player entity
+;;    -
 ;; Return:
 ;;    -
 ;; Description:
-;;    Creates a bullet-type entity at the player's vertical position
+;;    -
 ;;
-sysGeneratorSetEnemy3:
+sysGeneratorSetEnemy3::
    ld (enemy3), hl
+ret
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;    sysGeneratorSetEnemy3Full
+;; Parameters:
+;;    -
+;; Return:
+;;    -
+;; Description:
+;;    -
+;;
+sysGeneratorSetEnemy3Full::
+
+   ld (enemy3full), a
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;    sysGeneratorSetEnemy3Full
+;; Parameters:
+;;    -
+;; Return:
+;;    -
+;; Description:
+;;    -
+;;
+sysGeneratorSetBoolEnemy3Full::
+
+   ld (boolEnemy3full), a
+
 ret

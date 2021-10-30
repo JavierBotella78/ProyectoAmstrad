@@ -54,10 +54,14 @@ SpeedUp2=40
 .globl sysGeneratorExp1
 .globl sysGeneratorExp2
 .globl sysGeneratorExp3
+.globl sysGeneratorExp4
 .globl sysGeneratorStar
+
 .globl sysGeneratorSetEnemy1
 .globl sysGeneratorSetEnemy2
 .globl sysGeneratorSetEnemy3
+.globl sysGeneratorSetEnemy3Full
+.globl sysGeneratorSetBoolEnemy3Full
 
 .globl _spr_idle
 .globl _spr_idle2
@@ -92,6 +96,8 @@ SpeedUp2=40
 .globl _spr_newrobot2
 .globl _spr_newrobot3
 
+.globl _spr_ffirehs
+
 .globl _spr_doblescore1
 .globl _spr_doblescore2
 
@@ -113,6 +119,7 @@ SpeedUp2=40
 .globl _spr_floor33
 
 .globl _spr_rainbow
+.globl _spr_wobniar
 
 .globl _spr_hud_0
 .globl _spr_hud_1
@@ -141,6 +148,12 @@ SpeedUp2=40
 .globl _spr_explosion32
 .globl _spr_explosion33
 .globl _spr_explosion34
+
+.globl _spr_explosion40
+.globl _spr_explosion41
+.globl _spr_explosion42
+.globl _spr_explosion43
+.globl _spr_explosion44
 
 .globl _spr_marcoleft
 .globl _spr_marcoright 
@@ -172,3 +185,4 @@ SpeedUp2=40
 .globl initEnemy4
 .globl initEnemy5
 .globl initEnemy6
+.globl initEnemy7

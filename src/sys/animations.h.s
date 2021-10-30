@@ -51,3 +51,4 @@ SpeedExp=3
 .globl animationExplosion1
 .globl animationExplosion2
 .globl animationExplosion3
+.globl animationExplosion4

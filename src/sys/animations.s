@@ -192,6 +192,15 @@ animationExplosion3:
     .db #SpeedExp          
     .dw #_spr_explosion34
 
+animationExplosion4:
+    .db #SpeedExp                  
+    .dw #_spr_explosion41
+    .db #SpeedExp          
+    .dw #_spr_explosion42
+    .db #SpeedExp          
+    .dw #_spr_explosion43
+    .db #SpeedExp          
+    .dw #_spr_explosion44
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      sysAnimationsUpdateOne
