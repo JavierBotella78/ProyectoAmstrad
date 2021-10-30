@@ -120,6 +120,14 @@ animationEnemy6_2:
     .db #0
     .dw #animationEnemy6_2
 
+animationEnemy7:
+    .db #5  
+    .dw #_spr_ffirehs
+    .db #5  
+    .dw #_spr_ffirehs2
+    .db #0
+    .dw #animationEnemy7
+
 animationPUScore:
     .db #5                 
     .dw #_spr_doblescore1

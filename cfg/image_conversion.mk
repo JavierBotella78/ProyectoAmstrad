@@ -156,6 +156,7 @@ $(eval $(call IMG2SP, CONVERT , assets/new-enemies/newrobot3.png , 12, 16, spr_n
 $(eval $(call IMG2SP, CONVERT , assets/new-enemies/newrobot2abierto.png , 12, 16, spr_newrobot4))
 
 $(eval $(call IMG2SP, CONVERT , assets/new-enemies/ffirehs.png , 12, 16, spr_ffirehs))
+$(eval $(call IMG2SP, CONVERT , assets/new-enemies/ffirehs_2.png , 12, 16, spr_ffirehs2))
 
 $(eval $(call IMG2SP, SET_FOLDER, assets/screens/  ))
 $(eval $(call IMG2SP, SET_IMG_FORMAT,screen))

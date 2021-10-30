@@ -224,15 +224,15 @@ initEnemy6:
 
 
 initEnemy7: 
-   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable                   ;; Type
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated  ;; Type
    .db #63, #EFila3, #0, #0                                                               ;; x, y, vx, vy
    .db #6, #16                                                                            ;; width, height
-   .dw #sysAIEnemy7_1                                                                       ;; AI
+   .dw #sysAIEnemy7_1                                                                     ;; AI
    .dw #sysColisionsEnemy7, #sysColisionsSubEnemy                                         ;; Colision, Physics
    .dw #_spr_ffirehs, #0xc000                                                             ;; Sprite, prevPos
    .db #0x40, #AITypeEnemy | #RenderTypeStatic                                            ;; score, subtype
-   .dw #0                                                                                 ;; Anim
-   .db #0, #0                                                                             ;; AnimCounter, AnimActual
+   .dw #animationEnemy7                                                                   ;; Anim
+   .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0xc000                                                                            ;; actualPos
    .db #6                                                                                 ;; AICounter
    .db #6, #13 
