@@ -27,7 +27,11 @@
 .include "../man/game.h.s"
 .include "render.h.s"
 
-
+.globl _pew
+.globl _pew2
+.globl cpct_akp_SFXInit_asm
+.globl cpct_akp_SFXPlay_asm
+.globl cpct_akp_SFXStop_asm
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      sysColisionsUpdateOne
@@ -358,6 +362,19 @@ sysColisionsBullet:
     ret nz       ;; Si es un power-up, NO llama a la funcion
 
     call sysColisionsDestroy
+
+    ld de, #_pew
+   call cpct_akp_SFXInit_asm
+
+   ld l, #1
+   ld h, #15
+   ld e, #59
+   ld d, #0
+   ld bc,#0
+   ld a, #10
+   push ix 
+   call cpct_akp_SFXPlay_asm
+   pop ix 
 
 ret
 

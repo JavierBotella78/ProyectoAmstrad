@@ -36,6 +36,12 @@
 .globl cpct_scanKeyboard_asm
 .globl cpct_isKeyPressed_asm
 
+.globl _pew
+.globl _pew2
+.globl cpct_akp_SFXInit_asm
+.globl cpct_akp_SFXPlay_asm
+.globl cpct_akp_SFXStop_asm
+
 menuCoin:
     .db #0
 
@@ -129,13 +135,17 @@ manMenuCheckInput:
 
     ld hl, #Key_C
     call cpct_isKeyPressed_asm
+   
+   
 
     jr nz, cMenuPulsada
-
+    
     ld hl, #Key_Space
     call cpct_isKeyPressed_asm
 
     jr nz, enterMenuPulsada
+
+   
 
     ret
 
@@ -150,6 +160,7 @@ cMenuPulsada:
     ld (#menuCoin), a
 
     call sysGeneratorInitMenuCredit
+    
 
     ret
 
@@ -219,6 +230,7 @@ manMenuCheckBlink:
     ld (boolMenuBlink), a
 
     call sysGeneratorMenuErase
+
 
     ret
 

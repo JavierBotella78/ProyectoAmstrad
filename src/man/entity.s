@@ -21,6 +21,12 @@
 .include "entity.h.s"
 .include "../sys/render.h.s"
 
+.globl _pew
+.globl cpct_akp_SFXInit_asm
+.globl cpct_akp_SFXPlay_asm
+.globl cpct_akp_SFXStop_asm
+
+
 
 .globl cpct_memset_asm
 .globl cpct_memcpy_asm
@@ -158,7 +164,9 @@ manEntityDestroy::
    ld ix, (#posicionActual)
    ld bc, #-EntitySize 
    add ix, bc
+   
 
+     
 ret
 
 manEntityMarkToDestroy::
@@ -169,6 +177,19 @@ manEntityMarkToDestroy::
    or b
 
    ld indType(ix), a
+
+  ; ld de, #_pew
+  ; call cpct_akp_SFXInit_asm
+
+  ; ld l, #1
+  ; ld h, #15
+  ; ld e, #50
+  ; ld d, #0
+  ; ld bc,#0
+  ; ld a, #0x1
+  ; push ix 
+  ; call cpct_akp_SFXPlay_asm
+  ; pop ix 
 
 ret
 

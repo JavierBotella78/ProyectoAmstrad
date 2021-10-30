@@ -34,10 +34,17 @@
 .include "../sys/generator.h.s"
 .include "../sys/animations.h.s"
 
+
 .globl cpct_waitVSYNC_asm
 
 .globl cpct_akp_musicPlay_asm
 .globl cpct_akp_stop_asm
+
+.globl _pew
+.globl _pew2
+.globl cpct_akp_SFXInit_asm
+.globl cpct_akp_SFXPlay_asm
+.globl cpct_akp_SFXStop_asm
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  VARIABLES
@@ -243,12 +250,30 @@ manGameBulletCreator::
 
    jp exitPowerUpBullet
 
+   
+
 ifPowerUpBullet:
    ld a, #MultiBulletTime
 
 exitPowerUpBullet:
    ld (#bulletLife), a
    call sysGeneratorBulletCreator
+
+   ld de, #_pew
+   call cpct_akp_SFXInit_asm
+
+   ld l, #1
+   ld h, #15
+   ld e, #65
+   ld d, #0
+   ld bc,#0
+   ld a, #10
+   push ix 
+   call cpct_akp_SFXPlay_asm
+   pop ix 
+   
+  
+   
 
 ret
 
@@ -263,6 +288,19 @@ ret
 ;;    Decreases the player's life by 1 if it's hit by an enemy
 ;;
 manGamePlayerColision::
+
+   ld de, #_pew
+   call cpct_akp_SFXInit_asm
+
+   ld l, #1
+   ld h, #15
+   ld e, #45
+   ld d, #0
+   ld bc,#0
+   ld a, #10
+   push ix 
+   call cpct_akp_SFXPlay_asm
+   pop ix 
 
    ld a, (#playerInvulnerability)
    or a
@@ -327,6 +365,8 @@ skipStars:
    ret nz ;; Si 0 vidas, game over
 
    call manEntityMarkToDestroy
+
+  
 
 ret
 
@@ -415,6 +455,18 @@ ret
 manGamePUColision:
 
    ld (hl), #PUTime
+   ld de, #_pew
+   call cpct_akp_SFXInit_asm
+
+   ld l, #1
+   ld h, #15
+   ld e, #70
+   ld d, #0
+   ld bc,#0
+   ld a, #10
+   push ix 
+   call cpct_akp_SFXPlay_asm
+   pop ix 
 
 ret
 
