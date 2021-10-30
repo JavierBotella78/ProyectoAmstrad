@@ -236,6 +236,12 @@ changeEnemy5State:
     ld indAnim1(ix), d
     ld indAnim2(ix), e
 
+    ld a, #5
+    ld indAnimCounter(ix), a
+
+    ld a, #0
+    ld indAnimActual(ix), a
+
     ld a, indSubType(ix)
     ld b, #AITypeInmortal
     xor a, b
@@ -283,7 +289,7 @@ sysAIEnemy6_2::
     ld hl, #sysAIEnemy6_1
     ld de, #animationEnemy6_1
     ld bc, #_spr_newrobot1
-    ld a, #30
+    ld a, #20
     call sysAIEnemy6Counter
 
 ret
@@ -324,10 +330,18 @@ changeEnemy6State:
     ld indAnim1(ix), d
     ld indAnim2(ix), e
 
+    ld a, #5
+    ld indAnimCounter(ix), a
+
+    ld a, #0
+    ld indAnimActual(ix), a
+
     ld a, indType(ix)
     ld b, #ETypeColisionable
     xor a, b
     ld indType(ix), a
+
+    
 
 ret
 
