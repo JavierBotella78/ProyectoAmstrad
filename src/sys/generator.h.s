@@ -176,6 +176,9 @@ SpeedUp2=40
 .globl _spr_gameover
 .globl _spr_space
 .globl _spr_star
+.globl _spr_star2
+.globl _spr_star3
+
 
 
 .globl initStars

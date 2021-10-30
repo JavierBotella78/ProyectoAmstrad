@@ -107,6 +107,34 @@ initStar:
    .db #0                                                                                 ;; AICounter
    .db #2, #1                                                                             ;; delWitdh, delHeight
 
+initStar2: 
+   .db #ETypeRenderable | #ETypeMovable   ;; Type
+   .db #63, #5, #-1, #0                                                                   ;; x, y, vx, vy
+   .db #2, #1                                                                             ;; width, height
+   .dw #0                                                                                 ;; AI
+   .dw #0, #sysColisionsStar                                                              ;; Colision, Physics
+   .dw #_spr_star2, #0xc000                                                                ;; Sprite, prevPos
+   .db #0, #RenderTypeStatic                                                              ;; score, subtype
+   .dw #0                                                                                 ;; Anim
+   .db #0, #0                                                                             ;; AnimCounter, AnimActual
+   .dw #0xc000                                                          ;; actualPos
+   .db #0                                                                                 ;; AICounter
+   .db #2, #1                                                                             ;; delWitdh, delHeight
+
+initStar3: 
+   .db #ETypeRenderable | #ETypeMovable   ;; Type
+   .db #63, #5, #-1, #0                                                                   ;; x, y, vx, vy
+   .db #2, #1                                                                             ;; width, height
+   .dw #0                                                                                 ;; AI
+   .dw #0, #sysColisionsStar                                                              ;; Colision, Physics
+   .dw #_spr_star3, #0xc000                                                                ;; Sprite, prevPos
+   .db #0, #RenderTypeStatic                                                              ;; score, subtype
+   .dw #0                                                                                 ;; Anim
+   .db #0, #0                                                                             ;; AnimCounter, AnimActual
+   .dw #0xc000                                                          ;; actualPos
+   .db #0                                                                                 ;; AICounter
+   .db #2, #1                                                                             ;; delWitdh, delHeight
+
 initEnemy1: 
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated  ;; Type
    .db #63, #EFila1, #0, #0                                                               ;; x, y, vx, vy
@@ -538,6 +566,26 @@ sysGeneratorStar::
 
 ret
 
+sysGeneratorStar2::
+
+   ld ix, #initStar2
+   ld indY(ix), a
+   ld indX(ix), b
+   ld hl, #initStar2 
+   call sysGeneratorTmpl
+
+ret
+
+sysGeneratorStar3::
+
+   ld ix, #initStar3
+   ld indY(ix), a
+   ld indX(ix), b
+   ld hl, #initStar3
+   call sysGeneratorTmpl
+
+ret
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sysGeneratorInitGame
 ;; Requisitos:
@@ -551,18 +599,42 @@ sysGeneratorInitGame::
 
    ld a, #5
    ld b, #40
-   call sysGeneratorStar
+   call sysGeneratorStar3
 
    ld a, #10
    ld b, #15
-   call sysGeneratorStar
+   call sysGeneratorStar3
 
    ld a, #15
    ld b, #60
-   call sysGeneratorStar
+   call sysGeneratorStar3
 
    ld a, #20
    ld b, #5
+   call sysGeneratorStar
+   
+   ld a, #30
+   ld b, #50
+   call sysGeneratorStar
+
+   ld a, #35
+   ld b, #20
+   call sysGeneratorStar2
+
+   ld a, #40
+   ld b, #40
+   call sysGeneratorStar
+
+   ld a, #45
+   ld b, #30
+   call sysGeneratorStar
+
+     ld a, #50
+   ld b, #70
+   call sysGeneratorStar
+
+   ld a, #55
+   ld b, #10
    call sysGeneratorStar
    
    
