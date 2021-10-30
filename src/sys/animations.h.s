@@ -43,7 +43,9 @@ SpeedExp=3
 .globl animationEnemy4
 .globl animationEnemy5_1
 .globl animationEnemy5_2
-.globl animationEnemy6
+.globl animationEnemy6_1
+.globl animationEnemy6_2
+.globl animationEnemy7
 .globl animationPUScore
 .globl animationPUBullet
 .globl animationFloor1

@@ -22,8 +22,8 @@
 ;;  CONSTANTS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-InitMaxTime2Generate=20
-MinTime2Generate=15
+InitMaxTime2Generate=25
+MinTime2Generate=20
 
 InitMinNumberEnemies=10
 MaxNumberEnemies=50
@@ -95,8 +95,10 @@ SpeedUp2=40
 .globl _spr_newrobot1
 .globl _spr_newrobot2
 .globl _spr_newrobot3
+.globl _spr_newrobot4
 
 .globl _spr_ffirehs
+.globl _spr_ffirehs2
 
 .globl _spr_doblescore1
 .globl _spr_doblescore2

@@ -38,6 +38,7 @@ difficultyArray:
     .dw #manDifficultyLvl3  ;;6
     .dw #manDifficultyLvl4  ;;8
     .dw #manDifficultyLvl5  ;;10
+    .dw #manDifficultyLvl6  ;;12
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -150,12 +151,6 @@ manDifficultyLvl1:
     ld a, #0
     call sysAISetAICounter
 
-     ld hl, #initEnemy7
-    call sysGeneratorSetEnemy3
-
-    ld a, #1
-    call sysGeneratorSetBoolEnemy3Full
-
 ret
 
 
@@ -225,6 +220,28 @@ manDifficultyLvl5:
     call sysGeneratorSetEnemy3
 
     ld a, #1
+    call sysGeneratorSetBoolEnemy3Full
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; manDifficultyLvl6
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+manDifficultyLvl6:
+
+    ld a, #-2
+    call sysAISetSpeedAILeft
+
+    ld hl, #initEnemy6
+    call sysGeneratorSetEnemy3
+
+    ld a, #0
     call sysGeneratorSetBoolEnemy3Full
 
 ret

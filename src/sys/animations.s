@@ -99,12 +99,12 @@ animationEnemy5_1:
     .dw #animationEnemy5_1
 
 animationEnemy5_2:
-    .db #5               
+    .db #50               
     .dw #_spr_knight1
     .db #0
     .dw #animationEnemy5_2
 
-animationEnemy6:
+animationEnemy6_1:
     .db #5               
     .dw #_spr_newrobot1
     .db #5                  
@@ -112,7 +112,21 @@ animationEnemy6:
     .db #5                 
     .dw #_spr_newrobot3
     .db #0
-    .dw #animationEnemy6
+    .dw #animationEnemy6_1
+
+animationEnemy6_2:
+    .db #50  
+    .dw #_spr_newrobot4
+    .db #0
+    .dw #animationEnemy6_2
+
+animationEnemy7:
+    .db #5  
+    .dw #_spr_ffirehs
+    .db #5  
+    .dw #_spr_ffirehs2
+    .db #0
+    .dw #animationEnemy7
 
 animationPUScore:
     .db #5                 

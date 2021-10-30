@@ -74,6 +74,9 @@ boolEnemy3full:
 enemy3full:
    .db #0
 
+lastGenerated:
+   .db #0
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  TEMPLATES
@@ -198,7 +201,7 @@ initEnemy5:
    .dw #sysAIEnemy5_1                                                                       ;; AI
    .dw #sysColisionsEnemy5, #sysColisionsSubEnemy                                         ;; Colision, Physics
    .dw #_spr_knight2, #0xc000                                                             ;; Sprite, prevPos
-   .db #0x40, #AITypeEnemy | #RenderTypeStatic                                            ;; score, subtype
+   .db #0x40, #AITypeEnemy | #RenderTypeStatic | #AITypeInmortal                                          ;; score, subtype
    .dw #animationEnemy5_1                                                                 ;; Anim
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0xc000                                                                            ;; actualPos
@@ -209,27 +212,27 @@ initEnemy6:
    .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated  ;; Type
    .db #63, #EFila3, #0, #0                                                               ;; x, y, vx, vy
    .db #6, #16                                                                            ;; width, height
-   .dw #sysAIEnemy3                                                                      ;; AI
-   .dw #sysColisionsEnemy3, #sysColisionsSubEnemy                                           ;; Colision, Physics
-   .dw #_spr_newrobot1, #0xc000                                                                ;; Sprite, prevPos
-   .db #0x40, #AITypeEnemy | #RenderTypeStatic                                              ;; score, subtype
-   .dw #animationEnemy6                                                                   ;; Anim
+   .dw #sysAIEnemy6_1                                                                     ;; AI
+   .dw #sysColisionsEnemy3, #sysColisionsSubEnemy                                         ;; Colision, Physics
+   .dw #_spr_newrobot1, #0xc000                                                           ;; Sprite, prevPos
+   .db #0x40, #AITypeEnemy | #RenderTypeStatic                                            ;; score, subtype
+   .dw #animationEnemy6_1                                                                 ;; Anim
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
-   .dw #0xc000                                                          ;; actualPos
-   .db #0                                                                                 ;; AICounter
+   .dw #0xc000                                                                            ;; actualPos
+   .db #20                                                                                ;; AICounter
    .db #6, #13 
 
 
 initEnemy7: 
-   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable                   ;; Type
+   .db #ETypeRenderable | #ETypeAI | #ETypeMovable | #ETypeColisionable | #ETypeAnimated  ;; Type
    .db #63, #EFila3, #0, #0                                                               ;; x, y, vx, vy
    .db #6, #16                                                                            ;; width, height
-   .dw #sysAIEnemy7_1                                                                       ;; AI
+   .dw #sysAIEnemy7_1                                                                     ;; AI
    .dw #sysColisionsEnemy7, #sysColisionsSubEnemy                                         ;; Colision, Physics
    .dw #_spr_ffirehs, #0xc000                                                             ;; Sprite, prevPos
    .db #0x40, #AITypeEnemy | #RenderTypeStatic                                            ;; score, subtype
-   .dw #0                                                                                 ;; Anim
-   .db #0, #0                                                                             ;; AnimCounter, AnimActual
+   .dw #animationEnemy7                                                                   ;; Anim
+   .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0xc000                                                                            ;; actualPos
    .db #6                                                                                 ;; AICounter
    .db #6, #13 
@@ -1078,6 +1081,37 @@ sysGeneratorEnemy:
    ld a, #3
    and l
 
+   or a
+   
+   jp z, escero
+   dec a
+
+escero:
+   push af
+
+   ld a, (#lastGenerated)
+   ld b, a
+   
+   pop af
+
+   cp b
+
+   jp nz, noGenerarOtro
+
+   inc a
+   and #3
+
+   ld b, #3
+
+   cp b
+   
+   jp nz, noGenerarOtro
+
+   ld a, #0
+
+
+noGenerarOtro:
+   ld (#lastGenerated), a
    or a
 
    jp nz, generateEnemy2
