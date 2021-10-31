@@ -35,12 +35,12 @@
 # Conversion
 $(eval $(call AKS2DATA, SET_OUTPUTS, hs s))
 $(eval $(call AKS2DATA, CONVERT, assets/music/banger2.aks , cancion2 ,  0x0240))
-$(eval $(call AKS2DATA, CONVERT, assets/music/banger.aks , cancion1 ,  0x02E5))
+$(eval $(call AKS2DATA, CONVERT, assets/music/bangerazo.aks , cancion1 ,  0x02E5))
 
 $(eval $(call AKS2DATA, SET_SFXONLY  , yes  )) 
 
-$(eval $(call AKS2DATA, CONVERT, assets/music/pew.aks , pew ,  0x036c))
-$(eval $(call AKS2DATA, CONVERT, assets/music/explosion.aks , pew2 ,  0x03ae))
+$(eval $(call AKS2DATA, CONVERT, assets/music/pew.aks , pew ,  0x03bc))
+#$(eval $(call AKS2DATA, CONVERT, assets/music/explosion.aks , pew2 ,  0x03ae))
 
 
 

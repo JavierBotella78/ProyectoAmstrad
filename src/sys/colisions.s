@@ -28,7 +28,7 @@
 .include "render.h.s"
 
 .globl _pew
-.globl _pew2
+
 .globl cpct_akp_SFXInit_asm
 .globl cpct_akp_SFXPlay_asm
 .globl cpct_akp_SFXStop_asm
@@ -368,7 +368,7 @@ sysColisionsBullet:
 
    ld l, #1
    ld h, #15
-   ld e, #59
+   ld e, #45
    ld d, #0
    ld bc,#0
    ld a, #10

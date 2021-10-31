@@ -23,7 +23,7 @@
 .include "man/menu.h.s"
 .include "man/interruptions.h.s"
 .include "man/gameOver.h.s"
-.include "banger.h.s"
+.include "bangerazo.h.s"
 .include "banger2.h.s"
 .area _DATA
 .area _CODE
@@ -40,7 +40,7 @@ _main::
 
    call setManIr
 
-   ld de, #_cancion2
+   ld de, #_cancion1
    call cpct_akp_musicInit_asm
 
 hardReset:

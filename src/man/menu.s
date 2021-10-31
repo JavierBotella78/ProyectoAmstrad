@@ -37,7 +37,6 @@
 .globl cpct_isKeyPressed_asm
 
 .globl _pew
-.globl _pew2
 .globl cpct_akp_SFXInit_asm
 .globl cpct_akp_SFXPlay_asm
 .globl cpct_akp_SFXStop_asm
