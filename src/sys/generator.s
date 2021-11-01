@@ -159,7 +159,7 @@ initEnemy2:
    .dw #sysAIEnemy2                                                                       ;; AI
    .dw #sysColisionsEnemy2, #sysColisionsSubEnemy                                           ;; Colision, Physics
    .dw #_spr_octo, #0xc000                                                                ;; Sprite, prevPos
-   .db #0x25, #AITypeEnemy | #RenderTypeStatic                                             ;; score, subtype
+   .db #0x10, #AITypeEnemy | #RenderTypeStatic                                             ;; score, subtype
    .dw #animationEnemy2                                                                   ;; Anim
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0xc000                                                          ;; actualPos
@@ -173,7 +173,7 @@ initEnemy3:
    .dw #sysAIEnemy3                                                                       ;; AI
    .dw #sysColisionsEnemy3, #sysColisionsSubEnemy                                           ;; Colision, Physics
    .dw #_spr_robo, #0xc000                                                                ;; Sprite, prevPos
-   .db #0x40, #AITypeEnemy | #RenderTypeStatic                                              ;; score, subtype
+   .db #0x10, #AITypeEnemy | #RenderTypeStatic                                              ;; score, subtype
    .dw #animationEnemy3                                                                   ;; Anim
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0xc000                                                          ;; actualPos
@@ -187,7 +187,7 @@ initEnemy4:
    .dw #sysAIEnemy1                                                                      ;; AI
    .dw #sysColisionsEnemy1, #sysColisionsSubEnemy                                           ;; Colision, Physics
    .dw #_spr_newdrone1, #0xc000                                                                ;; Sprite, prevPos
-   .db #0x40, #AITypeEnemy | #RenderTypeStatic                                              ;; score, subtype
+   .db #0x20, #AITypeEnemy | #RenderTypeStatic                                              ;; score, subtype
    .dw #animationEnemy4                                                                   ;; Anim
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0xc000                                                          ;; actualPos
@@ -201,7 +201,7 @@ initEnemy5:
    .dw #sysAIEnemy5_1                                                                       ;; AI
    .dw #sysColisionsEnemy5, #sysColisionsSubEnemy                                         ;; Colision, Physics
    .dw #_spr_knight2, #0xc000                                                             ;; Sprite, prevPos
-   .db #0x40, #AITypeEnemy | #RenderTypeStatic | #AITypeInmortal                                          ;; score, subtype
+   .db #0x30, #AITypeEnemy | #RenderTypeStatic | #AITypeInmortal                                          ;; score, subtype
    .dw #animationEnemy5_1                                                                 ;; Anim
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0xc000                                                                            ;; actualPos
@@ -215,7 +215,7 @@ initEnemy6:
    .dw #sysAIEnemy6_1                                                                     ;; AI
    .dw #sysColisionsEnemy3, #sysColisionsSubEnemy                                         ;; Colision, Physics
    .dw #_spr_newrobot1, #0xc000                                                           ;; Sprite, prevPos
-   .db #0x40, #AITypeEnemy | #RenderTypeStatic                                            ;; score, subtype
+   .db #0x30, #AITypeEnemy | #RenderTypeStatic                                            ;; score, subtype
    .dw #animationEnemy6_1                                                                 ;; Anim
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0xc000                                                                            ;; actualPos
@@ -230,7 +230,7 @@ initEnemy7:
    .dw #sysAIEnemy7_1                                                                     ;; AI
    .dw #sysColisionsEnemy7, #sysColisionsSubEnemy                                         ;; Colision, Physics
    .dw #_spr_ffirehs, #0xc000                                                             ;; Sprite, prevPos
-   .db #0x40, #AITypeEnemy | #RenderTypeStatic                                            ;; score, subtype
+   .db #0x45, #AITypeEnemy | #RenderTypeStatic                                            ;; score, subtype
    .dw #animationEnemy7                                                                   ;; Anim
    .db #5, #0                                                                             ;; AnimCounter, AnimActual
    .dw #0xc000                                                                            ;; actualPos

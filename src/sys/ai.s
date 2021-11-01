@@ -267,7 +267,7 @@ sysAIEnemy6_1::
     ld hl, #sysAIEnemy6_2
     ld de, #animationEnemy6_2
     ld bc, #_spr_newrobot4
-    ld a, #10
+    ld a, #20
     call sysAIEnemy6Counter
 
 ret
