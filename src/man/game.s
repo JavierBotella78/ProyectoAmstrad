@@ -422,7 +422,7 @@ ret
 manGameSubScore:
 
    ld hl, (#score)
-   ld c, #0x10
+   ld c, #0x20
    ld b, #0
 
    ld a, l
