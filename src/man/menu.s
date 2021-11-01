@@ -23,6 +23,7 @@
 .include "menu.h.s"
 .include "entity.h.s"
 .include "interruptions.h.s"
+.include "game.h.s"
 
 .include "../sys/render.h.s"
 .include "../sys/prerender.h.s"
@@ -33,13 +34,14 @@
 .include "../sys/generator.h.s"
 .include "../sys/animations.h.s"
 
+.include "../banger2.h.s"
+
 .globl cpct_scanKeyboard_asm
 .globl cpct_isKeyPressed_asm
 
-.globl _pew
-.globl cpct_akp_SFXInit_asm
-.globl cpct_akp_SFXPlay_asm
-.globl cpct_akp_SFXStop_asm
+.globl cpct_akp_musicInit_asm
+.globl cpct_akp_musicPlay_asm
+.globl cpct_akp_stop_asm
 
 menuCoin:
     .db #0
@@ -48,7 +50,7 @@ boolMenuLoop:
     .db #0
 
 controlsTimer:
-    .dw #20000
+    .dw #0
 
 blinkMenuTimer:
     .dw #0
@@ -64,10 +66,10 @@ manMenuInit::
     ld a, #0
     ld (#menuCoin), a
 
-    ld hl, #20000
+    ld hl, #KCONTROLSTIMER
     ld (#controlsTimer), hl
 
-    ld hl, #4000
+    ld hl, #KBLINKMENUTIMER
     ld (#blinkMenuTimer), hl
 
     ld a, #1
@@ -77,6 +79,9 @@ manMenuInit::
     call sysRenderInitMenu
     call sysGeneratorInitMenu
 
+    ld de, #_cancion2
+    call cpct_akp_musicInit_asm
+
 ret
 
 
@@ -84,7 +89,18 @@ ret
 manMenuLoop::
 
     call manMenuCheckInput
+
+loopMenuBlink:
+    ld a, (#numI)
+    cp #1
+    jr nz, loopMenuBlink
     call manMenuCheckBlink
+
+    call cpct_akp_musicPlay_asm
+
+
+    call waitHalt
+
 
     ld a, (#boolMenuLoop)
     or a
@@ -94,11 +110,16 @@ manMenuLoop::
     ld a, #0
     ld (boolMenuLoop), a
 
+    call cpct_akp_stop_asm
+
     call sysGeneratorInitMenu2
 
 manMenuLoop2:
 
+    call waitHalt
+
     call manMenuCheckInput2
+    
 
     ld hl, (#controlsTimer)
     dec hl
@@ -222,7 +243,7 @@ manMenuCheckBlink:
 
     jp z, blinkMenuDraw
 
-    ld hl, #2000
+    ld hl, #KBLINKMENUTIMER2
     ld (blinkMenuTimer), hl
 
     ld a, #0
@@ -235,7 +256,7 @@ manMenuCheckBlink:
 
 blinkMenuDraw:
 
-    ld hl, #4000
+    ld hl, #KBLINKMENUTIMER
     ld (blinkMenuTimer), hl
 
 
@@ -256,3 +277,4 @@ blinkMenuDrawInsert:
     call sysGeneratorMenuInsertCoin
 
 ret
+

@@ -22,6 +22,10 @@
 ;;  CONSTANTS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+KGOTIMER=400
+KGOSUBCOUNT=50
+KBLINKGOTIMER=50
+KBLINKGOTIMER2=20
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  PUBLIC FUNCTIONS

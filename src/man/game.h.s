@@ -46,5 +46,7 @@ PUTime=40
 .globl manGameSubScore
 .globl manGameGetHighscore
 
+.globl waitHalt
+
 
 

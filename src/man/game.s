@@ -34,9 +34,12 @@
 .include "../sys/generator.h.s"
 .include "../sys/animations.h.s"
 
+.include "../bangerazo.h.s"
+
 
 .globl cpct_waitVSYNC_asm
 
+.globl cpct_akp_musicInit_asm
 .globl cpct_akp_musicPlay_asm
 .globl cpct_akp_stop_asm
 
@@ -44,6 +47,8 @@
 .globl cpct_akp_SFXInit_asm
 .globl cpct_akp_SFXPlay_asm
 .globl cpct_akp_SFXStop_asm
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  VARIABLES
@@ -109,6 +114,9 @@ manGameInit::
 
    ld a, #0
    ld (powerUpScore), a
+
+   ld de, #_cancion1
+   call cpct_akp_musicInit_asm
 ret
 
 
@@ -158,6 +166,7 @@ loopRender:
    jp nz, mainLoop
 
    call cpct_akp_stop_asm
+   call cpct_akp_SFXStop_asm
    call manGameChangeHighscore
    
 ret
@@ -502,7 +511,7 @@ ret
 ;; Description:
 ;;    Wait x halts and vsync
 ;;
-waitHalt:
+waitHalt::
    ld a, #1
    esperarbucle:
    push af

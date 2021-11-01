@@ -23,6 +23,7 @@
 .include "gameOver.h.s"
 .include "entity.h.s"
 .include "interruptions.h.s"
+.include "game.h.s"
 
 .include "../sys/render.h.s"
 .include "../sys/prerender.h.s"
@@ -46,13 +47,13 @@ gameOverCount:
     .db #9
 
 gameOverSubCount:
-    .dw #4000
+    .dw #0
 
 softResetJump:
     .dw #0
 
 gameOverTimer:
-    .dw #20000
+    .dw #0
 
 blinkGameOverTimer:
     .dw #0
@@ -74,13 +75,13 @@ manGameOverInit::
     ld a, #9
     ld (gameOverCount), a
 
-    ld hl, #4000
+    ld hl, #KGOSUBCOUNT
     ld (gameOverSubCount), hl
 
-    ld hl, #20000
+    ld hl, #KGOTIMER
     ld (#gameOverTimer), hl
 
-    ld hl, #4000
+    ld hl, #KBLINKGOTIMER
     ld (#blinkGameOverTimer), hl
 
     ld a, #1
@@ -99,7 +100,15 @@ manGameOverLoop::
 
     call manGameOverCheckInput
     call manGameOverUpdate
+
+    loopGOBlink:
+    ld a, (#numI)
+    cp #1
+    jr nz, loopGOBlink
     call manGameOverCheckBlink
+
+    call waitHalt
+    
 
     ld a, (#boolGameOverLoop)
     or a
@@ -112,6 +121,7 @@ manGameOverLoop::
     call sysGeneratorInitGameOver2
 
 manGameOverLoop2:
+    call waitHalt
 
     call manGameOverCheckInput2
 
@@ -159,7 +169,7 @@ manGameOverUpdate:
 
     ;; Reset gameOverSubCount
 
-    ld hl, #4000
+    ld hl, #KGOSUBCOUNT
     ld (gameOverSubCount), hl
 
     ld a, (#gameOverCount)
@@ -249,7 +259,7 @@ manGameOverCheckBlink:
 
     jp z, blinkGameOverDraw
 
-    ld hl, #2000
+    ld hl, #KBLINKGOTIMER2
     ld (blinkGameOverTimer), hl
 
     ld a, #0
@@ -261,7 +271,7 @@ manGameOverCheckBlink:
 
 blinkGameOverDraw:
 
-    ld hl, #4000
+    ld hl, #KBLINKGOTIMER
     ld (blinkGameOverTimer), hl
 
 
