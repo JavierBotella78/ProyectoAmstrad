@@ -96,7 +96,6 @@ sysInputUpdateOne:
     call sysInputChangeRenderable
     call sysInputChangeAnimation
     
-   
 
     ld indVy(ix), #0
 
@@ -130,6 +129,16 @@ comprobarTeclas:
     jr nz, sPulsada
     
     ld hl, #Key_Q
+    call cpct_isKeyPressed_asm
+
+    jr nz, wPulsada
+
+    ld hl, #Joy0_Down
+    call cpct_isKeyPressed_asm
+
+    jr nz, sPulsada
+    
+    ld hl, #Joy0_Up
     call cpct_isKeyPressed_asm
 
     jr nz, wPulsada
@@ -174,6 +183,11 @@ kPulsada:
 seguirComprobando:
 
     ld hl, #Key_P
+    call cpct_isKeyPressed_asm
+
+    jr nz, kPulsada
+
+    ld hl, #Joy0_Fire1
     call cpct_isKeyPressed_asm
 
     jr nz, kPulsada
