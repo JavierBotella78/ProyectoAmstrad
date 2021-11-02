@@ -8,4 +8,9 @@ src/banger.h.s
 src/banger.s
 src/banger2.h.s
 src/banger2.s
-
+src/bangerazo.h.s
+src/bangerazo.s
+src/pew.s
+src/pew.h.s
+CosmicGatlin.zip
+cosmicGatlin.wav
