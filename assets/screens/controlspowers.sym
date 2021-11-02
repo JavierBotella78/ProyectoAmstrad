@@ -8,12 +8,12 @@ Symbol Table
     .__.CPU.                                                    =  0000 GL
     .__.H$L.                                                    =  0000 GL
   0 _controlspowers                                                0000 GR
-  0 _controlspowers_end                                         =  05E4 GR
+  0 _controlspowers_end                                         =  06D6 GR
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  5E5   flags    0
+   0 _CODE                                      size  6D7   flags    0
 

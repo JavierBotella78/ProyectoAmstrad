@@ -1,9 +1,9 @@
 ;; File 'assets/screens/controlspowers.h.s' generated using cpct_pack
 ;; Compresor used:   zx7b
-;; Files compressed: [ 'assets/screens/controlspowers.bin' ]
+;; Files compressed: [ 'assets/screens/CONTROLSPOWERS2.bin' ]
 ;; Uncompressed:     16384 bytes
-;; Compressed:       1509 bytes
-;; Space saved:      14875 bytes
+;; Compressed:       1751 bytes
+;; Space saved:      14633 bytes
 ;;
 
 ;; Declaration of the compressed array and
@@ -12,7 +12,7 @@
 .globl _controlspowers_end
 
 ;; Compressed and uncompressed sizes
-_controlspowers_size_z == 1509
+_controlspowers_size_z == 1751
 _controlspowers_size   == 16384
 
 

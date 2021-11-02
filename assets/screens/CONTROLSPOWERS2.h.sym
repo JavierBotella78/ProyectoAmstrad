@@ -7,10 +7,12 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 GL
     .__.H$L.                                                    =  0000 GL
-    _controlspowers                                                **** GX
-    _controlspowers_end                                            **** GX
-    _controlspowers_size                                        =  4000 G
-    _controlspowers_size_z                                      =  05E5 G
+    CONTROLSPOWERS_H                                            =  00C8 G
+    CONTROLSPOWERS_OFF                                          =  0000 G
+    CONTROLSPOWERS_PALETTE_OFF                                  =  0000 G
+    CONTROLSPOWERS_PALETTE_SIZE                                 =  0000 G
+    CONTROLSPOWERS_SIZE                                         =  4000 G
+    CONTROLSPOWERS_W                                            =  0050 G
 
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.

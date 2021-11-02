@@ -161,7 +161,7 @@ $(eval $(call IMG2SP, CONVERT , assets/new-enemies/ffirehs_2.png , 12, 16, spr_f
 $(eval $(call IMG2SP, SET_FOLDER, assets/screens/  ))
 $(eval $(call IMG2SP, SET_IMG_FORMAT,screen))
 $(eval $(call IMG2SP, SET_OUTPUT, bin ))  #{ bin, c }
-$(eval $(call IMG2SP, CONVERT , assets/controlspowers.png , 160, 200, controlspowers))	
+$(eval $(call IMG2SP, CONVERT , assets/CONTROLSPOWERS2.png , 160, 200, controlspowers))	
 
 
 
