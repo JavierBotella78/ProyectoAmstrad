@@ -26,7 +26,7 @@ InitMaxTime2Generate=25
 MinTime2Generate=20
 
 InitMinNumberEnemies=10
-MaxNumberEnemies=50
+MaxNumberEnemies=30
 
 SubTime2Generate=1
 AddNumberEnemies=5
@@ -132,6 +132,7 @@ SpeedUp2=40
 .globl _spr_stars1
 .globl _spr_stars2
 .globl _spr_stars3
+.globl _spr_stars4
 
 .globl _spr_explosion10
 .globl _spr_explosion11

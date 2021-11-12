@@ -349,6 +349,20 @@ initPUScore:
    .db #0                                                                     ;; AICounter
    .db #5, #12                                                                ;; delWitdh, delHeight
 
+initPULife: 
+   .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAnimated ;; Type    
+   .db #0, #0, #-1, #0                                                        ;; x, y, vx, vy
+   .db #5, #12                                                                ;; width, height
+   .dw #0                                                                     ;; AI
+   .dw #sysColisionPULife, #sysColisionsDestroy                               ;; Colision, Physics
+   .dw #_spr_doblescore1, #0xc000                                             ;; Sprite, prevPos
+   .db #0, #AITypePU | #RenderTypeStatic                                      ;; score, subtype
+   .dw #animationPUScore                                                    ;; Anim
+   .db #5, #0                                                                 ;; AnimCounter, AnimActual
+   .dw #0xc000                                                          ;; actualPos
+   .db #0                                                                     ;; AICounter
+   .db #5, #12                                                                ;; delWitdh, delHeight
+
 initInterf: 
    .db #ETypeRenderable       ;; Type  
    .db #0, #144, #0, #0       ;; x, y, vx, vy
@@ -995,12 +1009,13 @@ sysGeneratorUpdate::
    ld c, #MaxNumberEnemies
    cp c
 
-   jp z, skipToTimer
+   jp z, skipToDifficultyIncrease
 
    ld b, #AddNumberEnemies
    add a, b
 
 ;; CAMBIO DE DIFICULTAD----------------------------------------------------------------------------------
+skipToDifficultyIncrease:
    push af
 
    call manDifficultyIncrease
@@ -1172,7 +1187,7 @@ sysGeneratorPU::
 
    call cpct_getRandom_mxor_u8_asm
 
-   ld a, #3
+   ld a, #7
    and l
 
    or a
@@ -1188,10 +1203,32 @@ generatePU2:
 
    dec a
    
-   ret nz
+   jp nz, generatePU3
 
    ld hl, #initPUScore
    ld iy, #initPUScore
+
+   jp sysGeneratorPUCall
+
+generatePU3:
+
+   dec a
+   
+   jp nz, generatePU4
+
+   ld hl, #initPULife
+   ld iy, #initPULife
+
+   jp sysGeneratorPUCall
+
+generatePU4:
+
+   dec a
+   
+   ret nz
+
+   ld hl, #initPULife
+   ld iy, #initPULife
 
 sysGeneratorPUCall:
 

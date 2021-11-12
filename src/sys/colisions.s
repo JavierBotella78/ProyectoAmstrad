@@ -320,6 +320,7 @@ sysColisionsSubEnemy:
 
     call manEntityMarkToDestroy
     call manGameSubScore
+    call manGamePlayerColision
 
 ret
 
@@ -418,6 +419,27 @@ sysColisionPUBullet:
     ret nz       ;; Si es una bala, NO llama a la funcion
 
     call manGamePUBulletColision
+    call manEntityMarkToDestroy
+
+ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      sysColisionPUScore
+;; Requisitos:
+;;      -
+;; Return:
+;;      -
+;; Descripcion:
+;;      -
+;;
+sysColisionPULife:
+
+    ld b, #AITypeBullet
+    and b
+
+    ret nz       ;; Si es una bala, NO llama a la funcion
+
+    call manGamePULifeColision
     call manEntityMarkToDestroy
 
 ret

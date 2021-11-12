@@ -318,48 +318,11 @@ manGamePlayerColision::
 
    ld a, (#playerLife)
    dec a
-   ld (playerLife), a 
+   ;;ld (playerLife), a 
    ;;Dibujar estrella rota
 
    push ix
-   ld ix, #initStars
-
-   ld b, #3                   ;; 3 ESTRELLAS
-   cp b
-   
-   jp z, stars3
-
-   ld b, #2                   ;; 2 ESTRELLAS
-   cp b
-   
-   jp z, stars2
-
-   ld b, #1                   ;; 1 ESTRELLAS
-   cp b
-   
-   jp z, stars1               ;; 0 ESTRELLAS
-
-   or a
-
-   jp z, stars0
-
-stars3:
-   ld hl, #_spr_stars3
-   jp skipStars
-stars2:
-   ld hl, #_spr_stars2
-   jp skipStars
-stars1:
-   ld hl, #_spr_stars1
-   jp skipStars
-stars0:
-   ld hl, #_spr_stars0
-skipStars:
-   
-   ld indSprite1(ix), h 
-   ld indSprite2(ix), l
-
-   call sysRenderDrawOnce
+   call drawLifeStars
    pop ix
 
    ld a, #MaxPlayerInvulnerability
@@ -450,21 +413,86 @@ ret
 manGamePUBulletColision::
 
    ld hl, #powerUpBullet
-   call manGamePUColision
+   ld (hl), #PUTimeBullet
 
 ret
 
 manGamePUScoreColision::
 
    ld hl, #powerUpScore
-   call manGamePUColision
+   ld (hl), #PUTimeScore
 
 ret
 
-manGamePUColision:
+manGamePULifeColision::
 
-   ld (hl), #PUTime
+   ld a, (#playerLife)
+   inc a
+
+   ld b, #5
+   cp b
+
+   ret z
    
+   ld (playerLife), a 
+
+   
+   push ix
+   call drawLifeStars
+   pop ix
+
+ret
+
+
+drawLifeStars::
+
+   ld ix, #initStars
+
+   ld b, #4                   ;; 4 ESTRELLAS
+   cp b
+   
+   jp z, stars4
+
+   ld b, #3                   ;; 3 ESTRELLAS
+   cp b
+   
+   jp z, stars3
+
+   ld b, #2                   ;; 2 ESTRELLAS
+   cp b
+   
+   jp z, stars2
+
+   ld b, #1                   ;; 1 ESTRELLAS
+   cp b
+   
+   jp z, stars1               ;; 0 ESTRELLAS
+
+   or a
+
+   jp z, stars0
+
+stars4:
+   ld hl, #_spr_stars4
+   jp skipStars
+stars3:
+   ld hl, #_spr_stars3
+   jp skipStars
+stars2:
+   ld hl, #_spr_stars2
+   jp skipStars
+stars1:
+   ld hl, #_spr_stars1
+   jp skipStars
+stars0:
+   ld hl, #_spr_stars0
+skipStars:
+   
+   ld indSprite1(ix), h 
+   ld indSprite2(ix), l
+
+   call sysRenderDrawOnce
+
 
 ret
 

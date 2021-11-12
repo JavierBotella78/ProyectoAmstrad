@@ -22,12 +22,14 @@
 ;;  CONSTANTS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-MaxPlayerInvulnerability=60
+MaxPlayerInvulnerability=50
 MaxPlayerInvSubTime=2
 
-SingleBulletTime=15
+SingleBulletTime=12
 MultiBulletTime=5
-PUTime=40
+
+PUTimeScore=80
+PUTimeBullet=40
 
 
 
@@ -41,6 +43,7 @@ PUTime=40
 .globl manGamePlayerColision
 .globl manGamePUBulletColision
 .globl manGamePUScoreColision
+.globl manGamePULifeColision
 
 .globl manGameScore
 .globl manGameSubScore

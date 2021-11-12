@@ -90,6 +90,7 @@ $(eval $(call IMG2SP, CONVERT , assets/hud/0stars.png , 40, 56, spr_stars0))
 $(eval $(call IMG2SP, CONVERT , assets/hud/1star.png , 40, 56, spr_stars1))
 $(eval $(call IMG2SP, CONVERT , assets/hud/2stars.png , 40, 56, spr_stars2))
 $(eval $(call IMG2SP, CONVERT , assets/hud/3stars.png , 40, 56, spr_stars3))
+$(eval $(call IMG2SP, CONVERT , assets/hud/4stars.png , 40, 56, spr_stars4))
 
 $(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl10.png , 8, 16, spr_explosion10))
 $(eval $(call IMG2SP, CONVERT , assets/explosion/rainbowexpl11.png , 8, 16, spr_explosion11))

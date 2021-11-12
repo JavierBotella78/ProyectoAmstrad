@@ -41,4 +41,5 @@
 .globl sysColisionsBullet
 .globl sysColisionPUScore
 .globl sysColisionPUBullet
+.globl sysColisionPULife
 .globl sysColisionsStar

@@ -244,4 +244,11 @@ manDifficultyLvl6:
     ld a, #0
     call sysGeneratorSetBoolEnemy3Full
 
+    ld a, (#difficultyLvl)
+    dec a
+    dec a
+    dec a
+    dec a
+    ld (difficultyLvl), a
+
 ret
