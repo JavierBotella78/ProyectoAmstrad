@@ -25,6 +25,7 @@
 .include "../man/game.h.s"
 .include "../man/difficulty.h.s"
 .include "assets/screens/controlspowers.h.s"
+.include "assets/screens/youwin.h.s"
 
 .include "ai.h.s"
 .include "colisions.h.s"
@@ -38,6 +39,7 @@
 .globl cpct_drawSolidBox_asm
 .globl cpct_zx7b_decrunch_s_asm
 .globl _controlspowers
+.globl _youwin
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  VARIABLES
@@ -930,6 +932,24 @@ sysGeneratorInitMenu2::
 ret
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sysGeneratorInitMenu2
+;; Requisitos:
+;;    -
+;; Return:
+;;    -
+;; Descripcion:
+;;
+;;
+sysGeneratorInitYouWin::
+
+   cpctm_clearScreen_asm 0
+   ld    hl, #_youwin_end
+   ld    de, #0xFFFF
+   call cpct_zx7b_decrunch_s_asm
+
+ret
+
 
 sysGeneratorDrawBorder:
 
@@ -1187,7 +1207,7 @@ sysGeneratorPU::
 
    call cpct_getRandom_mxor_u8_asm
 
-   ld a, #7
+   ld a, #15
    and l
 
    or a

@@ -42,6 +42,7 @@ SpeedUp2=40
 .globl sysGeneratorInitGame
 .globl sysGeneratorInitGameOver
 .globl sysGeneratorInitGameOver2
+.globl sysGeneratorInitYouWin
 .globl sysGeneratorInitMenu2
 .globl sysGeneratorInitMenu
 .globl sysGeneratorInitMenuCredit

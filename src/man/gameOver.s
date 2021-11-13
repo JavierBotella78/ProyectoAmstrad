@@ -87,16 +87,34 @@ manGameOverInit::
     ld a, #1
     ld (#boolGameOverBlink), a
 
+    call manGameGetScoreWin
+
+    or a
+    
+    jp nz, skipGameOverGen
+
     call sysGeneratorInitGameOver
 
     ld a, (#gameOverCount)
     call sysRenderGameOverCount
+
+    ret
+
+skipGameOverGen:
+
+    call sysGeneratorInitYouWin
 
 ret
 
 
 
 manGameOverLoop::
+
+    call manGameGetScoreWin
+
+    or a
+    
+    jp nz, manGameOverLoop2
 
     call manGameOverCheckInput
     call manGameOverUpdate

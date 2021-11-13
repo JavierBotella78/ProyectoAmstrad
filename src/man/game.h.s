@@ -48,6 +48,7 @@ PUTimeBullet=40
 .globl manGameScore
 .globl manGameSubScore
 .globl manGameGetHighscore
+.globl manGameGetScoreWin
 
 .globl waitHalt
 

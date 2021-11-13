@@ -318,7 +318,7 @@ manGamePlayerColision::
 
    ld a, (#playerLife)
    dec a
-   ;;ld (playerLife), a 
+   ld (playerLife), a 
    ;;Dibujar estrella rota
 
    push ix
@@ -372,6 +372,9 @@ skipDobleScore:
    ld h, a
 
    jp nc, skipMaxScore
+
+   ld a, #0
+   ld (playerLife), a
 
    ld hl, #0x9999
 
@@ -526,6 +529,30 @@ ret
 manGameGetHighscore::
 
    ld hl, (#highscore)
+
+ret
+
+manGameGetScoreWin::
+
+   ld hl, (#score)
+
+   ld a, #0x99
+   cp l
+
+   jp nz, no9999
+
+   cp h
+
+   jp nz, no9999
+   jp si9999
+
+no9999:
+   ld a, #0
+
+ret
+
+si9999:
+   ld a, #1
 
 ret
 
