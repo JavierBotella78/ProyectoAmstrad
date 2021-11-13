@@ -156,6 +156,20 @@ animationPUBullet:
     .db #0
     .dw #animationPUBullet
 
+animationPULife:
+    .db #5                 
+    .dw #_spr_life1
+    .db #5                 
+    .dw #_spr_life2
+    .db #5
+    .dw #_spr_life3
+    .db #5
+    .dw #_spr_life4
+    .db #5
+    .dw #_spr_life5
+    .db #0
+    .dw #animationPULife
+
 animationFloor1:
     .db #SpeedFloor1              
     .dw #_spr_floor1

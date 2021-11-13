@@ -39,7 +39,9 @@
 #$(eval $(call PACKZX7B,mygraphics,src/))
 
 $(eval $(call ADD2PACK,controlspowers,assets/screens/CONTROLSPOWERS2.bin))
+$(eval $(call ADD2PACK,youwin,assets/screens/congrats.bin))
 $(eval $(call PACKZX7B,controlspowers,assets/screens/))
+$(eval $(call PACKZX7B,youwin,assets/screens/))
 
 
 

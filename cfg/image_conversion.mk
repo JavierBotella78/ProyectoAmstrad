@@ -73,6 +73,12 @@ $(eval $(call IMG2SP, CONVERT , assets/powerup6.png , 10, 12, spr_powerup6))
 $(eval $(call IMG2SP, CONVERT , assets/powerup7.png , 10, 12, spr_powerup7))
 $(eval $(call IMG2SP, CONVERT , assets/powerup8.png , 10, 12, spr_powerup8))
 
+$(eval $(call IMG2SP, CONVERT , assets/lifestar1.png , 10, 13, spr_life1))
+$(eval $(call IMG2SP, CONVERT , assets/lifestar2.png , 10, 13, spr_life2))
+$(eval $(call IMG2SP, CONVERT , assets/lifestar3.png , 10, 13, spr_life3))
+$(eval $(call IMG2SP, CONVERT , assets/lifestar4.png , 10, 13, spr_life4))
+$(eval $(call IMG2SP, CONVERT , assets/lifestar5.png , 10, 13, spr_life5))
+
 $(eval $(call IMG2SP, CONVERT , assets/rainbow.png , 12, 4, spr_rainbow))
 $(eval $(call IMG2SP, CONVERT , assets/rainbow2.png , 12, 4, spr_wobniar))
 
@@ -163,6 +169,7 @@ $(eval $(call IMG2SP, SET_FOLDER, assets/screens/  ))
 $(eval $(call IMG2SP, SET_IMG_FORMAT,screen))
 $(eval $(call IMG2SP, SET_OUTPUT, bin ))  #{ bin, c }
 $(eval $(call IMG2SP, CONVERT , assets/CONTROLSPOWERS2.png , 160, 200, controlspowers))	
+$(eval $(call IMG2SP, CONVERT , assets/congrats.png , 160, 200, youwin))	
 
 
 

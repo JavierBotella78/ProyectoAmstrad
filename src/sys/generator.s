@@ -352,16 +352,16 @@ initPUScore:
 initPULife: 
    .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAnimated ;; Type    
    .db #0, #0, #-1, #0                                                        ;; x, y, vx, vy
-   .db #5, #12                                                                ;; width, height
+   .db #5, #13                                                                ;; width, height
    .dw #0                                                                     ;; AI
    .dw #sysColisionPULife, #sysColisionsDestroy                               ;; Colision, Physics
-   .dw #_spr_doblescore1, #0xc000                                             ;; Sprite, prevPos
+   .dw #_spr_life1, #0xc000                                             ;; Sprite, prevPos
    .db #0, #AITypePU | #RenderTypeStatic                                      ;; score, subtype
-   .dw #animationPUScore                                                    ;; Anim
+   .dw #animationPULife                                                   ;; Anim
    .db #5, #0                                                                 ;; AnimCounter, AnimActual
    .dw #0xc000                                                          ;; actualPos
    .db #0                                                                     ;; AICounter
-   .db #5, #12                                                                ;; delWitdh, delHeight
+   .db #5, #13                                                                ;; delWitdh, delHeight
 
 initInterf: 
    .db #ETypeRenderable       ;; Type  
@@ -1211,17 +1211,6 @@ generatePU2:
    jp sysGeneratorPUCall
 
 generatePU3:
-
-   dec a
-   
-   jp nz, generatePU4
-
-   ld hl, #initPULife
-   ld iy, #initPULife
-
-   jp sysGeneratorPUCall
-
-generatePU4:
 
    dec a
    

@@ -112,6 +112,12 @@ SpeedUp2=40
 .globl _spr_powerup7
 .globl _spr_powerup8
 
+.globl _spr_life1
+.globl _spr_life2
+.globl _spr_life3
+.globl _spr_life4
+.globl _spr_life5
+
 .globl _spr_floor1
 .globl _spr_floor2
 .globl _spr_floor3

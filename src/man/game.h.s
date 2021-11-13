@@ -22,7 +22,7 @@
 ;;  CONSTANTS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-MaxPlayerInvulnerability=50
+MaxPlayerInvulnerability=48
 MaxPlayerInvSubTime=2
 
 SingleBulletTime=12
