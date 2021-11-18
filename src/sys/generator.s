@@ -311,12 +311,12 @@ initBullet:
 
 initEnemyBullet: 
    .db #ETypeRenderable | #ETypeColisionable | #ETypeMovable | #ETypeAI ;; Type 
-   .db #50, #EFila3+8, #0, #0                                             ;; x, y, vx, vy
+   .db #50, #EFila3+8, #0, #0                                           ;; x, y, vx, vy
    .db #6, #4                                                           ;; width, height
    .dw #sysAIEnemyBullet                                                ;; AI
-   .dw #sysColisionsEnemyBullet, #sysColisionsDestroy                   ;; Colision, Physics
+   .dw #sysColisionsEnemyBullet, #sysColisionsSubEnemy                  ;; Colision, Physics
    .dw #_spr_wobniar, #0xc000                                           ;; Sprite, prevPos
-   .db #0, #AITypeEnemy | #RenderTypeStatic                             ;; score, subtype
+   .db #0x25, #AITypeEnemy | #RenderTypeStatic                             ;; score, subtype
    .dw #0                                                               ;; Anim
    .db #0, #0                                                           ;; AnimCounter, AnimActual
    .dw #0xc000                                                          ;; actualPos
@@ -1207,7 +1207,7 @@ sysGeneratorPU::
 
    call cpct_getRandom_mxor_u8_asm
 
-   ld a, #15
+   ld a, #31
    and l
 
    or a
@@ -1225,12 +1225,35 @@ generatePU2:
    
    jp nz, generatePU3
 
+   ld hl, #initPUBullet
+   ld iy, #initPUBullet
+
+   jp sysGeneratorPUCall
+
+
+generatePU3:
+
+   dec a
+   
+   jp nz, generatePU4
+
    ld hl, #initPUScore
    ld iy, #initPUScore
 
    jp sysGeneratorPUCall
 
-generatePU3:
+generatePU4:
+
+   dec a
+   
+   jp nz, generatePU5
+
+   ld hl, #initPUScore
+   ld iy, #initPUScore
+
+   jp sysGeneratorPUCall
+
+generatePU5:
 
    dec a
    
