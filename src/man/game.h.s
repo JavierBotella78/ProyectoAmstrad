@@ -25,7 +25,7 @@
 MaxPlayerInvulnerability=48
 MaxPlayerInvSubTime=2
 
-SingleBulletTime=12
+SingleBulletTime=13
 MultiBulletTime=5
 
 PUTimeScore=80

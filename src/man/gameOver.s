@@ -240,7 +240,7 @@ manGameOverCheckInput2:
 
     call cpct_scanKeyboard_asm
 
-    ld hl, #Key_P
+    ld hl, #Key_Space
     call cpct_isKeyPressed_asm
 
     jr nz, pGameOverPulsada
